@@ -5,29 +5,46 @@
 	//window.addEventListener('load', function () {
 
 	var canvas;
+	var tempcanvas;
 	var tool;
-	var tool_default = 'pencil'
 	var context;
-	var button;
+	var tempcontext;
+
 
 function init () {
 
-		//penni
-	tool = new tool_pencil();
-		//canvasinn
-	canvas = document.getElementById('paint');
+		//default penni til að byrja með
 
-	button = document.getElementById('rect');
-		//2d canvas context
+	tool = new tool_pencil();
+		//canvasinn og context
+	canvas = document.getElementById('paint');
+		
 	context = canvas.getContext('2d');
+
+		//temp canvas og context
+
+	var container = canvas.parentNode;
+
+	tempcanvas = document.createElement('canvas');
+
+
+	tempcanvas.id = 'temppaint';
+	tempcanvas.width = canvas.width;
+	tempcanvas.height = canvas.height;
+
+	container.appendChild(tempcanvas);
+
+	tempcontext = tempcanvas.getContext('2d');
+
 		//fylgist med eventum, ss mouse up, mouse down og mouse move
 	canvas.addEventListener('mousedown', ev_canvas, false);
 	canvas.addEventListener('mousemove', ev_canvas, false);
 	canvas.addEventListener('mouseup', ev_canvas, false);
 
-	//button.addEventListener('mouseclick', clicked, false)
+	
 }
 
+	// Þegar HTML5 button er clicked er valið shape og pencil
 function clicked(id) {
 	if(id === 'pencil') {
 		tool = new tool_pencil();
@@ -37,7 +54,13 @@ function clicked(id) {
 	}
 };
 
+function img_update() {
 
+	context.drawImage(tempcanvas,0,0);
+	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+}
+
+	// pencil fall
 
 function tool_pencil() {
 	var tool = this;
@@ -45,8 +68,8 @@ function tool_pencil() {
 
 	this.mousedown = function (ev) {
 
-		context.beginPath();
-		context.moveTo(ev.x, ev.y);
+		tempcontext.beginPath();
+		tempcontext.moveTo(ev.x, ev.y);
 		tool.started = true;
 
 	};
@@ -56,18 +79,22 @@ function tool_pencil() {
 		if (tool.started ) {
 			tool.mousemove(ev);
 			tool.started = false;
+			img_update();
 		}
 	};
 
 	this.mousemove = function (ev) {
 
 		if(tool.started) {
-			context.lineTo(ev.x, ev.y);
-			context.stroke();
+			tempcontext.lineTo(ev.x, ev.y);
+			tempcontext.stroke();
+			
 		}
 	};
 }
-
+	
+	//ferhyrningur
+	
 function tool_rect() {
 
 	var tool = this;
@@ -81,18 +108,23 @@ function tool_rect() {
 
 	this.mousemove = function(ev) {
 
-		var x = Math.min(ev.x, tool.startX);
-		var y = Math.min(ev.y, tool.startY);
-		var h = Math.abs(ev.x - tool.startX);
-		var w = Math.abs(ev.y - tool.startY);
+		if(tool.started){
+			var x = Math.min(ev.x, tool.startX);
+			var y = Math.min(ev.y, tool.startY);
+			var h = Math.abs(ev.x - tool.startX);
+			var w = Math.abs(ev.y - tool.startY);
+			tempcontext.clearRect(0, 0, canvas.width, canvas.height);		// Þessi skipun þarf að vera til staðar til að ferhyrningurinn litar sig ekki endalaust á meðan maður velur stærð
+			tempcontext.strokeRect(x,y,h,w);			// teiknifall fyrir ferhyrninginn
 
-		context.strokeRect(x,y,h,w);
+		}
+		
 	};
 
 	this.mouseup = function (ev) {
       if (tool.started) {
         tool.mousemove(ev);
         tool.started = false;
+        img_update();
       }
     };
 
