@@ -7,6 +7,7 @@
 		<style type="text/css">
 			#container { position:relative; }
 			#paint { border: 1px solid #000; }
+			#shapes { border: 1px solid #000; }
 		</style>
 	</head>
 
@@ -16,10 +17,10 @@
 			<canvas id = "paint" width = "640" height = "480"></canvas>
 		</div>
 		<div id = "shapes">
-			<button id = "rect">Rectangle</button>
+			<button id = "rect" onClick = "clicked(this.id)">Rectangle</button>
 			<button id = "triangle">Triangle</button>
 			<button id = "line">Line</button>
-			<button id = "pencil">Pencil</button>
+			<button id = "pencil" onClick = clicked(this.id)>Pencil</button>
 		</div>
 
 		<script type="text/javascript" src = "canvaspaint.js">
