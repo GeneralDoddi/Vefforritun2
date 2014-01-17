@@ -37,9 +37,9 @@ function init () {
 	tempcontext = tempcanvas.getContext('2d');
 
 		//fylgist med eventum, ss mouse up, mouse down og mouse move
-	canvas.addEventListener('mousedown', ev_canvas, false);
-	canvas.addEventListener('mousemove', ev_canvas, false);
-	canvas.addEventListener('mouseup', ev_canvas, false);
+	tempcanvas.addEventListener('mousedown', ev_canvas, false);
+	tempcanvas.addEventListener('mousemove', ev_canvas, false);
+	tempcanvas.addEventListener('mouseup', ev_canvas, false);
 
 	
 }
@@ -60,7 +60,7 @@ function img_update() {
 	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
 }
 
-var tools = {};
+//var tools = {};
 
 	// pencil fall
 
@@ -115,7 +115,7 @@ function tool_rect() {
 			var y = Math.min(ev.y, tool.startY);
 			var w = Math.abs(ev.x - tool.startX);
 			var h = Math.abs(ev.y - tool.startY);
-			tempcontext.clearRect(0, 0, tempcanvas.width, tempcanvas.height);		// Þessi skipun þarf að vera til staðar til að ferhyrningurinn litar sig ekki endalaust á meðan maður velur stærð
+			tempcontext.clearRect(0, 0, canvas.width, canvas.height);		// Þessi skipun þarf að vera til staðar til að ferhyrningurinn litar sig ekki endalaust á meðan maður velur stærð
 			tempcontext.strokeRect(x,y,w,h);			// teiknifall fyrir ferhyrninginn
 
 		}
