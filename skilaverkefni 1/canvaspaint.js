@@ -60,6 +60,8 @@ function img_update() {
 	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
 }
 
+var tools = {};
+
 	// pencil fall
 
 function tool_pencil() {
@@ -111,10 +113,10 @@ function tool_rect() {
 		if(tool.started){
 			var x = Math.min(ev.x, tool.startX);
 			var y = Math.min(ev.y, tool.startY);
-			var h = Math.abs(ev.x - tool.startX);
-			var w = Math.abs(ev.y - tool.startY);
-			tempcontext.clearRect(0, 0, canvas.width, canvas.height);		// Þessi skipun þarf að vera til staðar til að ferhyrningurinn litar sig ekki endalaust á meðan maður velur stærð
-			tempcontext.strokeRect(x,y,h,w);			// teiknifall fyrir ferhyrninginn
+			var w = Math.abs(ev.x - tool.startX);
+			var h = Math.abs(ev.y - tool.startY);
+			tempcontext.clearRect(0, 0, tempcanvas.width, tempcanvas.height);		// Þessi skipun þarf að vera til staðar til að ferhyrningurinn litar sig ekki endalaust á meðan maður velur stærð
+			tempcontext.strokeRect(x,y,w,h);			// teiknifall fyrir ferhyrninginn
 
 		}
 		
@@ -149,5 +151,5 @@ function tool_rect() {
 
 	}
 
-	init();
+init();
 //}, false) //}

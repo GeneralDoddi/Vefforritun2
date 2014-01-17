@@ -8,6 +8,7 @@
 			#container { position:relative; }
 			#paint { border: 1px solid #000; }
 			#shapes { border: 1px solid #000; }
+			#temppaint { position:absolute; top:1px; left:1px;}
 		</style>
 	</head>
 
@@ -17,7 +18,7 @@
 			<canvas id = "paint" width = "640" height = "480"></canvas>
 		</div>
 		<div id = "shapes">
-			<button id = "rect" onClick = "clicked(this.id)">Rectangle</button>
+			<button id = "rect" onClick = clicked(this.id)>Rectangle</button>
 			<button id = "triangle">Triangle</button>
 			<button id = "line">Line</button>
 			<button id = "pencil" onClick = clicked(this.id)>Pencil</button>
