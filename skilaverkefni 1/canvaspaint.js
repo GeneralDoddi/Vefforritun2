@@ -41,6 +41,9 @@ function init () {
 	tempcanvas.addEventListener('mousemove', ev_canvas, false);
 	tempcanvas.addEventListener('mouseup', ev_canvas, false);
 
+	canvas.style.cursor = 'crosshair';
+	tempcanvas.style.cursor = 'crosshair';
+
 	
 }
 
@@ -64,21 +67,23 @@ function clicked(id) {
 	else if(id === 'circle'){
 		tool = new tool_circle();
 	}
+	else if(id === 'eraser'){
+		tool = new tool_eraser();
+	}
 };
 
-function img_update() {
+	function img_update() {
 
 	context.drawImage(tempcanvas,0,0);
 	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
-}
+	}
 
-//var tools = {};
 
-	// pencil fall
-
-function tool_pencil() {
+	function tool_pencil() {
 	var tool = this;
 	this.started = false;
+
+
 
 	this.mousedown = function (ev) {
 
@@ -100,16 +105,18 @@ function tool_pencil() {
 	this.mousemove = function (ev) {
 
 		if(tool.started) {
+			ev.x = ev.offsetX + tempcanvas.offsetLeft ;
+			ev.y = ev.offsetY + tempcanvas.offsetTop;
 			tempcontext.lineTo(ev.x, ev.y);
 			tempcontext.stroke();
 			
 		}
 	};
-}
+	}
 	
 	//ferhyrningur
 	
-function tool_rect() {
+	function tool_rect() {
 
 	var tool = this;
 	this.started = false;
@@ -144,7 +151,7 @@ function tool_rect() {
 
 	//console.log("herro");
 
-};
+	};
 
 	function tool_line() {
 
@@ -309,15 +316,55 @@ function tool_rect() {
 
 		}
 	}
+
+	function tool_eraser(ev){
+
+		var tool = this;
+		tool.started = false;
+
+		this.mousedown = function(ev) {
+
+			tempcontext.beginPath();
+			tempcontext.moveTo(ev.x,ev.y);
+			tool.started = true;
+
+		}
+		this.mousemove = function(ev) {
+			if(tool.started){
+				
+				tempcontext.strokeStyle = 'white';
+				tempcontext.lineWidth = 5;
+				tempcontext.lineTo(ev.x, ev.y);
+				tempcontext.stroke();
+				
+			}
+		}
+		this.mouseup = function(ev) {
+
+			if(tool.started){
+				tool.mousemove(ev);
+				tool.started = false;
+				img_update();
+				tempcontext.strokeStyle = 'black';
+				tempcontext.lineWidth = 1;
+			}
+		}
+	}
 	
 
 	function ev_canvas(ev) {
 		var x, y;
 
-		if (ev.layerX || ev.layerX == 0) {
-			x = ev.layerX;
-			y = ev.layerY;
-		}
+		
+		var rect = canvas.getBoundingClientRect();
+		
+
+			x = ev.offsetX + canvas.offsetLeft ;
+    		y = ev.offsetY + canvas.offsetTop ;
+
+			//x = ev.layerX;
+			//y = ev.layerY;
+		
 
 		
 
