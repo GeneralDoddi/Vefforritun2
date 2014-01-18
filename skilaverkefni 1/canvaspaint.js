@@ -52,6 +52,12 @@ function clicked(id) {
 	else if(id === 'rect') {
 		tool = new tool_rect();
 	}
+	else if(id === 'line'){
+		tool = new tool_line();
+	}
+	else if(id === 'triangle'){
+		tool = new tool_triangle();
+	}
 };
 
 function img_update() {
@@ -133,6 +139,86 @@ function tool_rect() {
 	//console.log("herro");
 
 };
+
+	function tool_line() {
+
+		var tool = this;
+		this.started = false;
+
+		this.mousedown = function (ev) {
+			tool.started = true;
+			tool.startX = ev.x;
+			tool.startY = ev.y;
+		};
+
+		this.mousemove = function (ev) {
+
+			if(tool.started) {
+				
+
+				tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+
+				tempcontext.beginPath();
+				tempcontext.moveTo(tool.startX,tool.startY);
+				tempcontext.lineTo(ev.x,ev.y);
+				tempcontext.stroke();
+				tempcontext.closePath();
+			}
+		};
+
+		this.mouseup = function (ev) {
+			if(tool.started){
+				tool.mousemove(ev);
+				tool.started = false;
+				img_update();
+			};
+		};
+	}
+
+	function tool_triangle(ev) {
+
+		var tool = this;
+		this.started = false;
+
+		this.mousedown = function (ev) {
+			tool.started = true;
+			tool.startX = ev.x;
+			tool.startY = ev.y;
+		}
+
+		this.mousemove = function (ev) {
+
+			if(tool.started){
+
+				var x = Math.min(ev.x, tool.startX);
+				var y = Math.min(ev.y, tool.startY);
+				var w = ev.x - tool.startX;
+				var h = ev.y - tool.startY;
+				var p2X = tool.startX + w;
+				var p2Y = tool.startY;
+				var p3X = tool.startX + (w/2);
+				var p3Y = tool.startY + h;  
+				tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+
+				tempcontext.beginPath();
+				tempcontext.moveTo(tool.startX,tool.startY);
+				tempcontext.lineTo(p2X,p2Y);
+				tempcontext.lineTo(p3X,p3Y);
+				tempcontext.lineTo(tool.startX,tool.startY);
+				tempcontext.stroke();
+				tempcontext.closePath();
+			}
+		}
+
+		this.mouseup = function (ev) {
+
+			if(tool.started){
+				tool.mousemove(ev);
+				tool.started = false;
+				img_update();
+			}
+		}
+	}
 
 	function ev_canvas(ev) {
 		var x, y;
