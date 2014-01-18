@@ -58,6 +58,12 @@ function clicked(id) {
 	else if(id === 'triangle'){
 		tool = new tool_triangle();
 	}
+	else if(id === 'rtriangle'){
+		tool = new tool_rtriangle();
+	}
+	else if(id === 'circle'){
+		tool = new tool_circle();
+	}
 };
 
 function img_update() {
@@ -219,6 +225,91 @@ function tool_rect() {
 			}
 		}
 	}
+
+	function tool_rtriangle(ev) {
+
+		var tool = this;
+		tool.started = false;
+
+		this.mousedown = function(ev) {
+			tool.started = true;
+			tool.startX = ev.x;
+			tool.startY = ev.y;
+		}
+		this.mousemove = function(ev) {
+
+			if(tool.started){
+
+				var x = Math.min(ev.x, tool.startX);
+				var y = Math.min(ev.y, tool.startY);
+				var w = ev.x - tool.startX;
+				var h = ev.y - tool.startY;
+				var p2X = tool.startX + w;
+				var p2Y = tool.startY;
+				var p3X = tool.startX + w;
+				var p3Y = tool.startY + h;  
+				tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+
+				tempcontext.beginPath();
+				tempcontext.moveTo(tool.startX,tool.startY);
+				tempcontext.lineTo(p3X,p3Y);
+				tempcontext.lineTo(p2X,p2Y);
+				tempcontext.lineTo(tool.startX,tool.startY);
+				tempcontext.stroke();
+				tempcontext.closePath();
+			}
+
+		}
+		this.mouseup = function(ev) {
+
+			if(tool.started){
+				tool.mousemove(ev);	
+				tool.started = false;
+				img_update();
+			}
+		}
+	}
+
+	function tool_circle(ev){
+
+		var tool = this;
+		tool.started = false;
+
+		this.mousedown = function(ev) {
+
+			tool.started = true;
+			tool.startX = ev.x;
+			tool.startY = ev.y;
+
+		}
+		this.mousemove = function(ev) {
+
+			if(tool.started){
+				var centerx = ((ev.x + tool.startX)/2);
+				var centery = ((ev.y + tool.startY)/2);
+				var w = Math.abs(ev.x - tool.startX);
+				var h = ev.y - tool.startY;
+				var r = (w/2);
+
+				tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+
+				tempcontext.beginPath();
+				tempcontext.arc(centerx,centery,r,0,2*Math.PI,false);
+				tempcontext.stroke();
+				tempcontext.closePath();
+			}
+		}
+		this.mouseup = function(ev) {
+
+			if(tool.started){
+				tool.mousemove(ev);	
+				tool.started = false;
+				img_update();
+			}
+
+		}
+	}
+	
 
 	function ev_canvas(ev) {
 		var x, y;
