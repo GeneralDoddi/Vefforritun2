@@ -215,8 +215,8 @@ function clicked(id) {
 
 				tempcontext.beginPath();
 				tempcontext.moveTo(tool.startX,tool.startY);
-				tempcontext.lineTo(p2X,p2Y);
 				tempcontext.lineTo(p3X,p3Y);
+				tempcontext.lineTo(p2X,p2Y);
 				tempcontext.lineTo(tool.startX,tool.startY);
 				tempcontext.stroke();
 				tempcontext.closePath();
