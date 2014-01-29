@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var tool;
 	var context;
 	var tempcontext;
+	var started;
 
 
 function init () {
@@ -33,12 +34,56 @@ function init () {
 	tempcontext = tempcanvas.getContext('2d');
 
 		//fylgist med eventum, ss mouse up, mouse down og mouse move
-	tempcanvas.addEventListener('mousedown', ev_canvas, false);
-	tempcanvas.addEventListener('mousemove', ev_canvas, false);
-	tempcanvas.addEventListener('mouseup', ev_canvas, false);
+	tempcanvas.addEventListener('mousedown', onmousedown, false);
+	tempcanvas.addEventListener('mousemove', onmousemove, false);
+	tempcanvas.addEventListener('mouseup', onmouseup, false);
 
 	canvas.style.cursor = 'crosshair';
 	tempcanvas.style.cursor = 'crosshair';
 
 	
-} });
+}
+
+function img_update() {
+
+	context.drawImage(tempcanvas,0,0);
+	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+	}
+
+function tool_pencil() {
+	var tool = this;
+	started = false;
+
+};
+
+
+function onmousedown(ev) {
+
+			tempcontext.beginPath();
+			tempcontext.moveTo(ev.x, ev.y);
+			started = true;
+}
+
+function onmouseup(ev){
+
+		if(started){
+			onmousemove(ev);
+			started = false;
+			img_update();
+		}
+}
+
+function onmousemove(ev){
+
+		if(started){
+			ev.x = ev.offsetX + tempcanvas.offsetLeft ;
+			ev.y = ev.offsetY + tempcanvas.offsetTop;
+			tempcontext.lineTo(ev.x, ev.y);
+			tempcontext.stroke();
+			}
+		
+}
+
+init();
+
+ });
