@@ -8,6 +8,7 @@ $(document).ready(function() {
 	var started;
 
 
+
 function init () {
 
 		//default penni til að byrja með
@@ -30,9 +31,15 @@ function init () {
 	
 }
 
+$(".buttons").click(function(){
+	window[this.id]();
+	
+
+});
+
 function img_update() {
 
-	context.drawImage(tempcanvas,0,0);
+	//context.drawImage(tempcanvas,0,0);
 	//tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
 	}
 
@@ -42,6 +49,10 @@ function tool_pencil() {
 
 };
 
+function rtriangle(){
+
+	alert("cock");
+}
 
 function onmousedown(ev) {
 
