@@ -6,6 +6,7 @@ $(function() {
 	var isDrawing = false;
 
 	var undo = [];
+	var redo = []; 
 	var shapes = [];
 	var currentTool = undefined;
 
@@ -67,7 +68,7 @@ $(function() {
 			var point = new Point(x, y);
 			currentTool.addPoint(point);
 		
-			//clearWindow();
+			clearWindow();
 			drawShapes();
 			currentTool.draw(ctx);
 		}
@@ -95,7 +96,6 @@ $(function() {
 		clearWindow();
 		drawShapes();
 	});
-	
 	$("#clearButton").on("click", function(e) {
 		clearWindow();
 	});
