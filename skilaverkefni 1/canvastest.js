@@ -1,4 +1,4 @@
-$(document).ready(function() {
+//$(document).ready(function() {
 
 	var canvas;
 	var tempcanvas;
@@ -13,7 +13,7 @@ function init () {
 
 		//default penni til að byrja með
 
-	tool = new tool_pencil();
+	tool = new pencil();
 		//canvasinn og context
 	canvas = document.getElementById('paint');
 		
@@ -27,13 +27,16 @@ function init () {
 
 	canvas.style.cursor = 'crosshair';
 	
-
-	
 }
 
+
 $(".buttons").click(function(){
-	window[this.id]();
 	
+	var test = this.id;
+	console.log(test);
+	var testing = eval(test);
+
+	tool = new testing();
 
 });
 
@@ -43,7 +46,7 @@ function img_update() {
 	//tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
 	}
 
-function tool_pencil() {
+function pencil() {
 	var tool = this;
 	started = false;
 
@@ -83,4 +86,4 @@ function onmousemove(ev){
 
 init();
 
- });
+ //});
