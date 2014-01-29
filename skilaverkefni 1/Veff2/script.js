@@ -1,55 +1,40 @@
+
+
 $(function() {
 	
 	var canvas = document.getElementById("c");
 	var ctx = canvas.getContext("2d");
 	
 	var isDrawing = false;
+	
+	var test = '';
+	var currentTool = undefined;
+	var currentToolType = undefined;
 
 	var undo = [];
 	var redo = []; 
 	var shapes = [];
-	var currentTool = undefined;
 
-	// Pen = 0, Rectangle = 1
-	var currentToolType = 0;
 
-	$("#penTool").on("click", function() {
-		currentToolType = 0;
-		console.log("Selecting pen tool!");
-	})
+	function createNewTool(derp) {
 
-	$("#rectangleTool").on("click", function() {
-		currentToolType = 1;
-		console.log("Selecting rectangle tool!");
-	})
-	
-	$("#lineTool").on("click", function() {
-		currentToolType = 2;
-		console.log("Selecting line tool!");
-	})
-	
-	$("#circleTool").on("click", function() {
-		currentToolType = 3;
-		console.log("Selecting circle tool!");
-	})
-
-	function createNewTool() {
-		if(currentToolType === 0) {
-			return new Pencil();
-		}
-		else if(currentToolType === 1) {
-			return new Rect();
-		}
-		else if(currentToolType === 2) {
-			return new Line();
-		}
-		else if(currentToolType === 3) {
-			return new Circle();
-		}
+		currentToolType = derp;		
 	}
+
+	$(".buttons").click(function(){
+	
+		var test = this.id;
+		var currentToolType = eval(test);
+		createNewTool(currentToolType);
+
+		
+
+	});
 	
 	canvas.onmousedown = function(e) {
-		currentTool = createNewTool();
+		currentTool = new currentToolType();
+
+
 	
 		isDrawing = true;
 		

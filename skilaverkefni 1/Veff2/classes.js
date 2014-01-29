@@ -67,7 +67,7 @@ Line.prototype.addPoint = function(point) {
 
 Line.prototype.draw = function(c) {
 	
-	
+	c.beginPath();
 	c.moveTo(this.start.x,this.start.y);
 	c.lineTo(this.end.x, this.end.y);
 	c.stroke();
@@ -90,24 +90,13 @@ Circle.prototype.addPoint = function(point) {
 }
 Circle.prototype.draw = function(c) {
 	
-	/*var height = c.y - this.y; 
-	var width = Math.abs(c.x - this.x);
-	var radius = width / 2;
-	
-	c.beginPath();
-	c.arc(this.start.x,this.end.x,radius, 0, 2 * Math.Pi); 
-	c.stroke();
-	*/
 	var centerX = ((this.end.x + this.start.x)/2);
 	var centerY = ((this.end.y + this.start.y)/2);
 	var w = Math.abs(this.end.x - this.start.x);
 	var h = this.start.y - this.start.y;
 	var r = (w/2);
-
-				//tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
-	c.beginPath();
+	
 	c.arc(centerX,centerY,r,0,2*Math.PI,false);
 	c.stroke();
-	
 	
 }
