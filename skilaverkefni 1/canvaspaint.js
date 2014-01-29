@@ -350,7 +350,35 @@ function clicked(id) {
 			}
 		}
 	}
-	
+	function tool_text(ev){
+
+		var canvas = document.getElementById("canvas");
+	    var ctx = canvas.getContext("2d");
+	    var lastX;
+	    var lastY;
+	    var strokeColor = "red";
+	    var strokeWidth = 2;
+	    var canMouseX;
+	    var canMouseY;
+	    var canvasOffset = $("#canvas").offset();
+	    var offsetX = canvasOffset.left;
+	    var offsetY = canvasOffset.top;
+
+
+	    function MouseDown(e){
+	      canMouseX = parseInt(e.clientX-offsetX);
+	      canMouseY = parseInt(e.clientY-offsetY);
+	      $("#downlog").html("Down: "+ canMouseX + " / " + canMouseY);
+
+	      // Put your mousedown stuff here
+	      var text=document.getElementById("text").value;
+	      ctx.font = 'italic 20px sans-serif';
+	      ctx.fillText(text,canMouseX,canMouseY);
+	    }
+
+	    $("#canvas").mousedown(function(e){handleMouseDown(e);});
+
+	}
 
 	function ev_canvas(ev) {
 		var x, y;
