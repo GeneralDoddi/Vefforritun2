@@ -18,28 +18,14 @@ function init () {
 		
 	context = canvas.getContext('2d');
 
-		//temp canvas og context
-
-	var container = canvas.parentNode;
-
-	tempcanvas = document.createElement('canvas');
-
-
-	tempcanvas.id = 'temppaint';
-	tempcanvas.width = canvas.width;
-	tempcanvas.height = canvas.height;
-
-	container.appendChild(tempcanvas);
-
-	tempcontext = tempcanvas.getContext('2d');
 
 		//fylgist med eventum, ss mouse up, mouse down og mouse move
-	tempcanvas.addEventListener('mousedown', onmousedown, false);
-	tempcanvas.addEventListener('mousemove', onmousemove, false);
-	tempcanvas.addEventListener('mouseup', onmouseup, false);
+	canvas.addEventListener('mousedown', onmousedown, false);
+	canvas.addEventListener('mousemove', onmousemove, false);
+	canvas.addEventListener('mouseup', onmouseup, false);
 
 	canvas.style.cursor = 'crosshair';
-	tempcanvas.style.cursor = 'crosshair';
+	
 
 	
 }
@@ -47,7 +33,7 @@ function init () {
 function img_update() {
 
 	context.drawImage(tempcanvas,0,0);
-	tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
+	//tempcontext.clearRect(0,0,tempcanvas.width,tempcanvas.height);
 	}
 
 function tool_pencil() {
@@ -59,8 +45,8 @@ function tool_pencil() {
 
 function onmousedown(ev) {
 
-			tempcontext.beginPath();
-			tempcontext.moveTo(ev.x, ev.y);
+			context.beginPath();
+			context.moveTo(ev.x, ev.y);
 			started = true;
 }
 
@@ -76,10 +62,10 @@ function onmouseup(ev){
 function onmousemove(ev){
 
 		if(started){
-			ev.x = ev.offsetX + tempcanvas.offsetLeft ;
-			ev.y = ev.offsetY + tempcanvas.offsetTop;
-			tempcontext.lineTo(ev.x, ev.y);
-			tempcontext.stroke();
+			ev.x = ev.offsetX + canvas.offsetLeft ;
+			ev.y = ev.offsetY + canvas.offsetTop;
+			context.lineTo(ev.x, ev.y);
+			context.stroke();
 			}
 		
 }
