@@ -75,8 +75,12 @@ $(function() {
 	}
 	
 	function clearWindow() {
+		for(var i = 0; i < shapes.length; ++i) {
+			shapes[i].pop;
+		}
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.beginPath();
+
 	}
 	
 	function drawShapes() {
@@ -91,7 +95,8 @@ $(function() {
 	}
 	
 	$("#undo").on("click", function(e) {
-		shapes.pop();
+		undo.push(shapes.pop());
+		console.log(undo);
 		clearWindow();
 		drawShapes();
 	});
@@ -100,6 +105,7 @@ $(function() {
 	});
 	
 	$("#drawShapes").on("click", function(e) {
+		shapes.push(undo.pop());
 		drawShapes();
 	});
 });
