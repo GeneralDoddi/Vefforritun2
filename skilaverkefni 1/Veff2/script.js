@@ -7,7 +7,7 @@ $(function() {
 	var message = document.getElementById("textBox").value;
 	var isDrawing = false;
 	var isText = false;
-	var test = '';
+	var test;
 	var currentTool = undefined;
 	var currentToolType = undefined;
 
@@ -73,11 +73,17 @@ $(function() {
 		shapes.push(currentTool);
 		console.log(shapes);
 	}
+	function clearSlate() {
+		for(var i = 0; i < shapes.length; i++) {
+			shapes.splice(i);
+		}
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.beginPath();
+	}
 	
 	function clearWindow() {
-		for(var i = 0; i < shapes.length; ++i) {
-			shapes[i].pop;
-		}
+		
+		//console.log(shapes);
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.beginPath();
 
@@ -93,6 +99,12 @@ $(function() {
 		Text.addPoint()
 	
 	}
+
+	function setSize(size) {
+
+
+		this.lineWidth = size; 
+	}
 	
 	$("#undo").on("click", function(e) {
 		undo.push(shapes.pop());
@@ -101,11 +113,17 @@ $(function() {
 		drawShapes();
 	});
 	$("#clearButton").on("click", function(e) {
-		clearWindow();
+		clearSlate();
 	});
 	
 	$("#drawShapes").on("click", function(e) {
 		shapes.push(undo.pop());
 		drawShapes();
+	});
+
+
+	$(".size").change(function(){
+
+		setSize(this.value);
 	});
 });

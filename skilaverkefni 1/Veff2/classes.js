@@ -97,6 +97,7 @@ function Circle (point) {
 	
 	this.x = undefined;
 	this.y = undefined;
+
 }
 
 Circle.prototype.addPoint = function(point) {
@@ -108,7 +109,7 @@ Circle.prototype.addPoint = function(point) {
 	}
 
 }
-Circle.prototype.draw = function(c) {
+Circle.prototype.draw = function(c,test) {
 	
 	var centerX = ((this.end.x + this.start.x)/2);
 	var centerY = ((this.end.y + this.start.y)/2);
@@ -116,6 +117,7 @@ Circle.prototype.draw = function(c) {
 	var h = this.start.y - this.start.y;
 	var r = (w/2);
 	c.beginPath();
+	c.lineWidth = this.lineWidth;
 	c.arc(centerX,centerY,r,0,2*Math.PI,false);
 	c.stroke();
 	
