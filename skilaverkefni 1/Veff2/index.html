@@ -13,6 +13,7 @@
 		<button class = "buttons" id="Rect">Rectangle</button>
 		<button class = "buttons" id="Circle">Circle</button>
 		<button class = "buttons" id="Line">Line</button>
+		<button class = "buttons" id="Text">Text</button>
 		<div>
 			<canvas id="c" width="500" height="400"></canvas>
 		</div>
@@ -21,5 +22,18 @@
 			<button id="clearButton">Clear Canvas</button>
 			<button id="drawShapes">Redraw Shapes</button>
 		</div>
+		<div>
+			<form>
+ 				Text: <input id="textBox" placeholder="your text" />
+  				<br> 
+  				Fill Or Stroke : 
+				<select id="fillOrStroke">
+					<option value="fill">fill</option>
+					<option value="stroke">stroke</option>
+					<option value="both">both</option>
+				</select>
+				<br>
+ 			</form>
+ 		</div>
 	</body>
 </html>

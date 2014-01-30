@@ -12,18 +12,38 @@ Pencil.prototype.addPoint = function (point) {
 	this.points.push(point);
 }
 
-Pencil.prototype.draw = function(c) {
-	for (var i = 0; i < this.points.length; i++) {
+Pencil.prototype.draw = function(ctx) {
+	/*for (var i = 0; i < this.points.length; i++) {
 		
 		var current_point = this.points[i]
-		if(i == 0){
+		/*if(i == 0){
 			c.moveTo(current_point.x,current_point.y);
+			c.fillRect(curren_point.x,curren_point.y, 3 , 3 );
 		}
 		else{
-			c.lineTo(current_point.x,current_point.y);
+			c.fillRect(current_point.x,current_point.y,3,3);
+			//c.lineTo(current_point.x,current_point.y);
 			c.stroke();
-		}
-	}
+		//}
+	}*/
+	ctx.beginPath();
+	ctx.moveTo(this.points[0].x, this.points[0].y);
+ 
+for (var i = 1; i < this.points.length - 2; i++) {
+    var c = (this.points[i].x + this.points[i + 1].x) / 2;
+    var d = (this.points[i].y + this.points[i + 1].y) / 2;
+ 
+    ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, c, d);
+}
+ 
+// For the last 2 points
+ctx.quadraticCurveTo(
+    this.points[i].x,
+    this.points[i].y,
+    this.points[i + 1].x,
+    this.points[i + 1].y
+	);
+	ctx.stroke();
 }
 //Rectangle constrctor and tools
 function Rect (){
@@ -95,8 +115,32 @@ Circle.prototype.draw = function(c) {
 	var w = Math.abs(this.end.x - this.start.x);
 	var h = this.start.y - this.start.y;
 	var r = (w/2);
-	
+	c.beginPath();
 	c.arc(centerX,centerY,r,0,2*Math.PI,false);
 	c.stroke();
 	
+}
+
+function Text () {
+	this.x = undefined;
+	this.y = undefined;
+	this.message = undefined;
+}
+
+Text.prototype.addPoint = function(point) {
+	if(this.start===undefined){
+		this.start = point;
+		this.end = point;
+		this.message = document.getElementById("textBox").value;
+		
+	}
+}
+
+Text.prototype.draw = function(c) {
+
+	c.font = "50px serif";
+	//c.fillStyle = "#FF0000";
+	c.fillText (this.message,this.start.x , this.start.y);
+	//c.stroke();
+
 }
