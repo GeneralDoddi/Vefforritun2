@@ -22,7 +22,7 @@ Pencil.prototype.addPoint = function (point) {
 }
 
 Pencil.prototype.draw = function(ctx) {
-	
+
 	ctx.beginPath();
 	ctx.moveTo(this.points[0].x, this.points[0].y);
  	
@@ -39,6 +39,21 @@ Pencil.prototype.draw = function(ctx) {
 	ctx.quadraticCurveTo(this.points[i].x,this.points[i].y,this.points[i].x,this.points[i].y);
 	ctx.strokeStyle = this.colorStyle;
 	ctx.lineWidth = this.lineWidth;
+for (var i = 1; i < this.points.length - 2; i++) {
+    var c = (this.points[i].x + this.points[i + 1].x) / 2;
+    var d = (this.points[i].y + this.points[i + 1].y) / 2;
+ 
+    ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, c, d);
+}
+ 
+// For the last 2 points
+ctx.quadraticCurveTo(
+    this.points[i].x,
+    this.points[i].y,
+    this.points[i].x,
+    this.points[i].y
+	);
+
 	ctx.stroke();
 }
 //Rectangle constrctor and tools
@@ -48,7 +63,6 @@ function Rect (){
 	this.end = undefined;
 	this.lineWidth = undefined;
 	this.colorStyle = undefined;
-	
 }
 
 Rect.prototype.addPoint = function(point) {
