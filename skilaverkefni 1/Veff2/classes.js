@@ -13,19 +13,7 @@ Pencil.prototype.addPoint = function (point) {
 }
 
 Pencil.prototype.draw = function(ctx) {
-	/*for (var i = 0; i < this.points.length; i++) {
-		
-		var current_point = this.points[i]
-		/*if(i == 0){
-			c.moveTo(current_point.x,current_point.y);
-			c.fillRect(curren_point.x,curren_point.y, 3 , 3 );
-		}
-		else{
-			c.fillRect(current_point.x,current_point.y,3,3);
-			//c.lineTo(current_point.x,current_point.y);
-			c.stroke();
-		//}
-	}*/
+
 	ctx.beginPath();
 	ctx.moveTo(this.points[0].x, this.points[0].y);
  
@@ -40,8 +28,8 @@ for (var i = 1; i < this.points.length - 2; i++) {
 ctx.quadraticCurveTo(
     this.points[i].x,
     this.points[i].y,
-    this.points[i + 1].x,
-    this.points[i + 1].y
+    this.points[i].x,
+    this.points[i].y
 	);
 	ctx.stroke();
 }
@@ -49,6 +37,7 @@ ctx.quadraticCurveTo(
 function Rect (){
 	this.start = undefined;
 	this.end = undefined;
+	this.name = 'Rect';
 }
 
 Rect.prototype.addPoint = function(point) {
