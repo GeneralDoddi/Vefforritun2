@@ -6,6 +6,7 @@
 		<script src="jquery.js"></script>
 		<script src="script.js"></script>
 		<script src="classes.js"></script>
+		<script src="jscolor.js"></script>
 	</head>
 	<body>
 		<p>Tool to use:</p>
@@ -23,7 +24,7 @@
 			<button id="drawShapes">Redraw Shapes</button>
 			<form>
 				Size: 
-				<select class="size">
+				<select class="size" id="ble">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -47,6 +48,7 @@
 
 				</select>
 			</form>
+			Color:<input class="color" id="color" placeholder="000000">
 		</div>
 		<div>
 			<form>

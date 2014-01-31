@@ -10,12 +10,9 @@ $(function() {
 	var test;
 	var currentTool = undefined;
 	var currentToolType = undefined;
-
 	var undo = [];
-	var redo = []; 
 	var shapes = [];
 	var currentToolType = "Pen";
-
 
 	function createNewTool(derp) {
 
@@ -29,15 +26,15 @@ $(function() {
 		{
 			isText = true;
 		}
-		
 		var currentToolType = eval(test);
-		
 		createNewTool(currentToolType);
 	});
 	
 	canvas.onmousedown = function(e) {
 		
 		currentTool = new currentToolType();
+		
+		
 		isDrawing = true;
 		
 		var x = e.clientX - this.offsetLeft;
@@ -73,6 +70,7 @@ $(function() {
 		shapes.push(currentTool);
 		console.log(shapes);
 	}
+
 	function clearSlate() {
 		for(var i = 0; i < shapes.length; i++) {
 			shapes.splice(i);
@@ -94,17 +92,11 @@ $(function() {
 			shapes[i].draw(ctx);
 		}
 	}
-	function updateText (e) {
-		// body...function textBoxChanged(e) {
-		Text.addPoint()
-	
-	}
-
-	function setSize(size) {
-
-
-		this.lineWidth = size; 
-	}
+	function textFillColorChanged(e) {
+      var target = e.target;
+      textFillColor = "#" + target.value;
+      drawScreen();
+   }
 	
 	$("#undo").on("click", function(e) {
 		undo.push(shapes.pop());
@@ -122,8 +114,5 @@ $(function() {
 	});
 
 
-	$(".size").change(function(){
-
-		setSize(this.value);
-	});
+	
 });
