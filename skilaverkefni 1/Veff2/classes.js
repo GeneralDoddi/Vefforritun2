@@ -35,26 +35,10 @@ Pencil.prototype.draw = function(ctx) {
  		ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, c, d);
 	}
  
-	// For the last 2 points
-	ctx.quadraticCurveTo(this.points[i].x,this.points[i].y,this.points[i].x,this.points[i].y);
 	ctx.strokeStyle = this.colorStyle;
 	ctx.lineWidth = this.lineWidth;
-for (var i = 1; i < this.points.length - 2; i++) {
-    var c = (this.points[i].x + this.points[i + 1].x) / 2;
-    var d = (this.points[i].y + this.points[i + 1].y) / 2;
- 
-    ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, c, d);
-}
- 
-// For the last 2 points
-ctx.quadraticCurveTo(
-    this.points[i].x,
-    this.points[i].y,
-    this.points[i].x,
-    this.points[i].y
-	);
-
 	ctx.stroke();
+
 }
 //Rectangle constrctor and tools
 function Rect (){
@@ -78,21 +62,19 @@ Rect.prototype.addPoint = function(point) {
 	this.lineWidth = parseInt(document.getElementById("ble").value);
 	this.colorStyle = "#"+document.getElementById("color").value;
 }
-
-
 Rect.prototype.draw = function(ctx) {
 	
 	var width = this.end.x - this.start.x;
 	var height = this.end.y - this.start.y;
+	
 	ctx.beginPath();
 	ctx.rect(this.start.x, this.start.y, width, height);
-	
 	ctx.strokeStyle = this.colorStyle;
 	ctx.lineWidth = this.lineWidth;
-	
 	ctx.stroke();
 	
 }
+//Line constructor and tools
 function Line (){
 	this.objectname = "Line";
 	this.start = undefined;
@@ -104,14 +86,12 @@ function Line (){
 Line.prototype.addPoint = function(point) {
 	if(this.start === undefined){
 		this.start = point;
-		this.colorStyle = "#" + document.getElementById("color").value;
-		console.log(this.colorStyle);
-		this.lineWidth = parseInt(document.getElementById("ble").value);
-		console.log(this.lineWidth);
 	}
 	else{
 		this.end = point;
 	}
+	this.colorStyle = "#" + document.getElementById("color").value;
+	this.lineWidth = parseInt(document.getElementById("ble").value);
 }
 
 Line.prototype.draw = function(c) {
@@ -125,7 +105,7 @@ Line.prototype.draw = function(c) {
 	
 	c.stroke();
 }
-
+//Circle constructor and tools
 function Circle (point) {
 	this.objectname = "Circle";
 	this.x = undefined;
@@ -141,9 +121,8 @@ Circle.prototype.addPoint = function(point) {
 	else{
 		this.end = point;
 	}
-	console.log(this.colorStyle);
 	this.lineWidth = parseInt(document.getElementById("ble").value);
-
+	this.colorStyle = "#" + document.getElementById("color").value;
 }
 Circle.prototype.draw = function(c) {
 	
@@ -154,6 +133,7 @@ Circle.prototype.draw = function(c) {
 	var r = (w/2);
 	c.beginPath();
 	c.lineWidth = this.lineWidth;
+	c.strokeStyle = this.colorStyle;
 	c.arc(centerX,centerY,r,0,2*Math.PI,false);
 	c.stroke();
 	
@@ -165,6 +145,7 @@ function Text () {
 	this.y = undefined;
 	this.message = undefined;
 	this.color = undefined;
+	this.font = undefined; 
 }
 
 Text.prototype.addPoint = function(point) {
@@ -179,7 +160,7 @@ Text.prototype.addPoint = function(point) {
 Text.prototype.draw = function(c) {
 
 	c.font = "50px serif";
-	//c.fillStyle = "#FF0000";
+	c.fillStyle = "#FF0000";
 	c.fillText (this.message,this.start.x , this.start.y);
 	//c.stroke();
 
