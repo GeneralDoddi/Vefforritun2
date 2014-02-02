@@ -32,18 +32,18 @@
 
 		<div id = "attributes">	
 			<form>
-				Size:<input type="range" name="Size" id = "ble" min="1" max="50" value = "10"> 
-				Color:<input class="color" id = "color" value= "0000000">	
+				Size:<input type="range" name="Size" id = "ble" min="1" max="50" value = "10">
+				<br> 
+				Color:<input class="color" id = "color" value= "000000">	
 			</form>
 			
 		</div>
 		
-		<div id="text">
+		<div id="textManipulation">
 			
  				Text: <input id="textBox" placeholder="your text" autocomplete='off' />
-  				 
-  				
-  				<select id= "font" legend = "Font">
+ 				<br>
+  				 Font:<select id= "font" legend = "Font">
 					<option value="Arial">Arial</option>
 					<option value="Calibri">Calibri</option>
 					<option value="sans-serif">Sans-serif</option>
@@ -51,9 +51,9 @@
 				</select>
 		</div>	
  		
- 		<div id = "Save/Load">
- 			<input type="submit" id = "save" value = "Save"></input>
- 			<input type="submit" id = "load" value = "Load"></input>
+ 		<div id = "memorizing">
+ 			<input class="buttons" type="submit" id = "save" value = "Save"></input>
+ 			<input class="buttons" type="submit" id = "load" value = "Load"></input>
  			<legend>Drawings:</legend>
  			<select id = "drawings"></select>
  		</div>

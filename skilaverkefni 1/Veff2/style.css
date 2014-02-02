@@ -1,3 +1,70 @@
-#c{
-	border: 1px solid black;
+body{
+	background: dadada;
 }
+
+#c{
+	border: 0px solid black;
+	background-color: white;
+	position: relative;
+	top: 20;
+	left: 40;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#attributes{
+	border: px solid black;
+	position:relative;
+	top: -400px;
+	left:550px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #383530;
+	padding: 5px 10px;
+	background: lidht grey;
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		color-stop(0.50, #ffffff),
+		to(#d6d6d6));
+}
+#textManipulation{
+	border: 0px solid black;
+	position: relative;
+	top: -400px;
+	left: 550px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#operations{
+	border: 0px solid black;
+	position:relative;
+	left:150;
+	top: 25;
+	font-family: Arial, Helvetica, sans-serif;
+	
+}
+#shapes{
+	border: px solid black;
+	position:relative;
+	left:80px;
+}
+#Memorizing{
+	border: px solid black;
+	font-family: Arial, Helvetica, sans-serif;
+	position: relative;
+	top:-210;
+	left: 550px;
+}
+.buttons{
+   font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #383530;
+	padding: 5px 10px;
+	background: lidht grey;
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		color-stop(0.50, #ffffff),
+		to(#d6d6d6));
+
+
+}
+
