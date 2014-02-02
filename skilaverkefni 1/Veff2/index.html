@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Canvas testing</title>
 		
 		<link href="style.css" rel="stylesheet" />
@@ -9,20 +10,26 @@
 		<script src="jscolor.js"></script>
 	</head>
 	<body>
-		<p>Tool to use:</p>
+
+		
 		<button class = "buttons" id="Pencil">Pen</button>
 		<button class = "buttons" id="Rect">Rectangle</button>
 		<button class = "buttons" id="Circle">Circle</button>
 		<button class = "buttons" id="Line">Line</button>
 		<button class = "buttons" id="Text">Text</button>
 		<button class = "buttons" id = "Eraser">Eraser</button>
+		
 		<div>
 			<canvas id="c" width="500" height="400"></canvas>
 		</div>
+		
 		<div>
 			<button id="undo">Undo</button>
 			<button id="clearButton">Clear Canvas</button>
 			<button id="drawShapes">Redraw Shapes</button>
+		</div>
+
+		<div>	
 			<form>
 				Size: 
 				<select class="size" id="ble">
@@ -49,33 +56,28 @@
 
 				</select>
 			</form>
-			Color:<input class="color" id="color" placeholder="000000">
+			Color:<input class="color" id = "color" value= "0000000">
 		</div>
 		<div>
 			<form>
- 				Text: <input id="textBox" placeholder="your text" />
+ 				Text: <input id="textBox" placeholder="your text" autocomplete='off' />
   				<br> 
-  				Fill Or Stroke : 
-				<select id="fillOrStroke">
-					<option value="fill">fill</option>
-					<option value="stroke">stroke</option>
-					<option value="both">both</option>
-				</select>
-				<select id= "font">Font:</select>
+  				Font: <select id= "font">
 					<option value="Arial">Arial</option>
-					<option value="Font2">Font2</option>
-					<option value="Font3">Font3</option>
+					<option value="serif">Font2</option>
+					<option value="Impact">Webdings</option>
+				</select>
 				<br>
  			</form>
-
- 			<input type="submit" id = "save" value = "Save"></input>
- 			<input type="submit" id = "load" value = "Load"></input>
  			<div>
+ 				<input type="submit" id = "save" value = "Save"></input>
+ 				<input type="submit" id = "load" value = "Load"></input>
  				<form>
- 					Drawings:
+ 					<legend>Drawings:</legend>
  					<select id = "drawings"></select>
  				</form>
  			</div>
+ 			
  		</div>
  		
 	</body>

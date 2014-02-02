@@ -9,6 +9,7 @@ $(function() {
 
 		ctx.lineWidth = 1;
 		ctx.color = 'black';
+		document.getElementById("color").value="000000";
 
 		var param = {
             "user": "thordurt12",
@@ -44,7 +45,7 @@ $(function() {
 
 	var canvas = document.getElementById("c");
 	var ctx = canvas.getContext("2d");
-	var message = document.getElementById("textBox").value;
+	//var message = document.getElementById("textBox").value;
 	var isDrawing = false;
 	var isText = false;
 	var test;
@@ -140,6 +141,7 @@ $(function() {
 		Text.addPoint()
 	
 	}	
+	
 	$("#undo").on("click", function(e) {
 		if(!shapes[0] && undo[0]){
 			console.log('draw first');
@@ -165,10 +167,8 @@ $(function() {
 		}
 	});
 
-	$(".size").change(function(){
 
-		setSize(this.value);
-	});
+	
 	init();
 
 	$("#save").on("click", function(e){

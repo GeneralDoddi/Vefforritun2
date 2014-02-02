@@ -40,6 +40,41 @@ Pencil.prototype.draw = function(ctx) {
 	ctx.stroke();
 
 }
+function Eraser () {
+	this.name = "Eraser";
+	this.points = [];
+	this.lineWidth = undefined;
+	this.color = undefined;
+
+}
+
+Eraser.prototype.addPoint = function (point) {
+	
+	this.points.push(point);
+	this.lineWidth = parseInt(document.getElementById("ble").value);
+	this.colorStyle = "#FFFFFF";
+	
+}
+
+Eraser.prototype.draw = function(ctx) {
+
+	ctx.beginPath();
+	ctx.moveTo(this.points[0].x, this.points[0].y);
+ 	
+	for (var i = 1; i < this.points.length - 2; i++) {
+    	
+    	var c = (this.points[i].x + this.points[i + 1].x) / 2;
+    	var d = (this.points[i].y + this.points[i + 1].y) / 2;
+ 		 
+ 		
+ 		ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, c, d);
+	}
+ 
+	ctx.strokeStyle = this.colorStyle;
+	ctx.lineWidth = this.lineWidth;
+	ctx.stroke();
+
+}
 //Rectangle constrctor and tools
 function Rect (){
 	this.name = "Rect";
@@ -157,14 +192,15 @@ Text.prototype.addPoint = function(point) {
 		this.start = point;
 		this.end = point;
 		this.message = document.getElementById("textBox").value;
-		
+		this.font = document.getElementById("font").value;
+		this.color = document.getElementById("color").value;
 	}
 }
 
 Text.prototype.draw = function(c) {
 
-	c.font = "50px serif";
-	c.fillStyle = "#FF0000";
+	c.font = this.font;
+	c.fillStyle = "#"+ this.color;
 	c.fillText (this.message,this.start.x , this.start.y);
 	//c.stroke();
 
