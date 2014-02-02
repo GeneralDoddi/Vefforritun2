@@ -111,12 +111,16 @@ function Circle (point) {
 	this.x = undefined;
 	this.y = undefined;
 	this.lineWidth = undefined;
-	this.color = undefined;
+	this.colorStyle = undefined;
 }
 
 Circle.prototype.addPoint = function(point) {
 	if(this.start === undefined){
 		this.start = point;
+		this.colorStyle = "#" + document.getElementById("color").value;
+		console.log(this.colorStyle);
+		this.lineWidth = parseInt(document.getElementById("ble").value);
+		console.log(this.lineWidth);
 	}
 	else{
 		this.end = point;

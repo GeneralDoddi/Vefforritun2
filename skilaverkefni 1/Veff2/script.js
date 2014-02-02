@@ -131,6 +131,8 @@ $(function() {
 	function drawShapes() {
 		for(var i = 0; i < shapes.length; ++i) {
 			shapes[i].draw(ctx);
+			//console.log(shapes[i].name)
+
 		}
 	}
 	function updateText (e) {
@@ -188,6 +190,7 @@ $(function() {
 				crossDomain: true,
 				success: function (data) {
 					// The save was successful...
+					init();
 					console.log(data);
 				},
 				error: function (xhr, err) {
