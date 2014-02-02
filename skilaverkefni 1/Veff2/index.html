@@ -11,74 +11,52 @@
 	</head>
 	<body>
 
-		
+		<div id="Shapes">
 		<button class = "buttons" id="Pencil">Pen</button>
 		<button class = "buttons" id="Rect">Rectangle</button>
 		<button class = "buttons" id="Circle">Circle</button>
 		<button class = "buttons" id="Line">Line</button>
 		<button class = "buttons" id="Text">Text</button>
 		<button class = "buttons" id = "Eraser">Eraser</button>
+		</div>
 		
 		<div>
 			<canvas id="c" width="500" height="400"></canvas>
 		</div>
 		
-		<div>
-			<button id="undo">Undo</button>
-			<button id="clearButton">Clear Canvas</button>
-			<button id="drawShapes">Redraw Shapes</button>
+		<div id="operations">
+			<button class = "buttons" id="undo">Undo</button>
+			<button class = "buttons" id="clearButton">Clear Canvas</button>
+			<button class = "buttons" id="drawShapes">Redraw Shapes</button>
 		</div>
 
-		<div>	
+		<div id = "attributes">	
 			<form>
-				Size: 
-				<select class="size" id="ble">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-						<option value="13">13</option>
-						<option value="14">14</option>
-						<option value="15">15</option>
-						<option value="16">16</option>
-						<option value="17">17</option>
-						<option value="18">18</option>
-						<option value="19">19</option>
-						<option value="20">20</option>
-
-				</select>
+				Size:<input type="range" name="Size" id = "ble" min="1" max="50" value = "10"> 
+				Color:<input class="color" id = "color" value= "0000000">	
 			</form>
-			Color:<input class="color" id = "color" value= "0000000">
+			
 		</div>
-		<div>
-			<form>
+		
+		<div id="text">
+			
  				Text: <input id="textBox" placeholder="your text" autocomplete='off' />
-  				<br> 
-  				Font: <select id= "font">
+  				 
+  				
+  				<select id= "font" legend = "Font">
 					<option value="Arial">Arial</option>
-					<option value="serif">Font2</option>
-					<option value="Impact">Webdings</option>
+					<option value="Calibri">Calibri</option>
+					<option value="sans-serif">Sans-serif</option>
+					<option value="Courier New">Courier New</option>
 				</select>
-				<br>
- 			</form>
- 			<div>
- 				<input type="submit" id = "save" value = "Save"></input>
- 				<input type="submit" id = "load" value = "Load"></input>
- 				<form>
- 					<legend>Drawings:</legend>
- 					<select id = "drawings"></select>
- 				</form>
- 			</div>
- 			
- 		</div>
+		</div>	
  		
-	</body>
+ 		<div id = "Save/Load">
+ 			<input type="submit" id = "save" value = "Save"></input>
+ 			<input type="submit" id = "load" value = "Load"></input>
+ 			<legend>Drawings:</legend>
+ 			<select id = "drawings"></select>
+ 		</div>
+
+ 	</body>
 </html>

@@ -9,7 +9,7 @@ $(function() {
 
 		ctx.lineWidth = 1;
 		ctx.color = 'black';
-		document.getElementById("color").value="000000";
+		//document.getElementById("color").value="000000";
 
 		var param = {
             "user": "thordurt12",
@@ -54,6 +54,7 @@ $(function() {
 	var undo = [];
 	var shapes = [];
 	var currentToolType = "Pen";
+	
 
 	function createNewTool(derp) {
 
@@ -123,7 +124,6 @@ $(function() {
 	
 	function clearWindow() {
 		
-		//console.log(shapes);
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.beginPath();
 
@@ -136,12 +136,6 @@ $(function() {
 
 		}
 	}
-	function updateText (e) {
-		// body...function textBoxChanged(e) {
-		Text.addPoint()
-	
-	}	
-	
 	$("#undo").on("click", function(e) {
 		if(!shapes[0] && undo[0]){
 			console.log('draw first');
@@ -215,7 +209,7 @@ $(function() {
 			success: function(data){
 				var items = JSON.parse(data.WhiteboardContents);
 				for (var i = 0; i < items.length; i++){
-						var testing = eval(items[i].objectname);
+						var testing = eval(items[i].name);
 						console.log(testing);
 						items[i].__proto__ = testing.prototype;
 						shapes.push(items[i]);
@@ -228,8 +222,5 @@ $(function() {
 				console.log('fail');
 			}
 		})
-		
-
 	});
-	
 });
