@@ -1,16 +1,21 @@
 body{
 	background: dadada;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
 }
 
 #c{
-	border: 0px solid black;
+	border: 2px solid grey;
 	background-color: white;
 	position: relative;
 	top: 20;
 	left: 40;
-	font-family: Arial, Helvetica, sans-serif;
+	
 }
 #attributes{
+	margin:0px;
+	width:300px;
+	
 	border: px solid black;
 	position:relative;
 	top: -400px;
@@ -27,13 +32,26 @@ body{
 		to(#d6d6d6));
 }
 #textManipulation{
+	margin:0px;
+	width:300px;
+	
 	border: 0px solid black;
+	widht:30px;
 	position: relative;
 	top: -400px;
 	left: 550px;
 	font-family: Arial, Helvetica, sans-serif;
+	color: #383530;
+	padding: 5px 10px;
+	background: lidht grey;
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		color-stop(0.50, #ffffff),
+		to(#d6d6d6));
 }
 #operations{
+	
 	border: 0px solid black;
 	position:relative;
 	left:150;
@@ -47,11 +65,21 @@ body{
 	left:80px;
 }
 #Memorizing{
+	margin:0px;
+	width:300px;
 	border: px solid black;
 	font-family: Arial, Helvetica, sans-serif;
 	position: relative;
-	top:-210;
+	top:-230;
 	left: 550px;
+	color: #383530;
+	padding: 5px 10px;
+	background: lidht grey;
+	background: -webkit-gradient(
+		linear, left top, left bottom,
+		from(#ffffff),
+		color-stop(0.50, #ffffff),
+		to(#d6d6d6));
 }
 .buttons{
    font-family: Arial, Helvetica, sans-serif;
