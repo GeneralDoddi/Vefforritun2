@@ -1,3 +1,10 @@
+//******************************************************************//
+// Here are the classes needed for the drawing program controlled 	//
+// in scripts.js. It is designed so that is easy to add features	//
+//Written by Bjarnþór Sigurðarson and Þórður Þorsteinsson			//
+//******************************************************************//					
+
+//Constructor for each point made by drawing object
 function Point(x,y){
 
 	this.x = x;
