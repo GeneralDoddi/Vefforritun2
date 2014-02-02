@@ -130,8 +130,8 @@ $(function() {
 	
 	function drawShapes() {
 		for(var i = 0; i < shapes.length; ++i) {
-			//shapes[i].draw(ctx);
-			console.log(shapes[i].name)
+			shapes[i].draw(ctx);
+			//console.log(shapes[i].name)
 		}
 	}
 	function updateText (e) {
@@ -189,6 +189,7 @@ $(function() {
 				crossDomain: true,
 				success: function (data) {
 					// The save was successful...
+					init();
 					console.log(data);
 				},
 				error: function (xhr, err) {
@@ -213,11 +214,11 @@ $(function() {
 			success: function(data){
 				var items = JSON.parse(data.WhiteboardContents);
 				for (var i = 0; i < items.length; i++){
-						items[i].name
+						var testing = eval(items[i].objectname);
 						console.log(testing);
+						items[i].__proto__ = testing.prototype;
 						shapes.push(items[i]);
 						drawShapes();
-						console.log(shapes)
 
 				}
 				
