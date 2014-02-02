@@ -40,6 +40,7 @@ Pencil.prototype.draw = function(ctx) {
 	ctx.stroke();
 
 }
+//Eraser constructor and tools
 function Eraser () {
 	this.name = "Eraser";
 	this.points = [];
@@ -194,14 +195,15 @@ Text.prototype.addPoint = function(point) {
 		this.message = document.getElementById("textBox").value;
 		this.font = document.getElementById("font").value;
 		this.color = document.getElementById("color").value;
+		this.size = document.getElementById("ble").value;
 	}
 }
 
 Text.prototype.draw = function(c) {
-
-	c.font = this.font;
+	
+	c.font = this.size+"pt "+this.font;
 	c.fillStyle = "#"+ this.color;
 	c.fillText (this.message,this.start.x , this.start.y);
-	//c.stroke();
+	
 
 }
