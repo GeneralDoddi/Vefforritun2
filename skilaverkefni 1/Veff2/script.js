@@ -9,7 +9,8 @@ $(function() {
 
 		ctx.lineWidth = 1;
 		ctx.color = 'black';
-		//document.getElementById("color").value="000000";
+		c.style.cursor = 'crosshair';
+		document.getElementById("color").value="000000";
 
 		var param = {
             "user": "thordurt12",
@@ -184,7 +185,7 @@ $(function() {
 				crossDomain: true,
 				success: function (data) {
 					// The save was successful...
-					init();
+					
 					console.log(data);
 				},
 				error: function (xhr, err) {
@@ -207,8 +208,10 @@ $(function() {
 			dataType: "jsonp",
 			crossDomain: true,
 			success: function(data){
+				clearSlate();
 				var items = JSON.parse(data.WhiteboardContents);
 				for (var i = 0; i < items.length; i++){
+						
 						var testing = eval(items[i].name);
 						console.log(testing);
 						items[i].__proto__ = testing.prototype;

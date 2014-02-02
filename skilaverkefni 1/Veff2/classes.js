@@ -112,7 +112,7 @@ Rect.prototype.draw = function(ctx) {
 }
 //Line constructor and tools
 function Line (){
-	this.objectname = "Line";
+	this.name = "Line";
 	this.start = undefined;
 	this.end = undefined; 
 	this.lineWidth = undefined;
@@ -143,7 +143,7 @@ Line.prototype.draw = function(c) {
 }
 //Circle constructor and tools
 function Circle (point) {
-	this.objectname = "Circle";
+	this.name = "Circle";
 	this.x = undefined;
 	this.y = undefined;
 	this.lineWidth = undefined;
@@ -180,7 +180,7 @@ Circle.prototype.draw = function(c) {
 }
 
 function Text () {
-	this.objectname = "Text";
+	this.name = "Text";
 	this.x = undefined;
 	this.y = undefined;
 	this.message = undefined;
