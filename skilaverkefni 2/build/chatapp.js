@@ -50,7 +50,7 @@ app.controller("LoginController", ["$scope","$location", "SocketService", functi
 		}
 	};
 }]);
-app.controller("RoomController", ["$scope", "$routeParams", "SocketService", function($scope, $routeParams, SocketService) {
+app.controller("RoomController", ["$scope", "$location", "$routeParams", "SocketService", function($scope, $location ,$routeParams, SocketService) {
 	$scope.roomName = $routeParams.roomName;
 	$scope.currentMessage = "";
 
@@ -81,7 +81,13 @@ app.controller("RoomController", ["$scope", "$routeParams", "SocketService", fun
 			$scope.currentMessage = "";
 		}
 	};
-
+	$scope.disconnect = function() {
+		if(socket){
+			console.log("Disconnecting from server");
+			socket.emit("disconnect");
+			$location.path("/");			
+		}
+	};
 	$scope.keyPress = function($event) {
 		if($event.keyCode === 13) {
 			$scope.send();
