@@ -8,11 +8,17 @@ app.factory("SocketService", ["$http", function($http) {
 		setUsername: function(user) {
 			username = user;
 		},
+		setRoom: function(theRoom){
+			room.push(theRoom);
+		},
 		getUsername: function() {
 			return username;
 		},
 		getSocket: function() {
 			return socket;
-		}
+		},
+		getRoom: function() {
+			return room;
+		} 
 	};
 }]);

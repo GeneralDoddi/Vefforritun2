@@ -20,12 +20,18 @@ app.factory("SocketService", ["$http", function($http) {
 		setUsername: function(user) {
 			username = user;
 		},
+		setRoom: function(theRoom){
+			room.push(theRoom);
+		},
 		getUsername: function() {
 			return username;
 		},
 		getSocket: function() {
 			return socket;
-		}
+		},
+		getRoom: function() {
+			return room;
+		} 
 	};
 }]);
 app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
@@ -69,23 +75,48 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 		socket.on("updateusers", function(room, users) {
 			if(room === $scope.roomName) {
+				
 				$scope.users = users;
+				$scope.$apply();
 			}
+			//console.log(users);
 		});
 	}
 
 	$scope.send = function() {
 		if(socket) {
+			var chatMsg = ($scope.currentMessage).split(' ');
+			if(chatMsg[0] === "/kick"){
+				console.log("homo");
+			}
+			else if(chatMsg[0] === "/op"){
+
+			}
+			else if(chatMsg[0] === "/ban"){
+
+			}
+			else if(chatMsg[0] === "/joinroom"){
+				console.log(chatMsg[1]);
+				socket.emit("joinroom", {room: chatMsg[1], pass: ""}, function(success, errorMessage){
+
+				});
+
+			}
+			else if(chatMsg[0] === "/partroom"){
+
+			}
+			else{
 			console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
 			socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
 			$scope.currentMessage = "";
+			}
 		}
 	};
 	$scope.disconnect = function() {
 		if(socket){
-			console.log("Disconnecting from server");
-			socket.emit("disconnect");
-			$location.path("/");			
+			console.log(SocketService.getUsername() + " Disconnected from server");
+			$location.path("/");
+			socket.disconnect();			
 		}
 	};
 	$scope.keyPress = function($event) {
@@ -93,4 +124,5 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
+	
 }]);
