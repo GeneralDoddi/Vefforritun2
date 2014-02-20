@@ -24,6 +24,19 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		partRoom: function(theRoom){
 			rooms.splice(rooms.indexOf(theRoom),1);
+		},
+		roomExists: function(theRoom){
+			for (var i = rooms.length - 1; i >= 0; i--) {
+				console.log(rooms);
+				if(rooms[i] === theRoom)
+				{
+					console.log("true");
+					return true;
+				}
+				
+			}
+			console.log("false");
+			return false;
 		}
 		
 	};

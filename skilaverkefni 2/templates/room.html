@@ -1,11 +1,11 @@
-<div class="container">		
-			<div class="well">
-				<ul class="nav nav-pills">
-					<li ng-repeat="room in roomList" ng-class = "setActive(room)">
-						<a ng-href="#/room/{{ room }}">{{ room }}</a>
 
+<div class="container">	
+<ul class="nav nav-pills">
+					<li ng-repeat="room in roomList" ng-class = "activate(room)">
+						<a ng-href="#/room/{{ room }}">{{ room }}</a><button class="close close-room" ng-click="partRoom()">&times;</button>
 					</li>
-				</ul>
+				</ul>	
+			<div class="well">
 				
 				<div class="row">
 					<div class="col-md-9 col-xs-9">
@@ -55,5 +55,9 @@
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
+=======
+</div>
+>>>>>>> 68d9a9e6b679eaf2183ff323b8b2e5b2f1806a7c
 
 
