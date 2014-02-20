@@ -69,7 +69,10 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
     console.log("Creating a new room");
     console.log($scope.input.abc);
     socket.emit("joinroom", { room: $scope.roomname, pass: "" }, function(success, errorMessage) {
-      SocketService.setRoom($scope.input.abc);
+      if(SocketService.roomExists($scope.input.abc) === false){
+          SocketService.setRoom($scope.input.abc);
+          console.log("accepted");
+        }
       $modalInstance.dismiss();
     });
   };
@@ -84,6 +87,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
 };
 
 app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
+	
 	$scope.username = "";
 	$scope.message = "";
 
@@ -154,7 +158,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
                     },
                     socket: function() {return SocketService.getSocket();
                     },
-                    setRoom: function() {return SocketService.setRoom();
+                    setRoom: function() {return SocketService.setRoom;
                     }
                 }
             });
@@ -165,23 +169,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
                 $log.info('Modal dismissed at: ' + new Date());
             });
 	};
-	$scope.joinRoom = function(){
-		var modalInstance = $modal.open({
-                templateUrl: 'templates/joinRoomPartial.html',
-                controller: "ModalInstanceCtrl",  //what do I put here to reference the other controller?
-                resolve: {
-                    userList: function() {
-                        return $scope.roomList;
-                    }
-				}
-            });
-
-            modalInstance.result.then(function(selectedItem) {
-                $scope.selected = selectedItem;
-            }, function() {
-                $log.info('Modal dismissed at: ' + new Date());
-            });	
-	};
+	
 	$scope.send = function() {
 		if(socket) {
 			var chatMsg = ($scope.currentMessage).split(' ');
@@ -221,9 +209,9 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.disconnect = function() {
 		if(socket){
 			console.log(SocketService.getUsername() + " Disconnected from server");
+			socket.disconnect();
 			$location.path("/");
-			socket.disconnect();			
-
+			
 		}
 	};
 	$scope.keyPress = function($event) {

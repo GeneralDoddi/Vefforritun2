@@ -1,4 +1,5 @@
 app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
+	
 	$scope.username = "";
 	$scope.message = "";
 

@@ -11,7 +11,10 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
     console.log("Creating a new room");
     console.log($scope.input.abc);
     socket.emit("joinroom", { room: $scope.roomname, pass: "" }, function(success, errorMessage) {
-      SocketService.setRoom($scope.input.abc);
+      if(SocketService.roomExists($scope.input.abc) === false){
+          SocketService.setRoom($scope.input.abc);
+          console.log("accepted");
+        }
       $modalInstance.dismiss();
     });
   };
