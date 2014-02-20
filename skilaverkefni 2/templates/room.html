@@ -1,11 +1,12 @@
-<div class="container">
-	<ul class="nav nav-pills">
-		<li ng-repeat="room in rooms" ng-class = "active">
-			<a href="#{{ roomName }}">{{ roomName }}</a>
-		</li>
-	</ul>
-			
+
+
+<div class="container">		
 			<div class="well">
+				<ul class="nav nav-pills">
+					<li ng-repeat="room in rooms" ng-class = "setActive(room)">
+						<a ng-href="#/room/{{ room }}">{{ room }}</a><button class="close close-room" ng-click="partRoom()">&times;</button>
+					</li>
+				</ul>
 				<div class="row">
 					<div class="col-md-9 col-xs-9">
 						<ul style="list-style: none">
@@ -34,3 +35,10 @@
 			<button ng-click="send()">Send</button>
 			<button ng-click="disconnect()">Disconnect</button>
 </div>
+
+
+<ul class="nav nav-tabs sevensixfive">
+  <li ng-repeat="ro in rName" ng-class="setActive(ro)">
+		<a ng-href="#/room/{{ro}}" id="{{ro}}">{{ro}}</a><button class="close close-room" ng-click="leaveRoom()">&times;</button>
+	</li>
+</ul>

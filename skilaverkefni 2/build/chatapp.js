@@ -10,9 +10,11 @@ app.config(["$routeProvider", function($routeProvider){
 	}).otherwise({redirectTo:"/"});
 }]);
 
+
 app.factory("SocketService", ["$http", function($http) {
 	var username = "";
 	var socket;
+	var rooms = [];
 	return {
 		setConnected: function(theSocket) {
 			socket = theSocket;
@@ -20,18 +22,22 @@ app.factory("SocketService", ["$http", function($http) {
 		setUsername: function(user) {
 			username = user;
 		},
-		setRoom: function(theRoom){
-			rooms.push(theRoom);
-		},
 		getUsername: function() {
 			return username;
 		},
 		getSocket: function() {
 			return socket;
 		},
-		getRoom: function() {
+		//room service
+		setRoom: function(theRoom){
+			rooms.push(theRoom);
+		},
+		getRoom: function(){
 			return rooms;
-		} 
+		},
+		partRoom: function(theRoom){
+			rooms.splice(rooms.indexOf(theRoom),1);
+		}
 	};
 }]);
 app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {

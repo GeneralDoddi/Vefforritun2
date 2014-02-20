@@ -1,2 +1,2 @@
 #!/bin/bash
-nodejs chatserver.js
+node chatserver.js
