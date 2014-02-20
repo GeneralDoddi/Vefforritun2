@@ -1,7 +1,10 @@
 <div class="container">
 	<ul class="nav nav-pills">
-		<li ng-repeat="room in rooms"><a href="#">{{ roomName }}</a></li>
-			<h1>Welcome to {{ roomName }}</h1>
+		<li ng-repeat="room in rooms" ng-class = "active">
+			<a href="#{{ roomName }}">{{ roomName }}</a>
+		</li>
+	</ul>
+			
 			<div class="well">
 				<div class="row">
 					<div class="col-md-9 col-xs-9">

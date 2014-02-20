@@ -21,7 +21,7 @@ app.factory("SocketService", ["$http", function($http) {
 			username = user;
 		},
 		setRoom: function(theRoom){
-			room.push(theRoom);
+			rooms.push(theRoom);
 		},
 		getUsername: function() {
 			return username;
@@ -30,7 +30,7 @@ app.factory("SocketService", ["$http", function($http) {
 			return socket;
 		},
 		getRoom: function() {
-			return room;
+			return rooms;
 		} 
 	};
 }]);
@@ -96,8 +96,10 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 			}
 			else if(chatMsg[0] === "/joinroom"){
-				console.log(chatMsg[1]);
-				socket.emit("joinroom", {room: chatMsg[1], pass: ""}, function(success, errorMessage){
+				//console.log(chatMsg[1]);
+				SocketService.setRoom(chatMsg[1]);
+				console.log(SocketService.getRoom[chatMsg[1]]);
+				socket.emit("joinroom", {room: SocketService.getRoom(chatMsg[1]), pass: ""}, function(success, errorMessage){
 
 				});
 
