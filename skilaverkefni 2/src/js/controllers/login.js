@@ -10,6 +10,7 @@ app.controller("LoginController", ["$scope","$location", "SocketService", functi
 				if (available){
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.username);
+					SocketService.setRoom("lobby");
 					$location.path("/room/lobby");
 				}
 				else{

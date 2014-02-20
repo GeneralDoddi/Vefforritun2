@@ -39,6 +39,19 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		partRoom: function(theRoom){
 			rooms.splice(rooms.indexOf(theRoom),1);
+		},
+		roomExists: function(theRoom){
+			for (var i = rooms.length - 1; i >= 0; i--) {
+				console.log(rooms);
+				if(rooms[i] === theRoom)
+				{
+					console.log("true");
+					return true;
+				}
+				
+			}
+			console.log("false");
+			return false;
 		}
 		
 	};
@@ -70,6 +83,7 @@ app.controller("LoginController", ["$scope","$location", "SocketService", functi
 				if (available){
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.username);
+					SocketService.setRoom("lobby");
 					$location.path("/room/lobby");
 				}
 				else{
@@ -84,13 +98,22 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.roomName = $routeParams.roomName;
 	
 	$scope.currentMessage = "";
+	$scope.roomList = SocketService.getRoom();
 	
 	var socket = SocketService.getSocket();
 
 	if(socket) {
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
-
+				if(SocketService.roomExists($scope.roomName) === false){
+					SocketService.setRoom($scope.roomName);
+					console.log("accepted");
+				}
+				
+				console.log("joinroom " + $scope.roomName);
+				console.log(SocketService.getRoom());
 		});
+
+		
 
 		socket.on("updatechat", function(roomname, messageHistory) {
 			console.log(messageHistory);
@@ -161,11 +184,16 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			}
 			else if(chatMsg[0] === "/joinroom"){
 				//console.log(chatMsg[1]);
-				SocketService.setRoom(chatMsg[1]);
-				console.log(SocketService.getRoom[chatMsg[1]]);
-				socket.emit("joinroom", {room: SocketService.getRoom(chatMsg[1]), pass: ""}, function(success, errorMessage){
-
+				if(SocketService.roomExists(chatMsg[1]) === false){
+					SocketService.setRoom(chatMsg[1]);
+					console.log("accepted");
+					socket.emit("joinroom", {room: chatMsg[1], pass: ""}, function(success, errorMessage){
+					console.log(SocketService.getRoom());
 				});
+				}
+				
+				
+				$scope.currentMessage = "";
 
 			}
 			else if(chatMsg[0] === "/partroom"){
@@ -180,14 +208,10 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	};
 	$scope.disconnect = function() {
 		if(socket){
-<<<<<<< HEAD
-			$location.path("/");			
-			socket.disconnect();
-=======
 			console.log(SocketService.getUsername() + " Disconnected from server");
 			$location.path("/");
 			socket.disconnect();			
->>>>>>> f10dd4ff9c865334eaba3aba635b80f70bf7988e
+
 		}
 	};
 	$scope.keyPress = function($event) {
