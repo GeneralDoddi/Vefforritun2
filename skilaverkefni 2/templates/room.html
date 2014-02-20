@@ -1,19 +1,33 @@
-<div class="container">
-	<h1>Welcome to {{ roomName }}</h1>
-	<div class="well">
-		<div class="row">
-			<div class="col-md-9 col-xs-9">
-				<ul style="list-unstiled">
-					<li ng-repeat="message in messages">
-						<span>
-							<strong>[{{ message.timestamp | date:"HH:mm:ss" }}]:</strong>
-							<strong>
-								{{ message.nick }}
-							</strong>
-							{{ message.message }}
-						</span>
+<div class="container">		
+			<div class="well">
+				<ul class="nav nav-pills">
+					<li ng-repeat="room in rooms" ng-class = "setActive(room)">
+						<a ng-href="#/room/{{ room }}">{{ room }}</a><button class="close close-room" ng-click="partRoom()">&times;</button>
 					</li>
 				</ul>
+				<div class="row">
+					<div class="col-md-9 col-xs-9">
+						<ul style="list-style: none">
+							<li ng-repeat="message in messages">
+								<span>
+									<strong>[{{ message.timestamp | date:"HH:mm:ss" }}]:</strong>
+									<strong>
+										{{ message.nick }}
+									</strong>
+									{{ message.message }}
+								</span>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-xs-3">
+						<p>Users</p>
+						<ul>
+							<li ng-repeat="user in users">
+								{{ user }}
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-3 col-xs-3">
 				<p>Users: </p>
@@ -46,3 +60,10 @@
 		</div>
 	</div>
 </div>
+
+			<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
+			<button ng-click="send()">Send</button>
+			<button ng-click="disconnect()">Disconnect</button>
+</div>
+
+

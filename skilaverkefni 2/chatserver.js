@@ -44,6 +44,7 @@ io.sockets.on('connection', function (socket) {
 		//If the room does not exist
 		if(rooms[room] === undefined) {
 			rooms[room] = new Room();
+			console.log(room);
 			//Op the user if he creates the room.
 			rooms[room].ops[socket.username] = socket.username;
 			//If the user wants to password protect the room we set the password.

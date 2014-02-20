@@ -18,9 +18,11 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 		socket.on("updateusers", function(room, users) {
 			if(room === $scope.roomName) {
+				
 				$scope.users = users;
 				$scope.$apply();
 			}
+			//console.log(users);
 		});
 		
 	}
@@ -65,15 +67,41 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	};
 	$scope.send = function() {
 		if(socket) {
+			var chatMsg = ($scope.currentMessage).split(' ');
+			if(chatMsg[0] === "/kick"){
+				console.log("homo");
+			}
+			else if(chatMsg[0] === "/op"){
+
+			}
+			else if(chatMsg[0] === "/ban"){
+
+			}
+			else if(chatMsg[0] === "/joinroom"){
+				//console.log(chatMsg[1]);
+				SocketService.setRoom(chatMsg[1]);
+				console.log(SocketService.getRoom[chatMsg[1]]);
+				socket.emit("joinroom", {room: SocketService.getRoom(chatMsg[1]), pass: ""}, function(success, errorMessage){
+
+				});
+
+			}
+			else if(chatMsg[0] === "/partroom"){
+
+			}
+			else{
 			console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
 			socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
 			$scope.currentMessage = "";
+			}
 		}
 	};
 	$scope.disconnect = function() {
 		if(socket){
-			$location.path("/");			
-			socket.disconnect();
+			console.log(SocketService.getUsername() + " Disconnected from server");
+			$location.path("/");
+			socket.disconnect();			
+
 		}
 	};
 	$scope.keyPress = function($event) {
@@ -82,4 +110,5 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
+	
 }]);
