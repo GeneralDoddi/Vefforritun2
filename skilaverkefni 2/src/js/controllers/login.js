@@ -10,7 +10,7 @@ app.controller("LoginController", ["$scope","$location", "SocketService", functi
 				if (available){
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.username);
-					$location.path("/room/lobby");
+					$location.path("room/lobby");
 				}
 				else{
 					$scope.message = "Your name is taken, please choose another name";
