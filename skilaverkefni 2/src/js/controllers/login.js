@@ -1,7 +1,7 @@
 app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
 	$scope.username = "";
 	$scope.message = "";
-	console.log("herro from login");
+
 	var socket = io.connect("http://localhost:8080");
 
 	$scope.connect = function () {

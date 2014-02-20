@@ -1,4 +1,6 @@
-var app = angular.module("ChatApp", ["ngRoute"]);
+var app = angular.module("ChatApp",["ngRoute","ui.bootstrap"]);
+
+
 
 app.config(["$routeProvider", function($routeProvider){
 	$routeProvider.when("/",{

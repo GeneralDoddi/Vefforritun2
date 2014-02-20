@@ -14,5 +14,6 @@ app.factory("SocketService", ["$http", function($http) {
 		getSocket: function() {
 			return socket;
 		}
+		
 	};
 }]);
