@@ -93,6 +93,7 @@ io.sockets.on('connection', function (socket) {
 				socket.emit('updatechat', room, rooms[room].messageHistory);
 				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 				io.sockets.emit('servermessage', "join", room, socket.username);
+				console.log(rooms[room].users;
 			}
 			fn(false, reason);
 		}

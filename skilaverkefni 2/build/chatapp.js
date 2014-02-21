@@ -110,6 +110,11 @@ app.controller("LoginController", ["$scope","$location", "SocketService", functi
 			});
 		}
 	};
+	$scope.keyPress = function($event) {
+		if($event.keyCode === 13) {
+			$scope.connect();
+		}
+	};
 }]);
 app.controller("RoomController", ["$scope", "$location", "$routeParams", "SocketService","$modal","$log", function($scope, $location,$routeParams, SocketService,$modal,$log) {
 	$scope.roomName = $routeParams.roomName;
@@ -129,16 +134,15 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				console.log(SocketService.getRoom());
 		});
 
-		
-
 		socket.on("updatechat", function(roomname, messageHistory) {
 			console.log(messageHistory);
 			$scope.messages = messageHistory;
 			$scope.$apply();
 		});
-		socket.on("updateusers", function(room, users) {
+		socket.on("updateusers", function(room, users, ops) {
 			if(room === $scope.roomName) {
-				
+				//console.log("ops " + ops);
+				$scope.ops = ops;
 				$scope.users = users;
 				$scope.$apply();
 			}
@@ -177,7 +181,11 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				console.log("homo");
 			}
 			else if(chatMsg[0] === "/op"){
-
+				//socket.emit("op", "lobby", chatMsg[1]);
+				console.log($scope.users[0]);
+				for(var i in $scope.ops){
+					console.log(i);
+				}
 			}
 			else if(chatMsg[0] === "/ban"){
 
