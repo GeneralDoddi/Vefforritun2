@@ -1,8 +1,8 @@
 
 <div class="container">	
-<ul class="nav nav-pills">
-					<li ng-repeat="room in roomList" ng-class = "activate(room)">
-						<a ng-href="#/room/{{ room }}">{{ room }}</a><button class="close close-room" ng-click="partRoom()">&times;</button>
+	<ul class="nav nav-tabs">
+		<li class = "active" ng-repeat="room in roomList" ng-class = "activate(room)">
+		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"<button class="close close-room" ng-click="partRoom()"> &times;</button></span></a>
 					</li>
 				</ul>	
 			<div class="well">
