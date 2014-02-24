@@ -3,8 +3,8 @@ var app = angular.module("ChatApp",["ngRoute","ui.bootstrap"]);
 
 
 app.config(["$routeProvider", function($routeProvider){
-	$routeProvider.when("/",{
-		templateUrl:"templates/home.html",
+	$routeProvider.when("/",{ 
+		templateUrl:"templates/default.html",
 		controller:"LoginController", 
 	}).when("/room/:roomName", {
 		templateUrl:"templates/room.html",
@@ -37,9 +37,9 @@ app.factory("SocketService", ["$http", function($http) {
 		getRoom: function(){
 			return rooms;
 		},
-		partRoom: function(theRoom){
-			rooms.splice(rooms.indexOf(theRoom),1);
-		},
+		//partRoom: function(theRoom){
+			
+		//},
 		roomExists: function(theRoom){
 			for (var i = rooms.length - 1; i >= 0; i--) {
 				console.log(rooms);
@@ -56,11 +56,44 @@ app.factory("SocketService", ["$http", function($http) {
 		
 	};
 }]);
+var LoginPartialController = function($scope,$location , SocketService, $modalInstance) {
+	
+	console.log("Hello from login");
+	var socket = io.connect("http://localhost:8080");
+	$scope.username = "";
+	$scope.message = "";
+	$scope.input = {};
+	
+	$scope.connect = function () {
+		console.log($scope.input.abc);
+		console.log("Hello from login3");
+		if(socket){
+			
+			socket.emit("adduser", $scope.input.abc, function(available) {
+				if (available){
+					console.log("hello from connect");
+					SocketService.setConnected(socket);
+					SocketService.setUsername($scope.input.abc);
+
+					SocketService.setRoom("lobby");
+					
+				}
+				else{
+					$scope.message = "Your name is taken, please choose another name";
+				}
+				$location.path("/room/lobby");
+				$scope.$apply();
+				$modalInstance.dismiss();	
+			});
+			
+		}
+	};
+
+};
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, SocketService) {
 
   $scope.roomName = "";
-  console.log(roomList);
   $scope.roomList = roomList;
   $scope.input = {};
   
@@ -76,41 +109,33 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
       $modalInstance.dismiss();
     });
   };
-
-  $scope.ok = function () {
-  $modalInstance.close();
-  };
-
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
 };
 
-app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
+app.controller("LoginController", function($scope, $location,SocketService, $modal) {
 	
-	$scope.username = "";
-	$scope.message = "";
+	
+	console.log("hello from modal login");
+	
+	var modalLoginInstance = $modal.open({
 
-	var socket = io.connect("http://localhost:8080");
+				templateUrl:'templates/home.html',
+				controller: "LoginPartialController",
+				/*resolve:{
+					socket: function() {
+						return SocketService.getSocket();
 
-	$scope.connect = function () {
-		if(socket){
-			socket.emit("adduser", $scope.username, function(available) {
-				if (available){
-					SocketService.setConnected(socket);
-					SocketService.setUsername($scope.username);
+					}
+				}*/
+			
+	});
 
-					SocketService.setRoom("lobby");
-					$location.path("/room/lobby");
-				}
-				else{
-					$scope.message = "Your name is taken, please choose another name";
-				}
-				$scope.$apply();
-			});
-		}
-	};
-}]);
+		
+
+	
+});
 app.controller("RoomController", ["$scope", "$location", "$routeParams", "SocketService","$modal","$log", function($scope, $location,$routeParams, SocketService,$modal,$log) {
 	$scope.roomName = $routeParams.roomName;
 	$scope.currentMessage = "";
@@ -214,6 +239,17 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			
 		}
 	};
+	$scope.partRoom = function() {
+			console.log("Leaving room " + $scope.roomName);
+			console.log($scope.roomName);
+			console.log(SocketService.getUsername());	
+			
+			socket.emit("partroom",$scope.roomName, SocketService.getUsername() );
+			console.log($scope.roomList);
+			
+
+	};
+	
 	$scope.keyPress = function($event) {
 		console.log("$event");
 		if($event.keyCode === 13) {

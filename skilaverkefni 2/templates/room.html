@@ -2,7 +2,7 @@
 <div class="container">	
 	<ul class="nav nav-tabs">
 		<li class = "active" ng-repeat="room in roomList" ng-class = "activate(room)">
-		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"<button class="close close-room" ng-click="partRoom()"> &times;</button></span></a>
+		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"<button class="close close-room" ng-click="partRoom()">&times;</button></span></a>
 					</li>
 				</ul>	
 			<div class="well">
@@ -23,10 +23,10 @@
 					</div>
 					
 					<div class="col-md-3 col-xs-3">
-						<p>Users</p>
+						<p>Users: </p>
 						<ul>
-							<li ng-repeat="room in roomList">
-								{{ room }}
+							<li ng-repeat="user in users">
+								{{ user }}
 							</li>
 						</ul>
 					</div>

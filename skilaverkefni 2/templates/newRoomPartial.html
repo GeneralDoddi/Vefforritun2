@@ -1,21 +1,15 @@
 <div>
-    
-        <div class="modal-header">
-            <h3>Create new room</h3>
-        </div>
-        <div class="modal-body">
-           
-            <li ng-repeat="room in roomList">
-						{{ room }}
-			</li>
-		</div>
-        <div class="modal-footer">
-            <button class = "btn btn-primary" ng-click = "createRoom()">Create new room</button>
-			<input ng-model="input.abc" placeholder="Insert room name here">
-        	<button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    
+    <div class="modal-header">
+        <h3>Create new room</h3>
+    </div>
+    <div class="modal-body">
+        <li ng-repeat="room in roomList">
+			{{ room }}
+		</li>
+	</div>
+    <div class="modal-footer">
+        <button class = "btn btn-primary" ng-click = "createRoom()">Create new room</button>
+		<input ng-model="input.abc" placeholder="Insert room name here">
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
 </div>

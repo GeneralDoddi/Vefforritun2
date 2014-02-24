@@ -1,25 +1,22 @@
-app.controller("LoginController", ["$scope","$location", "SocketService", function($scope, $location,SocketService) {
+app.controller("LoginController", function($scope, $location,SocketService, $modal) {
 	
-	$scope.username = "";
-	$scope.message = "";
+	
+	console.log("hello from modal login");
+	
+	var modalLoginInstance = $modal.open({
 
-	var socket = io.connect("http://localhost:8080");
+				templateUrl:'templates/home.html',
+				controller: "LoginPartialController",
+				/*resolve:{
+					socket: function() {
+						return SocketService.getSocket();
 
-	$scope.connect = function () {
-		if(socket){
-			socket.emit("adduser", $scope.username, function(available) {
-				if (available){
-					SocketService.setConnected(socket);
-					SocketService.setUsername($scope.username);
+					}
+				}*/
+			
+	});
 
-					SocketService.setRoom("lobby");
-					$location.path("/room/lobby");
-				}
-				else{
-					$scope.message = "Your name is taken, please choose another name";
-				}
-				$scope.$apply();
-			});
-		}
-	};
-}]);
+		
+
+	
+});
