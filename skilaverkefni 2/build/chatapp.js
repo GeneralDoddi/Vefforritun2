@@ -228,5 +228,14 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
+	$scope.active = function(room) {
+		console.log("this is" + room);
+		$(".tab-"+room).hide();
+
+	};
+	/*$scope.partRoom = function(){
+		console.log("CLOSE");
+	};*/
+
 	
 }]);
