@@ -14,6 +14,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
       if(SocketService.roomExists($scope.input.abc) === false){
           SocketService.setRoom($scope.input.abc);
           console.log("accepted");
+          $location.path("/room/"+chatMsg[1]);
         }
       $modalInstance.dismiss();
     });

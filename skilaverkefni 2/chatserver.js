@@ -145,6 +145,10 @@ io.sockets.on('connection', function (socket) {
 		//Update the userlist in the room.
 		io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 		io.sockets.emit('servermessage', "part", room, socket.username);
+		if(emptyObject(room))
+		{
+			delete rooms[room];
+		}
 	});
 
 	// when the user disconnects.. perform this
@@ -332,4 +336,12 @@ function Room() {
 		this.password = "";
 		this.locked = false;
 	};
+}
+
+function emptyObject(room) {
+	for(var user in rooms[room].users)
+	{
+		return false
+	}
+	return true
 }
