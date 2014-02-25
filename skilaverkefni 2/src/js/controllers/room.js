@@ -184,6 +184,17 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			
 		}
 	};
+	$scope.partRoom = function() {
+			console.log("Leaving room " + $scope.roomName);
+			console.log($scope.roomName);
+			console.log(SocketService.getUsername());	
+			
+			socket.emit("partroom",$scope.roomName, SocketService.getUsername() );
+			console.log($scope.roomList);
+			
+
+	};
+	
 	$scope.keyPress = function($event) {
 		console.log("$event");
 		if($event.keyCode === 13) {
