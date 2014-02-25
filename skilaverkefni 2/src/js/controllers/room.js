@@ -58,6 +58,11 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 			});
 		});
+		socket.on("exited", function(room, user){
+			$location.path("/room/lobby");
+			//socket.emit("sendmsg", {roomName: room,  msg: "Has left" });
+					
+		});
 
 		
 	}
@@ -186,13 +191,24 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			
 		}
 	};
-	$scope.partRoom = function() {
-			console.log("Leaving room " + $scope.roomName);
-			console.log($scope.roomName);
-			console.log(SocketService.getUsername());	
+	$scope.partRoom = function(room) {
+			console.log(room);
+			if(room === "lobby")
+				{
+					alert("You must disconnect to leave lobby");
+				}
+			else{
+					//chatMsg.shift();
+					console.log("delete " + room);
+					
+					SocketService.partRoom(room);
+					socket.emit("exited", room, $scope.username);
+					
+					socket.emit("partroom",room);
+					//$location.path("/room/lobby");
+
+				}
 			
-			socket.emit("partroom",$scope.roomName, SocketService.getUsername() );
-			console.log($scope.roomList);
 			
 
 	};
@@ -203,14 +219,5 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
-	/*$scope.active = function(room) {
-		console.log("this is" + room);
-		$(".tab-"+room).hide();
-
-	};
-	$scope.partRoom = function(){
-		console.log("CLOSE");
-	};*/
-
 	
 }]);

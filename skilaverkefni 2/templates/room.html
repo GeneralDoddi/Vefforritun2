@@ -3,17 +3,16 @@
 	<div class="tabs">
 	<ul class="nav nav-tabs">
 		<li ng-repeat="room in roomList">
-		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}
-		<span class ="close"><button class="close close-room" ng-click="partRoom()"> &times;</button></span></a>
+			<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"><button class="close close-{{ room }}" ng-click="partRoom(room)" href="#/room/lobby"> &times;</button></span></a>
 		</li>
 	</ul>	
 	</div>
+	
 	<div class="well">
 		<div class="row-msg">
 			
 			<h3>
 			<p>{{roomName}}</p>
-			<p>-------------------------------------------------------------</p>
 			</h3>
 				<ul style="list-style: none">
 					<li ng-repeat="message in messages">
@@ -39,6 +38,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class = "row-usr">			
 			
 			<div class="col-md-3 col-xs-3">
@@ -52,6 +52,11 @@
 		</div>
 		<div class = "row-rooms">
 			<div class="col-md-3 col-xs-3">
+
+						<p>Rooms</p>
+							<li ng-repeat="room in roomList">
+								{{ room }}
+
 
 				<p>Rooms</p>
 					<li ng-repeat="room in roomList">
