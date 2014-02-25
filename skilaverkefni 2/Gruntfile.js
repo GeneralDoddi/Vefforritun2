@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
   // Project configuration.
+  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
@@ -22,6 +23,13 @@ module.exports = function(grunt) {
           ], 
           dest: 'build/chatapp.js',
       }
+    },
+    connect:{
+        localhost:{
+            port:8090,
+            base:"."
+
+        },
     },
 
     uglify:{

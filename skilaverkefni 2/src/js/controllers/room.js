@@ -5,16 +5,14 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.username = SocketService.getUsername();
 	$scope.privChat = SocketService.getPrivchat();
 	
+	
 	var socket = SocketService.getSocket();
 	
 	if(socket) {
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
-
-					
 				}
-
 		});
 
 		socket.on("updatechat", function(roomname, messageHistory) {
@@ -109,6 +107,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				socket.emit("kick", {room: $scope.roomName, user: chatMsg[1]}, function(success, errorMessage){
 					if(success){
 						socket.emit("sendmsg", {roomName: $scope.roomName,  msg: "Has kicked : " + chatMsg[1]});
+						
 					}
 				});
 				
@@ -230,14 +229,14 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				}
 			else{
 					//chatMsg.shift();
-					console.log("delete " + room);
+					console.log("delete " + $scope.roomName);
 					
-					SocketService.partRoom(room);
+					SocketService.partRoom($scope.roomName);
 					socket.emit("exited", room, $scope.username);
 					
-					socket.emit("partroom",room);
-					//$location.path("/room/lobby");
-
+					socket.emit("partroom",$scope.roomName);
+					$location.path("/room/lobby");
+					//$scope.apply();
 				}
 			
 			
@@ -248,7 +247,13 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		console.log("$event");
 		if($event.keyCode === 13) {
 			$scope.send();
+			//$scope.glued= true;
 		}
 	};
+	$scope.changeView = function () {
+        $location.path("/room/"+$scope.roomName);
+        $scope.$apply();
+
+    };
 	
 }]);

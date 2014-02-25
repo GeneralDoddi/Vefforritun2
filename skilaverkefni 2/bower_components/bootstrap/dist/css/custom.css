@@ -1,3 +1,8 @@
+[scroll-glue]{
+        height: 100px;
+        overflow-y: scroll;
+        border: 1px solid grey;
+      }
 .row {
   margin-right: -1px;
   margin-left: 95px;
@@ -5,7 +10,7 @@
 
 .row-msg{
 	
-	float: none;
+	float: left;
 	background-color: black;
 	color: rgb(39, 192, 39);
 	border: solid black;
@@ -14,15 +19,22 @@
 	margin-top: -10px;
 	margin-right: 0px;
   	margin-left: 26px;
-  	overflow-x: hidden;
-  	
+  	overflow-y: auto;
+  	font-family: monospace;
   	max-width: 500px;
   	word-wrap: break-word;
 
 }
 .row-msg>h3,.h3{
 	margin-top: 0px;
-	padding-top: -10px
+	padding-top: -10px;
+}
+.row-usr>h4,.h4{
+	margin-top: 0px;
+	padding-top: -10px;
+}
+.row-usr<ul{
+	list-style: none;
 }
 
 .row-send{
@@ -31,26 +43,26 @@
 	float: right;
 }
 .row-usr{
-	float:left;
+	float:right;
 	background-color: black;
 	color: rgb(39, 192, 39);
 	border: 1px solid black;
-	float:right;
+	font-family: monospace;
 	height:300px;
 	position: relative;
 	top: -344px;
-	left:-112px;
+	left:-435px;
 	width: 130px;
 
 }
 .row-rooms{
 	overflow-x: hidden; 
-	float:left;
+	float:right;
 	border:1px solid black;
 	position: relative;
 	height: 300px;
 	top:-344px;
-	left: 528px;
+	left: -157px;
 	margin-right: 10px;
 	width: 130px;
 	background-color: black;
