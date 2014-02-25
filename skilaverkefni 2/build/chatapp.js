@@ -18,6 +18,7 @@ app.factory("SocketService", ["$http", function($http) {
 	var socket;
 	var rooms = [];
 	var privChat = [];
+	var chatitem = [];
 	return {
 		setConnected: function(theSocket) {
 			socket = theSocket;
@@ -62,6 +63,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		exitChat: function(theUser){
 			privChat.splice(privChat.indexOf(theUser),1);
+		},
+		setChatitem: function(chat){
+			chatitem.push(chat);
+		},
+		getChatitem: function(){
+			return chatitem;
 		},
 		chatExists: function(theUser){
 			for (var i = privChat.length - 1; i >= 0; i--) {
@@ -136,7 +143,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance,$location, roomList, so
           SocketService.setRoom($scope.input.roomName);
           console.log("accepted");
           $location.path("/room/"+$scope.input.roomName);
-          
+
         }
       $modalInstance.dismiss();
     });
@@ -172,6 +179,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.roomList = SocketService.getRoom();
 	$scope.username = SocketService.getUsername();
 	$scope.privChat = SocketService.getPrivchat();
+	$scope.privmessages = SocketService.getChatitem();
 	
 	
 	var socket = SocketService.getSocket();
@@ -237,8 +245,12 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 				console.log(message);
-				//$scope.privmessages = message;
-				//$scope.$apply();
+				//SocketService.setChatitem(message);
+				$scope.privmessages = message;
+				$scope.$apply();
+				if(!$("."+user).is(":visible")){
+					$("."+user).toggle();
+				}
 			
 		});
 
@@ -252,7 +264,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
                 backdrop: "static",
                 resolve: {
                     roomList: function() {
-                        return $scope.roomList;
+                        return SocketService.getRoom();
                     },
                     socket: function() {return SocketService.getSocket();
                     },
@@ -361,22 +373,15 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				SocketService.setPrivchat(chatMsg[1]);
 				socket.emit("privatemsg", {nick: chatMsg[1], message: chatMsg[2]}, function(success, errorMessage){
 						if(success){
-							//$location.path("/room/"+chatMsg[1]);
-							$scope.$apply();
+							//$scope.privmessages.push(chatMsg[2]);
+							//$scope.$apply();
 						}
 				});
 				$scope.currentMessage = "";
 			}
 			else{
-				//console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
-				if(SocketService.roomExists($scope.roomName) === true){
-					socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
-					console.log("public msg");
-				}
-				else if(SocketService.chatExists($scope.roomName) === true){
-					socket.emit("privatemsg", {nick: $scope.roomName, message: $scope.currentMessage});
-					console.log("private msg");
-				}
+				console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
+				socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
 				$scope.currentMessage = "";
 			}
 		}
@@ -418,10 +423,9 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			//$scope.glued= true;
 		}
 	};
-	$scope.changeView = function () {
-        $location.path("/room/"+$scope.roomName);
-        $scope.$apply();
-
-    };
+	$scope.derp = function(chat){
+		$("."+chat).toggle();
+	};
 	
 }]);
+

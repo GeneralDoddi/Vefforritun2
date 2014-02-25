@@ -3,6 +3,7 @@ app.factory("SocketService", ["$http", function($http) {
 	var socket;
 	var rooms = [];
 	var privChat = [];
+	var chatitem = [];
 	return {
 		setConnected: function(theSocket) {
 			socket = theSocket;
@@ -47,6 +48,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		exitChat: function(theUser){
 			privChat.splice(privChat.indexOf(theUser),1);
+		},
+		setChatitem: function(chat){
+			chatitem.push(chat);
+		},
+		getChatitem: function(){
+			return chatitem;
 		},
 		chatExists: function(theUser){
 			for (var i = privChat.length - 1; i >= 0; i--) {

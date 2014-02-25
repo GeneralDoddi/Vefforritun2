@@ -14,7 +14,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance,$location, roomList, so
           SocketService.setRoom($scope.input.roomName);
           console.log("accepted");
           $location.path("/room/"+$scope.input.roomName);
-          
+
         }
       $modalInstance.dismiss();
     });

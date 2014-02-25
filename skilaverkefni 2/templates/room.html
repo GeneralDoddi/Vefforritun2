@@ -49,6 +49,7 @@
 		
 		<div class = "row-rooms">
 			<div class="col-md-3 col-xs-3">
+<<<<<<< HEAD
 				<h4>Rooms</h4>
 					<li ng-repeat="room in roomList">
 						<ul>	
@@ -60,6 +61,36 @@
 		</div>	
 	
 	</div>
+		
+
+	<ul class="nav nav-tabs">
+		<li ng-repeat="chat in privChat">
+			
+			
+			<button id="{{ chat }}" ng-click="derp(chat)" >{{ chat }}
+				<div class="{{ chat }}"> 
+				<div class = "col-lg-12">
+					<ul style="list-style: none">
+						<li ng-repeat="privmsg in privmessages">
+							<span>
+									<strong>
+								[{{ privmsg.timestamp |date:"HH:mm:ss" }}]:</strong>
+								<strong>
+									{{ privmsg.nick }}
+								</strong>
+									{{ privmsg.message }}
+							</span>
+						</li>
+					</ul>
+				</div>
+				</div>
+			</button>
+			
+			
+
+		</li>
+	</ul>
+>>>>>>> a225800d9d0cf12588e53bd723d6e797e9a17756
 	
 	<div class ="row">
 		<div class ="col-lg-6">
