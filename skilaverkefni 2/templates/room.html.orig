@@ -1,28 +1,24 @@
 
 <div class="container">	
-	<div class="tabs">
-	<ul class="nav nav-tabs">
-		<li ng-repeat="room in roomList">
-<<<<<<< HEAD
-		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"></span></a><button class="close close-{{ room }}" ng-click="partRoom(room)" > &times;</button>
-=======
-			<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"><button class="close close-{{ room }}" ng-click="partRoom(room)" href="#/room/lobby"> &times;</button></span></a>
->>>>>>> 6f4936cbdd7b057bea97cd833240ecb7b9ad3873
-		</li>
-	</ul>	
+	<div class ="row-buttons">
+			<div class ="btn-group">
+				
+				<button class = "btn btn-default" ng-click="createRoom()">Create new room</button>
+				<button class = "btn btn-default" ng-click="disconnect()">Disconnect!</button>	
+				<button class="btn btn-default" ng-click="partRoom()" ng-href="#/room/lobby"> Leave Room</button>
+			</div>
 	</div>
-	
 	<div class="well">
 		<div class="row-msg">
 			
 			<h3>
-			<p>{{roomName}}</p>
+			{{roomName}}: 
 			</h3>
 				<ul style="list-style: none">
 					<li ng-repeat="message in messages">
 						<span>
 							<strong>
-							[{{ message.timestamp |date:"HH:mm:ss" }}]:</strong>
+							{{ message.timestamp |date:"HH:mm:ss" }}:</strong>
 							<strong>
 								{{ message.nick }}
 							</strong>
@@ -35,7 +31,7 @@
 			<div class="col-lg-6">
 				<div class="input-group">
 					<span class = "input-group-btn">
-						<button class = "btn btn-success" ng-click="send()">Send!</button>
+						<button class = "btn btn-default" ng-click="send()">Send!</button>
 					</span>
 					<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
 				
@@ -44,71 +40,71 @@
 		</div>
 
 		<div class = "row-usr">			
-			
-			<div class="col-md-3 col-xs-3">
-				<p>Users: </p>
-					<ul>
-						<li ng-repeat="user in users">
-							{{ user }}
-						</li>
-					</ul>
-				</div>
+			<h3>Ops: </h3>
+				<ul>
+					<li ng-repeat="op in ops">
+						@{{ op }}
+					</li>
+				
+				<li ng-repeat="user in users">
+					{{ user }}
+				</li>
+			</ul>
 		</div>
+		
 		<div class = "row-rooms">
-			<div class="col-md-3 col-xs-3">
-
-						<p>Rooms</p>
-							<li ng-repeat="room in roomList">
-								{{ room }}
-
-
 <<<<<<< HEAD
-							</li>
-					</div>
-							
-				</div>
-			</div>
+			<div class="col-md-3 col-xs-3">
+				<h4>Rooms</h4>
+=======
+			
+
+				<h3>Rooms:</h3>
+>>>>>>> 9c34d3503e8a0848ae747c1de2eb04bdbe53b958
+					<li ng-repeat="room in roomList">
+						<ul>	
+						<a ng-href= "#/room/{{ room }}">{{room}}</a>
+						</ul>
+					</li>
+					
 		</div>
+			
+	
 	</div>
+		
+
 	<ul class="nav nav-tabs">
 		<li ng-repeat="chat in privChat">
-		<a ng-href="#/room/{{ chat }}" data-toggle="tab">{{ chat }}<span class ="close"></span></a><button class="close close-{{ chat }}" ng-click="partRoom(chat)" > &times;</button>
-		</li>
-	</ul>	
-	<div class ="row-">
-		<div class="col-lg-6">
-			<div class="input-group">
-				<span class = "input-group-btn">
-					<button class = "btn btn-success" ng-click="send()">Send!</button>
-				</span>
-				<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
-				
-			</div>
-		</div>
-=======
-				<p>Rooms</p>
-					<li ng-repeat="room in roomList">
-						{{ room }}
-					<ul>
-						<li ng-repeat="op in ops">
-							@{{ op }}
-						</li>
-						<li ng-repeat="user in users">
-							{{ user }}
-
+			<button id="{{ chat }}" ng-click="derp(chat)" >{{ chat }}
+				<div class="{{ chat }}"> 
+				<div class = "col-lg-12">
+					<ul style="list-style: none">
+						<li ng-repeat="privmsg in privmessages">
+							<span>
+									<strong>
+								[{{ privmsg.timestamp |date:"HH:mm:ss" }}]:</strong>
+								<strong>
+									{{ privmsg.nick }}
+								</strong>
+									{{ privmsg.message }}
+							</span>
 						</li>
 					</ul>
-			</div></li>
-		</div>	
-	
->>>>>>> 6f4936cbdd7b057bea97cd833240ecb7b9ad3873
-	</div>
+				</div>
+				</div>
+			</button>
+		</li>
+	</ul>
+<<<<<<< HEAD
+
 	
 	<div class ="row">
 		<div class ="col-lg-6">
 			<div class ="btn-group">
 				<button class = "btn btn-danger" ng-click="disconnect()">Disconnect!</button>
 				<button class = "btn" ng-click="createRoom()">Create new room</button>
+
+				<button class="btn btn-danger" ng-click="partRoom()" ng-href="#/room/lobby"> Leave Room</button>
 			</div>
 		</div>
 	</div>
@@ -116,3 +112,6 @@
 
 
 
+=======
+</div>
+>>>>>>> 9c34d3503e8a0848ae747c1de2eb04bdbe53b958

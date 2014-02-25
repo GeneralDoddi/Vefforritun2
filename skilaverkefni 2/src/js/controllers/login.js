@@ -8,12 +8,6 @@ app.controller("LoginController", function($scope, $location,SocketService, $mod
 				templateUrl:'templates/home.html',
 				controller: "LoginPartialController",
 				backdrop: "static",
-				/*resolve:{
-					socket: function() {
-						return SocketService.getSocket();
-
-					}
-				}*/
 			
 	});
 });	
