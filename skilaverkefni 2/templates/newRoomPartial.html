@@ -3,8 +3,9 @@
         <h3>Create new room</h3>
     </div>
     <div class="modal-body">
-        <li ng-repeat="room in roomList">
-			{{ room }}
+        <li ng-repeat="room in roomList" >
+        <button class = "btn"  ng-click = "joinRoom()">{{ room }}</a>
+			
 		</li>
 	</div>
     <div class="modal-footer">

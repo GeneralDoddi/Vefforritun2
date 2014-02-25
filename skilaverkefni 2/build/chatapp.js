@@ -111,6 +111,17 @@ var ModalInstanceCtrl = function ($scope, $modalInstance,$location, roomList, so
       $modalInstance.dismiss();
     });
   };
+  $scope.joinRoom = function(room) {
+    console.log($scope.input.room);
+    socket.emit("joinroom", { room: $scope.room, pass: "" }, function(success, errorMessage) {
+      if(SocketService.roomExists($scope.input.roomName) === false){
+          SocketService.setRoom($scope.input.roomName);
+          console.log("accepted");
+          $location.path("/room/"+chatMsg[1]);
+        }
+      $modalInstance.dismiss();
+    });
+  };
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
@@ -147,10 +158,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
-<<<<<<< HEAD
-					console.log("accepted");
-=======
->>>>>>> f1be4669c269ef295e0e74e771144b7348b4543b
+
 					
 				}
 
