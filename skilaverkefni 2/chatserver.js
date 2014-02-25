@@ -47,6 +47,7 @@ io.sockets.on('connection', function (socket) {
 			console.log(room);
 			//Op the user if he creates the room.
 			rooms[room].ops[socket.username] = socket.username;
+
 			//If the user wants to password protect the room we set the password.
 			if(pass !== undefined) {
 				rooms[room].setPassword(pass);
@@ -55,10 +56,12 @@ io.sockets.on('connection', function (socket) {
 			users[socket.username].channels[room] = room;
 			//Send the room information to the client.
 			fn(true);
+
 			io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 			//Update topic
 			socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 			io.sockets.emit('servermessage', "join", room, socket.username);
+
 		}
 		else {
 
@@ -93,6 +96,7 @@ io.sockets.on('connection', function (socket) {
 				socket.emit('updatechat', room, rooms[room].messageHistory);
 				socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 				io.sockets.emit('servermessage', "join", room, socket.username);
+
 			}
 			fn(false, reason);
 		}
@@ -148,7 +152,7 @@ io.sockets.on('connection', function (socket) {
 		if(emptyObject(room))
 		{
 			delete rooms[room];
-		}
+		}	
 	});
 
 	// when the user disconnects.. perform this
@@ -166,7 +170,7 @@ io.sockets.on('connection', function (socket) {
 			//Broadcast the the user has left the channels he was in.
 			io.sockets.emit('servermessage', "quit", users[socket.username].channels, socket.username);
 			//Remove the user from the global user roster.
-			delete users[socket.username];
+			delete users[socket.username];	
 		}
 	});
 

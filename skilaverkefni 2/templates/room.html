@@ -35,9 +35,18 @@
 			</div>
 		</div>
 					<div class="col-md-3 col-xs-3">
+
 						<p>Rooms</p>
 							<li ng-repeat="room in roomList">
 								{{ room }}
+
+						<ul>
+							<li ng-repeat="op in ops">
+								@{{ op }}
+							</li>
+							<li ng-repeat="user in users">
+								{{ user }}
+
 							</li>
 					</div>
 							
