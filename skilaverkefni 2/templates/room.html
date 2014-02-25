@@ -1,11 +1,18 @@
 
 <div class="container">	
-	
+	<div class ="row-buttons">
+			<div class ="btn-group">
+				
+				<button class = "btn btn-default" ng-click="createRoom()">Create new room</button>
+				<button class = "btn btn-default" ng-click="disconnect()">Disconnect!</button>	
+				<button class="btn btn-default" ng-click="partRoom()" ng-href="#/room/lobby"> Leave Room</button>
+			</div>
+	</div>
 	<div class="well">
 		<div class="row-msg">
 			
 			<h3>
-			{{roomName}}
+			{{roomName}}: 
 			</h3>
 				<ul style="list-style: none">
 					<li ng-repeat="message in messages">
@@ -24,7 +31,7 @@
 			<div class="col-lg-6">
 				<div class="input-group">
 					<span class = "input-group-btn">
-						<button class = "btn btn-success" ng-click="send()">Send!</button>
+						<button class = "btn btn-default" ng-click="send()">Send!</button>
 					</span>
 					<input ng-model="currentMessage" class="form-control" ng-keypress="keyPress($event)" />
 				
@@ -33,19 +40,17 @@
 		</div>
 
 		<div class = "row-usr">			
-			
-			
-				<h4>Users: </h4>
-					<ul>
-						<li ng-repeat="user in users">
-							{{ user }}
-						</li>
-						<li ng-repeat="op in ops">
-							@{{ op }}
-						</li>
-						
-					</ul>
-				</div>
+			<h3>Ops: </h3>
+				<ul>
+					<li ng-repeat="op in ops">
+						@{{ op }}
+					</li>
+				
+				<li ng-repeat="user in users">
+					{{ user }}
+				</li>
+			</ul>
+		</div>
 		
 		<div class = "row-rooms">
 			<div class="col-md-3 col-xs-3">
@@ -56,16 +61,14 @@
 						</ul>
 					</li>
 					
-			</div></li>
-		</div>	
+		</div>
+			
 	
 	</div>
 		
 
 	<ul class="nav nav-tabs">
 		<li ng-repeat="chat in privChat">
-			
-			
 			<button id="{{ chat }}" ng-click="derp(chat)" >{{ chat }}
 				<div class="{{ chat }}"> 
 				<div class = "col-lg-12">
@@ -84,9 +87,6 @@
 				</div>
 				</div>
 			</button>
-			
-			
-
 		</li>
 	</ul>
 
@@ -105,3 +105,4 @@
 
 
 
+</div>
