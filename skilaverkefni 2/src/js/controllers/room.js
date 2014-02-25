@@ -4,7 +4,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.roomList = SocketService.getRoom();
 	$scope.username = SocketService.getUsername();
 	$scope.privChat = SocketService.getPrivchat();
-	$scope.privmessages = [];
+	$scope.privmessages = SocketService.getChatitem();
 	
 	var socket = SocketService.getSocket();
 	
@@ -72,7 +72,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 				console.log(message);
-				$scope.privmessages.push(message);
+				//SocketService.setChatitem(message);
+				$scope.privmessages = message;
 				$scope.$apply();
 				if(!$("."+user).is(":visible")){
 					$("."+user).toggle();

@@ -25,7 +25,7 @@ io.sockets.on('connection', function (socket) {
 			socket.username = username;
 
 			//Store user object in global user roster.
-			users[username] = { username: socket.username, channels: {}, socket: this };
+			users[username] = { username: socket.username, channels: {}, socket: this, privmsg: []};
 			fn(true); // Callback, user name was available
 		}
 		else {
@@ -137,8 +137,11 @@ io.sockets.on('connection', function (socket) {
 				timestamp: new Date(),
 				message: msgObj.message
 			};
-			users[msgObj.nick].socket.emit('recv_privatemsg', socket.username, messageObj);
-			users[socket.username].socket.emit('recv_privatemsg', msgObj.nick, messageObj);
+			
+			users[msgObj.nick].privmsg.push(messageObj);
+			users[socket.username].privmsg.push(messageObj);
+			users[msgObj.nick].socket.emit('recv_privatemsg', socket.username, users[msgObj.nick].privmsg);
+			users[socket.username].socket.emit('recv_privatemsg', msgObj.nick, users[socket.username].privmsg);
 			//Callback recieves true.
 			fn(true);
 		}
@@ -346,6 +349,14 @@ function Room() {
 		this.password = "";
 		this.locked = false;
 	};
+}
+function privmsg(){
+	this.msghistory = [];
+	this.user = {}
+
+	this.addMsg = function(message){
+		(message !== undefined) ? this.msghistory.push(message) : console.log("ERROR: add message");
+	}
 }
 
 function emptyObject(room) {

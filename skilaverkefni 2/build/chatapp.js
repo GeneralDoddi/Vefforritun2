@@ -18,6 +18,7 @@ app.factory("SocketService", ["$http", function($http) {
 	var socket;
 	var rooms = [];
 	var privChat = [];
+	var chatitem = [];
 	return {
 		setConnected: function(theSocket) {
 			socket = theSocket;
@@ -62,6 +63,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		exitChat: function(theUser){
 			privChat.splice(privChat.indexOf(theUser),1);
+		},
+		setChatitem: function(chat){
+			chatitem.push(chat);
+		},
+		getChatitem: function(){
+			return chatitem;
 		},
 		chatExists: function(theUser){
 			for (var i = privChat.length - 1; i >= 0; i--) {
@@ -170,7 +177,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.roomList = SocketService.getRoom();
 	$scope.username = SocketService.getUsername();
 	$scope.privChat = SocketService.getPrivchat();
-	$scope.privmessages = [];
+	$scope.privmessages = SocketService.getChatitem();
 	
 	var socket = SocketService.getSocket();
 	
@@ -238,7 +245,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 				console.log(message);
-				$scope.privmessages.push(message);
+				//SocketService.setChatitem(message);
+				$scope.privmessages = message;
 				$scope.$apply();
 				if(!$("."+user).is(":visible")){
 					$("."+user).toggle();
