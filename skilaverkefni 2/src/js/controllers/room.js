@@ -169,6 +169,9 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 			}
+			else if(chatMsg[0] === "/msg"){
+
+			}
 			else{
 				console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
 				socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
@@ -201,14 +204,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
-	/*$scope.active = function(room) {
-		console.log("this is" + room);
-		$(".tab-"+room).hide();
-
-	};
-	$scope.partRoom = function(){
-		console.log("CLOSE");
-	};*/
+	
+	
 
 	
 }]);
