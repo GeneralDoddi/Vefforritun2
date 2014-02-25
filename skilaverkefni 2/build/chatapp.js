@@ -14,10 +14,15 @@ app.config(["$routeProvider", function($routeProvider){
 
 
 app.factory("SocketService", ["$http", function($http) {
+
+	// Socket service, maintaining arrays, names, socket etc between scopes
+	// Getters, setters and deleters and an added in boolean function for 
+	// looking through the array
+
 	var username = "";
 	var socket;
 	var rooms = [];
-	var privChat = [];
+	var privChat = {users: [], chatitem: []};
 	var chatitem = [];
 	return {
 		setConnected: function(theSocket) {
@@ -44,15 +49,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		roomExists: function(theRoom){
 			for (var i = rooms.length - 1; i >= 0; i--) {
-				//console.log(rooms);
 				if(rooms[i] === theRoom)
 				{
-					//console.log("true");
 					return true;
 				}
 				
 			}
-			//console.log("false");
 			return false;
 		},
 		getPrivchat: function(){
@@ -72,21 +74,19 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		chatExists: function(theUser){
 			for (var i = privChat.length - 1; i >= 0; i--) {
-				//console.log(rooms);
 				if(privChat[i] === theUser)
 				{
-					//console.log("true");
 					return true;
 				}
 				
 			}
-			//console.log("false");
 			return false;
 		},
 	};
 }]);
 var LoginPartialController = function($scope,$location , SocketService, $modalInstance) {
 	
+	//a controller for a partial view login screen
 	
 	var socket = io.connect("http://localhost:8080");
 	$scope.username = "";
@@ -94,23 +94,18 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 	$scope.input = {};
 	
 	$scope.connect = function () {
-		console.log($scope.input.abc);
-		console.log("Hello from login3");
 		if(socket){
 			
 			socket.emit("adduser", $scope.input.abc, function(available) {
-				if (available){
-					
+				if (available){					
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.input.abc);
-
 					SocketService.setRoom("lobby");
 					$location.path("/room/lobby");
 					$scope.$apply();
 					$modalInstance.dismiss();	
 				}
 				else{
-					console.log("herro from error");
 					$scope.message = "Your name is taken, please choose another name";
 				}
 				
@@ -120,7 +115,6 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 		}
 	};
 	$scope.keyPress = function($event) {
-		//console.log("$event");
 		if($event.keyCode === 13) {
 			$scope.connect();
 		}
@@ -136,11 +130,11 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
 
   $scope.createRoom = function (){
     
-    console.log("Creating a new room");
-    console.log($scope.input.abc);
+
     socket.emit("joinroom", { room: $scope.roomname, pass: "" }, function(success, errorMessage) {
-      if(SocketService.roomExists($scope.input.abc) === false){
-          SocketService.setRoom($scope.input.abc);
+      if(SocketService.roomExists($scope.input.roomName) === false){
+          SocketService.setRoom($scope.input.roomName);
+          $location.path("/room/"+$scope.input.roomName);
 
           console.log("accepted");
           $scope.$apply();
@@ -177,14 +171,19 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	var socket = SocketService.getSocket();
 	
 	if(socket) {
+
+		//used for maintaining the joined room when a scope is switched
+		//it was unavoidable for the first join, user is both op and user
+
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
 				}
 		});
 
+		// Keeps the chat updated in real time, but only the one selected
+
 		socket.on("updatechat", function(roomname, messageHistory) {
-			//console.log(roomname + " " + $scope.roomName);
 			if(roomname === $scope.roomName)
 			{
 				console.log(messageHistory);
@@ -192,15 +191,21 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				$scope.$apply();
 			}
 		});
+
+		//keeps users updated in real time in rooms the client is currently
+		// a part of 
+
 		socket.on("updateusers", function(room, users, ops) {
 			if(room === $scope.roomName) {
-				//console.log("ops " + ops);
 				$scope.ops = ops;
 				$scope.users = users;
 				$scope.$apply();
 			}
-			//console.log(users);
 		});
+
+		// kicked listener, makes the user part the room and is redirected
+		// to the lobby
+
 		socket.on("kicked", function(room, kickeduser, byuser){
 			if(kickeduser === $scope.username){
 				SocketService.partRoom($scope.roomName);
@@ -209,35 +214,31 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			}
 				
 		});
-		socket.on("opped", function(room, oppeduser, byuser){
-			if(oppeduser === $scope.username){
-				
-				//console.log("op");
-			}
-		});
-		socket.on("deopped", function(room, deoppeduser, bysuser){
-			if(deoppeduser === $scope.username){
-				
-			}
-		});
+
+		//opped and deop listeners were unnessecary
+		// a banned listener kicks user when he is banned 
+
 		socket.on("banned", function(room, banneduser, byuser){
 			socket.emit("kick", {room: room, user: banneduser},function(success, errorMessage){
 
 			});
 		});
+		//a special made listener for user to be redirected to lobby
+		// when he parts a room
 		socket.on("exited", function(room, user){
-			$location.path("/room/lobby");
-			//socket.emit("sendmsg", {roomName: room,  msg: "Has left" });
-					
+			$location.path("/room/lobby");			
 		});
+
+		//Private messages are recieved and processed, though we are aware
+		// of a special duplicate error in console it doesn't do any harm
+		// that error is because of the chatExists, sometimes he inserts
+		// an item that is already in the array
 		socket.on("recv_privatemsg", function(user, message){
 				if(SocketService.chatExists(user) === false){
 					SocketService.setPrivchat(user);
-					//$location.path("/room/"+senduser);
-
 				}
 				console.log(message);
-				//SocketService.setChatitem(message);
+				SocketService.setChatitem(message);
 				$scope.privmessages = message;
 				$scope.$apply();
 				if(!$("."+user).is(":visible")){
@@ -248,6 +249,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 		
 	}
+
+	//The partial view , for create room buttons
 	$scope.createRoom = function() {
 		console.log("create new room");
 		var modalInstance = $modal.open({
@@ -271,6 +274,10 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
                 $log.info('Modal dismissed at: ' + new Date());
             });
 	};
+
+	// The send function where it extracts the commands, kick,ban,op,deop,join
+	// etc and processes accordingly, of there isn't a / command it is a message
+
 	
 	$scope.send = function() {
 		if(socket) {
@@ -336,11 +343,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 					if(success){
 						$scope.$apply();
 					}
-				});
-					
+				});	
 				}
-				
-				
 				$scope.currentMessage = "";
 
 			}
@@ -360,14 +364,8 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 				}
 			}
 			else if(chatMsg[0] === "/msg"){
-				//chatMsg.shift();
-				//socket.emit("enablechat", $scope.username, chatMsg[1]);
 				SocketService.setPrivchat(chatMsg[1]);
 				socket.emit("privatemsg", {nick: chatMsg[1], message: chatMsg[2]}, function(success, errorMessage){
-						if(success){
-							//$scope.privmessages.push(chatMsg[2]);
-							//$scope.$apply();
-						}
 				});
 				$scope.currentMessage = "";
 			}
@@ -378,6 +376,9 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			}
 		}
 	};
+
+	// closes the socket for the client 
+
 	$scope.disconnect = function() {
 		if(socket){
 			console.log(SocketService.getUsername() + " Disconnected from server");
@@ -386,35 +387,38 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			
 		}
 	};
-	$scope.partRoom = function(room) {
-			console.log(room);
-			if(room === "lobby")
+
+	// partroom button implemented.
+
+	$scope.partRoom = function() {
+			
+			if($scope.roomName === "lobby")
 				{
 					alert("You must disconnect to leave lobby");
 				}
 			else{
-					//chatMsg.shift();
 					console.log("delete " + $scope.roomName);
 					
 					SocketService.partRoom($scope.roomName);
 					socket.emit("exited", room, $scope.username);
-					
 					socket.emit("partroom",$scope.roomName);
 					$location.path("/room/lobby");
-					//$scope.apply();
 				}
 			
 			
 
 	};
+
+	// Monitors a keypress with enter, and sends the message
 	
 	$scope.keyPress = function($event) {
 		console.log("$event");
 		if($event.keyCode === 13) {
 			$scope.send();
-			//$scope.glued= true;
 		}
 	};
+
+	// the power of derp shows and hides private messages
 	$scope.derp = function(chat){
 		$("."+chat).toggle();
 	};

@@ -1,8 +1,13 @@
 app.factory("SocketService", ["$http", function($http) {
+
+	// Socket service, maintaining arrays, names, socket etc between scopes
+	// Getters, setters and deleters and an added in boolean function for 
+	// looking through the array
+
 	var username = "";
 	var socket;
 	var rooms = [];
-	var privChat = [];
+	var privChat = {users: [], chatitem: []};
 	var chatitem = [];
 	return {
 		setConnected: function(theSocket) {
@@ -29,15 +34,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		roomExists: function(theRoom){
 			for (var i = rooms.length - 1; i >= 0; i--) {
-				//console.log(rooms);
 				if(rooms[i] === theRoom)
 				{
-					//console.log("true");
 					return true;
 				}
 				
 			}
-			//console.log("false");
 			return false;
 		},
 		getPrivchat: function(){
@@ -57,15 +59,12 @@ app.factory("SocketService", ["$http", function($http) {
 		},
 		chatExists: function(theUser){
 			for (var i = privChat.length - 1; i >= 0; i--) {
-				//console.log(rooms);
 				if(privChat[i] === theUser)
 				{
-					//console.log("true");
 					return true;
 				}
 				
 			}
-			//console.log("false");
 			return false;
 		},
 	};

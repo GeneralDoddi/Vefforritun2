@@ -25,7 +25,7 @@ io.sockets.on('connection', function (socket) {
 			socket.username = username;
 
 			//Store user object in global user roster.
-			users[username] = { username: socket.username, channels: {}, socket: this, privmsg: []};
+			users[username] = { username: socket.username, channels: {}, socket: this};
 			fn(true); // Callback, user name was available
 		}
 		else {
@@ -138,10 +138,8 @@ io.sockets.on('connection', function (socket) {
 				message: msgObj.message
 			};
 			
-			users[msgObj.nick].privmsg.push(messageObj);
-			users[socket.username].privmsg.push(messageObj);
-			users[msgObj.nick].socket.emit('recv_privatemsg', socket.username, users[msgObj.nick].privmsg);
-			users[socket.username].socket.emit('recv_privatemsg', msgObj.nick, users[socket.username].privmsg);
+			users[msgObj.nick].socket.emit('recv_privatemsg', socket.username, messageObj);
+			users[socket.username].socket.emit('recv_privatemsg', msgObj.nick, messageObj);
 			//Callback recieves true.
 			fn(true);
 		}
@@ -158,6 +156,7 @@ io.sockets.on('connection', function (socket) {
 		//Update the userlist in the room.
 		io.sockets.emit('updateusers', room, rooms[room].users, rooms[room].ops);
 		io.sockets.emit('servermessage', "part", room, socket.username);
+		// an added check, an empty room is checked and is deleted
 		if(emptyObject(room))
 		{
 			delete rooms[room];
@@ -349,14 +348,6 @@ function Room() {
 		this.password = "";
 		this.locked = false;
 	};
-}
-function privmsg(){
-	this.msghistory = [];
-	this.user = {}
-
-	this.addMsg = function(message){
-		(message !== undefined) ? this.msghistory.push(message) : console.log("ERROR: add message");
-	}
 }
 
 function emptyObject(room) {

@@ -39,33 +39,31 @@
 			</div>
 		</div>
 
-		<div class = "row-ops">			
+		<div class = "row-usr">			
 			<h3>Ops: </h3>
 				<ul>
 					<li ng-repeat="op in ops">
 						@{{ op }}
 					</li>
-				</ul>
-		</div>
-		<div class= "row-usr">		
-			<h3>Users:</h3>	
-				<ul>
-					<li ng-repeat="user in users">
-						{{ user }}
-					</li>
-				</ul>
+				
+				<li ng-repeat="user in users">
+					{{ user }}
+				</li>
+			</ul>
 		</div>
 		
 		<div class = "row-rooms">
 <<<<<<< HEAD
-				<h3>Rooms:</h3>
-=======
 			<div class="col-md-3 col-xs-3">
 				<h4>Rooms</h4>
->>>>>>> 6c06127cdfef638c35f472fcd63ff61728134d6f
+=======
+			
+
+				<h3>Rooms:</h3>
+>>>>>>> 9c34d3503e8a0848ae747c1de2eb04bdbe53b958
 					<li ng-repeat="room in roomList">
 						<ul>	
-						<a ng-href="#/room/{{room}}">{{room}}</a>
+						<a ng-href= "#/room/{{ room }}">{{room}}</a>
 						</ul>
 					</li>
 					
@@ -97,4 +95,23 @@
 			</button>
 		</li>
 	</ul>
+<<<<<<< HEAD
+
+	
+	<div class ="row">
+		<div class ="col-lg-6">
+			<div class ="btn-group">
+				<button class = "btn btn-danger" ng-click="disconnect()">Disconnect!</button>
+				<button class = "btn" ng-click="createRoom()">Create new room</button>
+
+				<button class="btn btn-danger" ng-click="partRoom()" ng-href="#/room/lobby"> Leave Room</button>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+=======
 </div>
+>>>>>>> 9c34d3503e8a0848ae747c1de2eb04bdbe53b958
