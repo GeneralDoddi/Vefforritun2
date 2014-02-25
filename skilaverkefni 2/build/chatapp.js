@@ -197,6 +197,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			{
 				console.log(messageHistory);
 				$scope.messages = messageHistory;
+				$scope.privmessages = SocketService.getChatitem();
 				$scope.$apply();
 			}
 		});
@@ -245,7 +246,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 				console.log(message);
-				//SocketService.setChatitem(message);
+				SocketService.setChatitem(message);
 				$scope.privmessages = message;
 				$scope.$apply();
 				if(!$("."+user).is(":visible")){
