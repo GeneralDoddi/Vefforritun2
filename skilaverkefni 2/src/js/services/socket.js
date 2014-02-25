@@ -30,14 +30,13 @@ app.factory("SocketService", ["$http", function($http) {
 				console.log(rooms);
 				if(rooms[i] === theRoom)
 				{
-					console.log("true");
+					//console.log("true");
 					return true;
 				}
 				
 			}
-			console.log("false");
+			//console.log("false");
 			return false;
 		}
-		
 	};
 }]);

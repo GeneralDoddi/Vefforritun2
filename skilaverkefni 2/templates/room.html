@@ -24,8 +24,10 @@
 					</div>
 					
 					<div class="col-md-3 col-xs-3">
-						<p>Users</p>
 						<ul>
+							<li ng-repeat="op in ops">
+								@{{ op }}
+							</li>
 							<li ng-repeat="user in users">
 								{{ user }}
 							</li>
