@@ -48,7 +48,7 @@
 	height:300px;
 	position: relative;
 	top: -344px;
-	left:-435px;
+	left:-80px;
 	width: 130px;
 
 }
@@ -56,7 +56,24 @@
 	margin-top: 0px;
 	padding-top: 0px;
 }
+.row-ops{
+	border: 1px white;
+	float:right;
+	background-color: black;
+	color: rgb(39, 192, 39);
+	border: 1px solid black;
+	
+	height:300px;
+	position: relative;
+	top: -344px;
+	left:-300px;
+	width: 130px;
 
+}
+.row-ops>h3,.h3{
+	margin-top: 0px;
+	padding-top: 0px;
+}
 .row-rooms{
 	overflow-x: hidden; 
 	float:right;

@@ -4,13 +4,13 @@
     </div>
     <div class="modal-body">
         <li ng-repeat="room in roomList" >
-        <button class = "btn"  ng-click = "joinRoom()">{{ room }}</a>
+        <button class = "btn"  ng-click = "createRoom()">{{ room }}</a>
 			
 		</li>
 	</div>
     <div class="modal-footer">
         <button class = "btn btn-primary" ng-click = "createRoom()">Create new room</button>
-		<input ng-model="input.roomName" placeholder="Insert room name here">
+		<input ng-model="input.abc" placeholder="Insert room name here">
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </div>

@@ -39,26 +39,28 @@
 			</div>
 		</div>
 
-		<div class = "row-usr">			
+		<div class = "row-ops">			
 			<h3>Ops: </h3>
 				<ul>
 					<li ng-repeat="op in ops">
 						@{{ op }}
 					</li>
-				
-				<li ng-repeat="user in users">
-					{{ user }}
-				</li>
-			</ul>
+				</ul>
+		</div>
+		<div class= "row-usr">		
+			<h3>Users:</h3>	
+				<ul>
+					<li ng-repeat="user in users">
+						{{ user }}
+					</li>
+				</ul>
 		</div>
 		
 		<div class = "row-rooms">
-			
-
 				<h3>Rooms:</h3>
 					<li ng-repeat="room in roomList">
 						<ul>	
-						<a ng-href= "#/room/{{ room }}">{{room}}</a>
+						<a ng-href="#/room/{{room}}">{{room}}</a>
 						</ul>
 					</li>
 					
