@@ -3,7 +3,7 @@
 	<div class="tabs">
 	<ul class="nav nav-tabs">
 		<li ng-repeat="room in roomList">
-			<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"><button class="close close-{{ room }}" ng-click="partRoom(room)" href="#/room/lobby"> &times;</button></span></a>
+			<span><a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"></span></a><button class="close close-{{ room }}" ng-click="partRoom(room)" ng-href="#/room/lobby"> &times;</button></span>
 		</li>
 	</ul>	
 	</div>
@@ -53,9 +53,7 @@
 		<div class = "row-rooms">
 			<div class="col-md-3 col-xs-3">
 
-						<p>Rooms</p>
-							<li ng-repeat="room in roomList">
-								{{ room }}
+						
 
 
 				<p>Rooms</p>
