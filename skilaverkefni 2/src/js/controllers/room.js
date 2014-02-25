@@ -3,6 +3,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 	$scope.currentMessage = "";
 	$scope.roomList = SocketService.getRoom();
 	$scope.username = SocketService.getUsername();
+	$scope.privChat = SocketService.getPrivchat();
 	
 	var socket = SocketService.getSocket();
 	
@@ -20,7 +21,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			//console.log(roomname + " " + $scope.roomName);
 			if(roomname === $scope.roomName)
 			{
-				//console.log(messageHistory);
+				console.log(messageHistory);
 				$scope.messages = messageHistory;
 				$scope.$apply();
 			}
@@ -62,6 +63,17 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$location.path("/room/lobby");
 			//socket.emit("sendmsg", {roomName: room,  msg: "Has left" });
 					
+		});
+		socket.on("recv_privatemsg", function(user, message){
+				if(SocketService.chatExists(user) === false){
+					SocketService.setPrivchat(user);
+					//$location.path("/room/"+senduser);
+
+				}
+				console.log(message);
+				//$scope.privmessages = message;
+				//$scope.$apply();
+			
 		});
 
 		
@@ -176,9 +188,28 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 
 				}
 			}
+			else if(chatMsg[0] === "/msg"){
+				//chatMsg.shift();
+				//socket.emit("enablechat", $scope.username, chatMsg[1]);
+				SocketService.setPrivchat(chatMsg[1]);
+				socket.emit("privatemsg", {nick: chatMsg[1], message: chatMsg[2]}, function(success, errorMessage){
+						if(success){
+							//$location.path("/room/"+chatMsg[1]);
+							$scope.$apply();
+						}
+				});
+				$scope.currentMessage = "";
+			}
 			else{
-				console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
-				socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
+				//console.log("I sent a message to " + $scope.roomName + ": " + $scope.currentMessage);
+				if(SocketService.roomExists($scope.roomName) === true){
+					socket.emit("sendmsg", { roomName: $scope.roomName, msg: $scope.currentMessage });
+					console.log("public msg");
+				}
+				else if(SocketService.chatExists($scope.roomName) === true){
+					socket.emit("privatemsg", {nick: $scope.roomName, message: $scope.currentMessage});
+					console.log("private msg");
+				}
 				$scope.currentMessage = "";
 			}
 		}

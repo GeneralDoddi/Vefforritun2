@@ -2,7 +2,7 @@
 <div class="container">	
 	<ul class="nav nav-tabs">
 		<li ng-repeat="room in roomList">
-		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"><button class="close close-{{ room }}" ng-click="partRoom(room)" href="#/room/lobby"> &times;</button></span></a>
+		<a ng-href="#/room/{{ room }}" data-toggle="tab">{{ room }}<span class ="close"></span></a><button class="close close-{{ room }}" ng-click="partRoom(room)" > &times;</button>
 		</li>
 	</ul>	
 	<div class="well">
@@ -44,7 +44,11 @@
 			</div>
 		</div>
 	</div>
-	
+	<ul class="nav nav-tabs">
+		<li ng-repeat="chat in privChat">
+		<a ng-href="#/room/{{ chat }}" data-toggle="tab">{{ chat }}<span class ="close"></span></a><button class="close close-{{ chat }}" ng-click="partRoom(chat)" > &times;</button>
+		</li>
+	</ul>	
 	<div class ="row-">
 		<div class="col-lg-6">
 			<div class="input-group">
