@@ -37,12 +37,12 @@ app.factory("SocketService", ["$http", function($http) {
 		getRoom: function(){
 			return rooms;
 		},
-		//partRoom: function(theRoom){
-			
-		//},
+		partRoom: function(theRoom){
+			rooms.splice(rooms.indexOf(theRoom),1);
+		},
 		roomExists: function(theRoom){
 			for (var i = rooms.length - 1; i >= 0; i--) {
-				console.log(rooms);
+				//console.log(rooms);
 				if(rooms[i] === theRoom)
 				{
 					//console.log("true");
@@ -87,6 +87,12 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 					
 			});
 			
+		}
+	};
+	$scope.keyPress = function($event) {
+		//console.log("$event");
+		if($event.keyCode === 13) {
+			$scope.connect();
 		}
 	};
 
@@ -147,10 +153,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
-<<<<<<< HEAD
-					console.log("accepted");
-=======
->>>>>>> f1be4669c269ef295e0e74e771144b7348b4543b
+
 					
 				}
 
@@ -197,6 +200,11 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			socket.emit("kick", {room: room, user: banneduser},function(success, errorMessage){
 
 			});
+		});
+		socket.on("exited", function(room, user){
+			$location.path("/room/lobby");
+			//socket.emit("sendmsg", {roomName: room,  msg: "Has left" });
+					
 		});
 
 		
@@ -326,13 +334,24 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			
 		}
 	};
-	$scope.partRoom = function() {
-			console.log("Leaving room " + $scope.roomName);
-			console.log($scope.roomName);
-			console.log(SocketService.getUsername());	
+	$scope.partRoom = function(room) {
+			console.log(room);
+			if(room === "lobby")
+				{
+					alert("You must disconnect to leave lobby");
+				}
+			else{
+					//chatMsg.shift();
+					console.log("delete " + room);
+					
+					SocketService.partRoom(room);
+					socket.emit("exited", room, $scope.username);
+					
+					socket.emit("partroom",room);
+					//$location.path("/room/lobby");
+
+				}
 			
-			socket.emit("partroom",$scope.roomName, SocketService.getUsername() );
-			console.log($scope.roomList);
 			
 
 	};
@@ -343,14 +362,5 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 			$scope.send();
 		}
 	};
-	/*$scope.active = function(room) {
-		console.log("this is" + room);
-		$(".tab-"+room).hide();
-
-	};
-	$scope.partRoom = function(){
-		console.log("CLOSE");
-	};*/
-
 	
 }]);

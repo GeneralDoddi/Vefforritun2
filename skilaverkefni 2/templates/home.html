@@ -2,7 +2,7 @@
 	<h1>Please choose a username:</h1>
 </div>
 <div class = "modal-body">
-	<input data-ng-model="input.abc" placeholder="Insert name here">
+	<input data-ng-model="input.abc" placeholder="Insert name here" ng-keypress="keyPress($event)">
 	<button ng-click="connect()">Connect!</button>
 	<p ng-bind ="message"></p>
 

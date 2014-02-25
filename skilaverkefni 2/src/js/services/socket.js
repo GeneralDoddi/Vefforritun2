@@ -22,12 +22,12 @@ app.factory("SocketService", ["$http", function($http) {
 		getRoom: function(){
 			return rooms;
 		},
-		//partRoom: function(theRoom){
-			
-		//},
+		partRoom: function(theRoom){
+			rooms.splice(rooms.indexOf(theRoom),1);
+		},
 		roomExists: function(theRoom){
 			for (var i = rooms.length - 1; i >= 0; i--) {
-				console.log(rooms);
+				//console.log(rooms);
 				if(rooms[i] === theRoom)
 				{
 					//console.log("true");

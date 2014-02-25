@@ -32,5 +32,11 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 			
 		}
 	};
+	$scope.keyPress = function($event) {
+		//console.log("$event");
+		if($event.keyCode === 13) {
+			$scope.connect();
+		}
+	};
 
 };
