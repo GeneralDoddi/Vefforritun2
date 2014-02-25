@@ -1,0 +1,10 @@
+.row {
+  margin-right: -1px;
+  margin-left: 95px;
+}
+.row-msg{
+	border: solid black;
+	width: inherit;
+	margin-right: -1px;
+  	margin-left: -15px;
+}
