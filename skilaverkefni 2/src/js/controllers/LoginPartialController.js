@@ -1,6 +1,6 @@
 var LoginPartialController = function($scope,$location , SocketService, $modalInstance) {
 	
-	console.log("Hello from login");
+	
 	var socket = io.connect("http://localhost:8080");
 	$scope.username = "";
 	$scope.message = "";
@@ -13,19 +13,21 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 			
 			socket.emit("adduser", $scope.input.abc, function(available) {
 				if (available){
-					console.log("hello from connect");
+					
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.input.abc);
 
 					SocketService.setRoom("lobby");
-					
+					$location.path("/room/lobby");
+					$scope.$apply();
+					$modalInstance.dismiss();	
 				}
 				else{
+					console.log("herro from error");
 					$scope.message = "Your name is taken, please choose another name";
 				}
-				$location.path("/room/lobby");
-				$scope.$apply();
-				$modalInstance.dismiss();	
+				
+					
 			});
 			
 		}

@@ -57,7 +57,7 @@ app.factory("SocketService", ["$http", function($http) {
 }]);
 var LoginPartialController = function($scope,$location , SocketService, $modalInstance) {
 	
-	console.log("Hello from login");
+	
 	var socket = io.connect("http://localhost:8080");
 	$scope.username = "";
 	$scope.message = "";
@@ -70,19 +70,21 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 			
 			socket.emit("adduser", $scope.input.abc, function(available) {
 				if (available){
-					console.log("hello from connect");
+					
 					SocketService.setConnected(socket);
 					SocketService.setUsername($scope.input.abc);
 
 					SocketService.setRoom("lobby");
-					
+					$location.path("/room/lobby");
+					$scope.$apply();
+					$modalInstance.dismiss();	
 				}
 				else{
+					console.log("herro from error");
 					$scope.message = "Your name is taken, please choose another name";
 				}
-				$location.path("/room/lobby");
-				$scope.$apply();
-				$modalInstance.dismiss();	
+				
+					
 			});
 			
 		}
@@ -90,7 +92,7 @@ var LoginPartialController = function($scope,$location , SocketService, $modalIn
 
 };
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, SocketService) {
+var ModalInstanceCtrl = function ($scope, $modalInstance,$location, roomList, socket, SocketService) {
 
   $scope.roomName = "";
   $scope.roomList = roomList;
@@ -99,10 +101,10 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, roomList, socket, Sock
   $scope.createRoom = function (){
     
     console.log("Creating a new room");
-    console.log($scope.input.abc);
+    console.log($scope.input.roomName);
     socket.emit("joinroom", { room: $scope.roomname, pass: "" }, function(success, errorMessage) {
-      if(SocketService.roomExists($scope.input.abc) === false){
-          SocketService.setRoom($scope.input.abc);
+      if(SocketService.roomExists($scope.input.roomName) === false){
+          SocketService.setRoom($scope.input.roomName);
           console.log("accepted");
           $location.path("/room/"+chatMsg[1]);
         }
@@ -123,6 +125,7 @@ app.controller("LoginController", function($scope, $location,SocketService, $mod
 
 				templateUrl:'templates/home.html',
 				controller: "LoginPartialController",
+				backdrop: "static",
 				/*resolve:{
 					socket: function() {
 						return SocketService.getSocket();
@@ -144,6 +147,10 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
+<<<<<<< HEAD
+					console.log("accepted");
+=======
+>>>>>>> f1be4669c269ef295e0e74e771144b7348b4543b
 					
 				}
 
@@ -199,6 +206,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		var modalInstance = $modal.open({
                 templateUrl: 'templates/newRoomPartial.html',
                 controller: "ModalInstanceCtrl",  //what do I put here to reference the other controller?
+                backdrop: "static",
                 resolve: {
                     roomList: function() {
                         return $scope.roomList;

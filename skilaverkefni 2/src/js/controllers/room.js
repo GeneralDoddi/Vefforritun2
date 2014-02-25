@@ -10,6 +10,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		socket.emit("joinroom", { room: $scope.roomName, pass: "" }, function(success, errorMessage) {
 				if(SocketService.roomExists($scope.roomName) === false){
 					SocketService.setRoom($scope.roomName);
+
 					
 				}
 
@@ -65,6 +66,7 @@ app.controller("RoomController", ["$scope", "$location", "$routeParams", "Socket
 		var modalInstance = $modal.open({
                 templateUrl: 'templates/newRoomPartial.html',
                 controller: "ModalInstanceCtrl",  //what do I put here to reference the other controller?
+                backdrop: "static",
                 resolve: {
                     roomList: function() {
                         return $scope.roomList;
