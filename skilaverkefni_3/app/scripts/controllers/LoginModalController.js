@@ -1,5 +1,5 @@
-var LoginModalCtrl = function ($scope, $modalInstance,$modal, items) {
-  console.log("hello from login")
+var LoginModalCtrl = function ($scope, $modalInstance, $modal, items) {
+  console.log('hello from login');
   $scope.items = items;
   $scope.selected = {
     item: $scope.items[0]
