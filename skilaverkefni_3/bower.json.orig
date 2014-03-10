@@ -1,0 +1,37 @@
+{
+  "name": "skilaverkefni3",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-cookies": "1.2.6",
+<<<<<<< HEAD
+    "angular-sanitize": "1.2.6",
+=======
+    "angular-resource": "1.2.6",
+    "angular-sanitize": "1.2.6",
+    "bootstrap": "~3.0.3",
+    "es5-shim": "~2.1.0",
+    "json3": "~3.2.6",
+>>>>>>> 28563a99e93df5755d0ba2579bcdc428f1771957
+    "angular-bootstrap": "~0.10.0",
+    "angular-route": "~1.2.14"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.6",
+    "angular-scenario": "1.2.6"
+  },
+  "homepage": "-",
+  "authors": [
+    "Thordur"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "description": "A teaching evaluation application",
+  "main": "app.js"
+}
