@@ -8,11 +8,6 @@ var app = angular.module('skilaverkefni3App', [
   
 ]);
 
-<<<<<<< HEAD
-
-
-
-=======
 app.config(["$routeProvider", function($routeProvider) {
 	$routeProvider.when("/", {
 		templateUrl: "views/main.html",
@@ -45,4 +40,3 @@ app.config(["$routeProvider", function($routeProvider) {
 })
 	}).otherwise({redirectTo:"/"});
 }]);*/
->>>>>>> a0369f1bc936840cd85c78686173f1e3f457bf31
