@@ -1,4 +1,4 @@
-app.controller("AdminCtrl", function($scope,$modal,$log, EvalService, $routeParams){
+app.controller('UserController', function($scope,$modal,$log, EvalService, $routeParams){
 		
 
 		EvalService.getAllEvaluations().then(function(data) {
@@ -10,5 +10,4 @@ app.controller("AdminCtrl", function($scope,$modal,$log, EvalService, $routePara
 			console.log("Update: " + updateMessage);
 		});
 
-	console.log("rass");
 });

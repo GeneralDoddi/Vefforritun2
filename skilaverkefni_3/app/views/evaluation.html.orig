@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+<p>This is the Evaluation view.</p>
+<p>Nafn mitt er tommi, Ríddu mér</p>
+=======
+<div>
+	<form>
+		Saved Template<input type="radio" name="new/old" value="old">
+		New Template<input type="radio" name="new/old" value="new"><br>
+
+		Evaluation name(Icelandic):<input type="text" name="eval name IS" value=""><br>
+		Evaluation name(English):<input type="text" name="eval name EN" value=""><br>
+		Course name:
+		<select>
+			<option value="courlse1">Course1</option>
+			<option value="courlse1">Course2</option>
+		</select><br>
+
+		Intro(Icelandic):<input type="text" name="intro" value=""><br>
+		Intro(English):<input type="text" name="intro" value=""><br>
+
+		
+		<div id="questions"></div>
+		Add Question<button ng-click="addQ()">+</button><br>
+
+		<input type="submit" value="Save Template">
+		<input type="submit" value="Submit Evaluation">	
+	</form>
+</div>
+>>>>>>> 5115bc0d3192a9d704ca669e2563a98e06aae80f
