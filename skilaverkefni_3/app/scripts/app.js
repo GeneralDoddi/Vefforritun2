@@ -21,28 +21,10 @@ app.config(["$routeProvider", function($routeProvider) {
 	}).when("/evaluation/:evaluationID",{
 		templateUrl: "views/evaluation.html",
 		controller: "EvaluationController"
+	}).when("/user/",{
+		templateUrl: "views/user.html",
+		controller: "UserController"
 	}).otherwise({ redirectTo: '/' });
-	
-	
-		/*.when("/evaluation/:evaluationID", {
-			templateUrl: "templates/evaluation.html",
-			controller: "EvaluationController"
-		}).when("/evaluation/", {
-			templateUrl: "templates/evaluation.html",
-			controller: "EvaluationController"}
-	}).otherwise({ redirectTo: "/"});*/
+
 }]);
 
-/*app.config(["$routeProvider", function($routeProvider){
-	$routeProvider.when("/",{ 
-		templateUrl:"views/home.html",
-		controller:"Login", 
-	}).when("/room/:roomName", {
-		templateUrl:"templates/room.html",
-		controller: "RoomController",
-.when('/testroute', {
-  templateUrl: 'views/testroute.html',
-  controller: 'TestrouteCtrl'
-})
-	}).otherwise({redirectTo:"/"});
-}]);*/
