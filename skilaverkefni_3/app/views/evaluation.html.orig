@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<p>This is the Evaluation view.</p>
+<p>Nafn mitt er tommi, Ríddu mér</p>
+=======
 <div>
 	<form>
 		Saved Template<input type="radio" name="new/old" value="old">
@@ -22,3 +26,4 @@
 		<input type="submit" value="Submit Evaluation">	
 	</form>
 </div>
+>>>>>>> 5115bc0d3192a9d704ca669e2563a98e06aae80f
