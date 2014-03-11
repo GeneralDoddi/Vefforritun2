@@ -14,7 +14,7 @@ app.config(["$routeProvider", function($routeProvider) {
 		controller: "MainCtrl"
 	}).when("/admin/", {
 		templateUrl: "views/admin.html",
-		controller: "AdminCtrl"
+		controller: "AdminController"
 	}).when("/evaluation/",{
 		templateUrl: "views/evaluation.html",
 		controller: "EvaluationController"

@@ -1,4 +1,4 @@
-app.controller("EvaluationController", [
+app.controller('EvaluationController', [
 	"$scope", "EvalService", "$routeParams",
 	function($scope, EvalService, $routeParams) {
 		var evaluationID = $routeParams.evaluationID;
@@ -36,4 +36,4 @@ app.controller("EvaluationController", [
 			});
 		}
 	}
-])
+]);
