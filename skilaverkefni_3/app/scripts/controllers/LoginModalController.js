@@ -18,6 +18,7 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, items, $routePara
     else if($("#username").val() == "user")
     {
       console.log("user mode!");
+        $location.path("/user/");
     }
 
     $modalInstance.close($scope.selected.item);
@@ -26,4 +27,10 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, items, $routePara
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+
+  $scope.keyPress = function($event) {
+    if($event.keyCode === 13) {
+      $scope.ok();
+    }
+  }
 };
