@@ -15,6 +15,12 @@ app.config(["$routeProvider", function($routeProvider) {
 	}).when("/admin/", {
 		templateUrl: "views/admin.html",
 		controller: "AdminCtrl"
+	}).when("/evaluation/",{
+		templateUrl: "views/evaluation.html",
+		controller: "EvaluationController"
+	}).when("/evaluation/:evaluationID",{
+		templateUrl: "views/evaluation.html",
+		controller: "EvaluationController"
 	}).otherwise({ redirectTo: '/' });
 	
 	
