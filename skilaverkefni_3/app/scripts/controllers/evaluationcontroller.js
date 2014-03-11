@@ -21,6 +21,19 @@ app.controller('EvaluationController', [
 			};
 		}
 
+		$scope.addQ = function(){
+			console.log("Hello from addQ");
+
+
+			//var header = document.getElementById("qHeader");
+			var header = $("#qHeader").html()
+			console.log(header);
+
+			$("#questions").append(header);
+			//$("#questions").load("views/qHeader.html");
+
+		}
+
 		$scope.addAnswer = function(question) {
 			question.Answers.push("New answer");
 		}
