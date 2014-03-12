@@ -1,5 +1,6 @@
-app.controller('UserController', function($scope,$modal,$log, EvalService, $routeParams){
+app.controller('UserController', function($scope,$modal,$log, EvalService, HttpService, $routeParams){
 		
+		$scope.items = [];
 
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
@@ -9,5 +10,10 @@ app.controller('UserController', function($scope,$modal,$log, EvalService, $rout
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
 		});
+
+		$scope.userinfo = function(){
+		 	$scope.items = HttpService.getUserobj();
+		 	console.log($scope.items);
+		}
 
 });

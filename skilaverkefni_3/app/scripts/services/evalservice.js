@@ -1,6 +1,6 @@
 app.service("EvalService", [
-	"$q", "$timeout",
-	function($q, $timeout) {
+	"$q", "$timeout", "HttpService", "$http",
+	function($q, $timeout, HttpService, $http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function createEvaluation(id, titleIS, titleEN, introIS, introEN) {
 			return {
@@ -27,7 +27,7 @@ app.service("EvalService", [
 
 		function generateEvaluations() {
 			var result = [];
-			for(var i = 0; i < 5; ++i) {
+			/*for(var i = 0; i < 5; ++i) {
 				var number = i+1;
 				var evaluation = createEvaluation(i, "Kennslumat " + number, "Evaluation " + number, "Derp", "Derp");
 				for(var j = 0; j < 3; ++j) {
@@ -36,7 +36,30 @@ app.service("EvalService", [
 					evaluation.CourseQuestions.push(question);
 				}
 				result.push(evaluation);
-			}
+			}*/
+
+			$http.get(HttpService.getSocket() + 'evaluations', {"user": "thordurt12", "pass": "123456"}).
+    success(function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+      console.log(data);
+      console.log(status);
+      console.log(headers);
+      console.log(config);
+      console.log("success");
+
+      
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log("No such User");
+      console.log(data);
+      console.log(headers);
+      console.log(status);
+      console.log(config);
+    }); 
+
 			return result;
 		}
 
@@ -73,3 +96,4 @@ app.service("EvalService", [
 	}
     //console.log("rass");
   ]);
+

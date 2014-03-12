@@ -4,3 +4,13 @@
 		<a ng-href="#/evaluation/{{ evaluation.ID }}">{{ evaluation.TitleIS }}</a>
 	</li>
 </ul>
+
+<div ng-init = "userinfo()">
+	<p>Username: {{ items.Username }}</p>
+	<p>Full Name: {{ items.FullName }}</p>
+	<p>SSN: {{ items.SSN }}</p>
+	<p>Email: {{ items.Email }}</p>
+	<p>Role: {{ items.Role }}</p>
+	<img src="{{ items.ImageURL }}"></img>
+	
+</div>
