@@ -1,3 +1,4 @@
+
 <div>
 	<form>
 		Saved Template<input type="radio" name="new/old" value="old">
@@ -14,9 +15,116 @@
 		Intro(Icelandic):<input type="text" name="intro" value=""><br>
 		Intro(English):<input type="text" name="intro" value=""><br>
 
-		
+		<div id="addButtons">
+			<button ng-click="isWordQuestion = true; isSingleQuestion = false; isMultiQuestion = false">Add Word Question</button>
+			<button ng-click="isWordQuestion = true; isSingleQuestion = true; isMultiQuestion = false">Add Single Choice Question</button>
+			<button ng-click="isWordQuestion = true; isSingleQuestion = false; isMultiQuestion = true">Add Multiple Choice Question</button><br>
+		</div>
+
+		<div id="newQ">
+			<div id="qHeader" ng-init="isWordQuestion = false" ng-show="isWordQuestion">
+				<form>
+					Enter Question(Icelandic):
+					<input type="text" ng-model="question.qIs" required/>
+					<button type="button">-</button>
+					<button type="button">+</button><br>
+					Enter Question(English):
+					<input type="text" ng-model="question.qEn" required/>
+					Teacher<input ng-model="qInput" type="radio" name="teacher/course" value="teacher">
+					Course<input ng-model="qInput" type="radio" name="teacher/course" value="course">
+					
+					<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				</form>
+			</div>
+			<div id="additionalQInfo">
+				<div id="singleQ" ng-init="isSingleQuestion = false" ng-show="isSingleQuestion">
+					<form>
+						<input type="radio" name="answer" value="button">
+						<input type="text" name="answerIS" value="Icelandic answer">
+						<button type="button">-</button>
+						<button type="button">+</button><br>	
+						<input type="text" name="answerEN" value="English answer">
+						<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+						<input type="radio" name="answer" value="button">
+						<input type="text" name="answerIS" value="Icelandic answer">
+						<button type="button">-</button>
+						<button type="button">+</button><br>	
+						<input type="text" name="answerEN" value="English answer">
+						<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+						<input type="radio" name="answer" value="button">
+						<input type="text" name="answerIS" value="Icelandic answer">
+						<button type="button">-</button>
+						<button type="button">+</button><br>	
+						<input type="text" name="answerEN" value="English answer">
+						<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+						<input type="radio" name="answer" value="button">
+						<input type="text" name="answerIS" value="Icelandic answer">
+						<button type="button">-</button>
+						<button type="button">+</button><br>	
+						<input type="text" name="answerEN" value="English answer">
+						<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+						<input type="radio" name="answer" value="button">
+						<input type="text" name="answerIS" value="Icelandic answer">
+						<button type="button">-</button>
+						<button type="button">+</button><br>	
+						<input type="text" name="answerEN" value="English answer">
+						<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+
+					</form>	
+					
+				</div>
+
+					<div id="multiQ" ng-init="isMultiQuestion = false" ng-show="isMultiQuestion">
+						<form>
+							<input type="checkbox" name="answer" value="checkbox">
+							<input type="text" name="answerIS" value="Icelandic answer">
+							<button type="button">-</button>
+							<button type="button">+</button><br>	
+							<input type="text" name="answerEN" value="English answer">
+							<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+							<input type="checkbox" name="answer" value="checkbox">
+							<input type="text" name="answerIS" value="Icelandic answer">
+							<button type="button">-</button>
+							<button type="button">+</button><br>	
+							<input type="text" name="answerEN" value="English answer">
+							<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+							<input type="checkbox" name="answer" value="checkbox">
+							<input type="text" name="answerIS" value="Icelandic answer">
+							<button type="button">-</button>
+							<button type="button">+</button><br>	
+							<input type="text" name="answerEN" value="English answer">
+							<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+							<input type="checkbox" name="answer" value="checkbox">
+							<input type="text" name="answerIS" value="Icelandic answer">
+							<button type="button">-</button>
+							<button type="button">+</button><br>	
+							<input type="text" name="answerEN" value="English answer">
+							<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+
+							<input type="checkbox" name="answer" value="checkbox">
+							<input type="text" name="answerIS" value="Icelandic answer">
+							<button type="button">-</button>
+							<button type="button">+</button><br>	
+							<input type="text" name="answerEN" value="English answer">
+							<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+						</form>		
+					</div>
+			</div>
+			<button ng-click="addQ(); isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false" 
+				ng-init="isWordQuestion = false" ng-init="isWordQuestion = false" ng-show="isWordQuestion"
+				ng-init="isSingleQuestion = false" ng-show="isSingleQuestion"
+				ng-init="isMultiQuestion = false" ng-show="isMultiQuestion">Add Question</button><br>
+		</div>
+
 		<div id="questions"></div>
-		Add Question<button ng-click="addQ()">+</button><br>
 
 
 		<input type="submit" value="Save Template">
@@ -24,63 +132,3 @@
 	</form>
 </div>
 
-<div id="hideMe" style="display:none">
-	<div id="qHeader">
-		<form>
-			<select>
-				<option value="wordQ">Word Question</option>
-				<option value="singleQ">Single Choice</option>
-				<option value="multiQ">Multiple Choice</option>
-			</select>
-			<input type="text" name="qIS" value="Enter Question(Icelandic)">
-			<button type="button">-</button>
-			<button type="button">+</button><br>
-			<input type="text" name="qEN" value="Enter Question(English)">
-			Teacher<input type="radio" name="teacher/course" value="teacher">
-			Course<input type="radio" name="teacher/course" value="course">
-			
-			<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
-		</form>
-	</div>
-
-	<div id="multiQ">
-		<form>
-			<button type="button">-</button>
-			<input type="checkbox" name="answer" value="checkbox">
-
-			<input type="text" name="answerIS" value="Icelandic answer">
-
-			<button type="button">-</button>
-			<button type="button">+</button><br>	
-
-			<input type="text" name="answerEN" value="English answer">
-
-			<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
-
-
-		</form>	
-	<button type="button">+</button><br>
-	</div>
-
-	<div id="singleQ">
-		<form>
-			<button type="button">-</button>
-			<input type="radio" name="answer" value="button">
-
-			<input type="text" name="answerIS" value="Icelandic answer">
-
-			<button type="button">-</button>
-			<button type="button">+</button><br>	
-
-			<input type="text" name="answerEN" value="English answer">
-
-			<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
-
-
-		</form>	
-	<button type="button">+</button><br>
-
-</div>
-
-
-</div>
