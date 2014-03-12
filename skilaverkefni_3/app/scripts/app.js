@@ -1,4 +1,6 @@
 
+
+
 var app = angular.module('skilaverkefni3App', [
   'ngCookies',
   'ngResource',
