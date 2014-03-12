@@ -1,7 +1,21 @@
 app.controller('EvaluationController', [
-	"$scope", "EvalService", "$routeParams",
-	function($scope, EvalService, $routeParams) {
+	"$scope", "$compile", "EvalService",  "$routeParams",
+	function($scope, $compile, EvalService, $routeParams) {
 		var evaluationID = $routeParams.evaluationID;
+
+
+		$scope.isWordQuestion = false;
+		$scope.isSingleQuestion = false;
+		$scope.isMultiQuestion = false;
+
+		$scope.maseter = {};
+
+	    $scope.orig = angular.copy($scope.data);
+
+	    $scope.reset = function() {
+	    	console.log("hello from reset");
+
+	    };		
 
 		if(evaluationID !== undefined) {
 			EvalService.getEvaluationById(evaluationID).then(function(data) {
@@ -23,12 +37,9 @@ app.controller('EvaluationController', [
 
 		$scope.addQ = function(){
 			console.log("Hello from addQ");
-			var header = $("#qHeader").html();
-			$("#questions").append(header);
-		}
-
-		$scope.addAnswer = function(question) {
-			question.Answers.push("New answer");
+			$scope.reset();
+			
+			
 		}
 
 		$scope.addCourseQuestion = function() {
