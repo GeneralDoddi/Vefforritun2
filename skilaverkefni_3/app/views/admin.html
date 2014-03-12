@@ -1,8 +1,21 @@
 <a ng-click= "openEval()">New Evaluation</a>
 
-<h1>Evaluations</h1>
+<h1>Evaluation templates</h1>
 <ul>
-	<li ng-repeat="evaluation in evaluations">
-		<a ng-href="#/evaluation/{{ evaluation.ID }}">{{ evaluation.TitleIS }}</a>
+	<li ng-repeat="evaluation in evaluationtemplates">
+		<ul>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</ul>
 	</li>
 </ul>
+
+<input type = "button" ng-click="TESTCLICK()" value = "CLICKTOGETSINGLE"></button>
+<input type = "button" ng-click="TESTCLICK2()" value = "CLICKTOPOST"></button>
+
+<div>
+	<p>Username: {{ userinfo.Username }}</p>
+	<p>Full Name: {{ userinfo.FullName }}</p>
+	<p>SSN: {{ userinfo.SSN }}</p>
+	<p>Email: {{ userinfo.Email }}</p>
+	<p>Role: {{ userinfo.Role }}</p>
+	<img src="{{ userinfo.ImageURL }}"></img>
+	
+</div>

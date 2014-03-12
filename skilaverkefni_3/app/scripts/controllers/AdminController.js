@@ -1,9 +1,22 @@
-app.controller('AdminController', function($scope,$modal,$log, EvalService, $routeParams){
+app.controller('AdminController', function($scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 		
 
-		EvalService.getAllEvaluations().then(function(data) {
+		
+		$scope.userinfo = HttpService.getUserobj();
+		console.log($scope.userinfo);
+
+		/*EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.evaluations = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});*/
+
+		EvalService.getAllEvaluationTemplates().then(function(data){
+			console.log("Success, data: ", data);
+			$scope.evaluationtemplates = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
@@ -25,5 +38,28 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, $rou
 	    }
     });
 	}
-	console.log("rass");
+
+	$scope.TESTCLICK = function(){
+			console.log("success");
+			EvalService.getEvaluationTemplateByID(1002).then(function(data){
+			console.log("Success, data: ", data);
+			$scope.evaluationtemplatesID = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
+			console.log($scope.evaluationtemplatesID);
+		}
+	$scope.TESTCLICK2 = function(){
+		EvalService.postEvaluationTemplate().then(function(data){
+			console.log("Success, data: ", data);
+			$scope.evaluationtemplatesID = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
+
+	}
 });

@@ -5,7 +5,9 @@
 	</li>
 </ul>
 
-<div ng-init = "userinfo()">
+<input type = "button" ng-click="TESTCLICK()">CLICKMENOW</button>
+
+<div>
 	<p>Username: {{ items.Username }}</p>
 	<p>Full Name: {{ items.FullName }}</p>
 	<p>SSN: {{ items.SSN }}</p>
@@ -13,4 +15,10 @@
 	<p>Role: {{ items.Role }}</p>
 	<img src="{{ items.ImageURL }}"></img>
 	
+</div>
+
+<div>
+	<li ng-repeat="course in courses">
+		<ul>{{ course.CourseID }} - {{ course.NameIS }}</ul>
+	</li>
 </div>

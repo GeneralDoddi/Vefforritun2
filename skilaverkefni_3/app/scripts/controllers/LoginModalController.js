@@ -11,10 +11,7 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,item
     success(function(data, status, headers, config) {
       // this callback will be called asynchronously
       // when the response is available
-      console.log(data);
-      console.log(status);
-      console.log(headers);
-      console.log(config);
+      
       console.log("success");
 
       HttpService.setUserobj(data);
@@ -40,6 +37,8 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,item
     
     console.log($("#username").val());
     console.log($("#password").val());
+
+    
 
     
 
