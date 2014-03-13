@@ -6,7 +6,7 @@ var app = angular.module('skilaverkefni3App', [
   'ngResource',
   'ngSanitize',
   'ui.bootstrap',
-  'ngRoute'
+  'ngRoute',
   
 ]);
 

@@ -1,5 +1,12 @@
 <a ng-click= "openEval()">New Evaluation</a>
 
+<h1>Evaluations</h1>
+<ul>
+	<li ng-repeat="evaluation in evaluations">
+		<ul>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</ul>
+	</li>
+</ul>
+
 <h1>Evaluation templates</h1>
 <ul>
 	<li ng-repeat="evaluation in evaluationtemplates">
@@ -8,7 +15,8 @@
 </ul>
 
 <input type = "button" ng-click="TESTCLICK()" value = "CLICKTOGETSINGLE"></button>
-<input type = "button" ng-click="TESTCLICK2()" value = "CLICKTOPOST"></button>
+<input type = "button" ng-click="TESTCLICK2()" value = "CLICKTOPOST-TEMPLATE"></button>
+<input type = "button" ng-click="TESTCLICK3()" value = "CLICKTOPOST-EVAL"></button>
 
 <div>
 	<p>Username: {{ userinfo.Username }}</p>
@@ -18,4 +26,10 @@
 	<p>Role: {{ userinfo.Role }}</p>
 	<img src="{{ userinfo.ImageURL }}"></img>
 	
+</div>
+
+<div>
+	<li ng-repeat="course in courses">
+		<ul>{{ course.CourseID }} - {{ course.NameIS }}</ul>
+	</li>
 </div>

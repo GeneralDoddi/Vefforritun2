@@ -81,6 +81,29 @@ app.service("EvalService", [
 			},
 			addEvaluation: function(evaluation) {
 				
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+
+				$http.post(HttpService.getSocket() + 'evaluations', {
+					  "TemplateID": 1,
+					  "StartDate": "2014-03-13T16:15:57.7829528+00:00",
+					  "EndDate": "2014-03-13T16:15:57.7829528+00:00"
+					
+			    }).success(function(data, status, headers, config){
+
+			        console.log("POSTED!");
+			        deferred.resolve(data);
+
+			    }).error(function(data, status, headers, config) {
+			      // called asynchronously if an error occurs
+			      // or server returns response with an error status.
+			      console.log("failed to post");
+			      	deferred.reject(status);
+			    }); 
+
+				return deferred.promise;
+
 			},
 			getAllEvaluationTemplates: function(){
 				var deferred = $q.defer();
@@ -253,23 +276,24 @@ app.service("EvalService", [
     			$http.post(HttpService.getSocket() + 'courses/' + course + '/' + semester + '/evaluations/' + ID, [
 					  {
 					    "QuestionID": 1,
-					    "TeacherSSN": "sample string 2",
+					    "TeacherSSN": 1234567890,
 					    "Value": "sample string 3"
 					  },
 					  {
 					    "QuestionID": 2,
-					    "TeacherSSN": "sample string 2",
+					    "TeacherSSN": 1234567890,
 					    "Value": "sample string 3"
 					  },
 					  {
 					    "QuestionID": 3,
-					    "TeacherSSN": "sample string 2",
+					    "TeacherSSN": 1234567890,
 					    "Value": "sample string 3"
 					  }
 					]).
 			    success(function(data, status, headers, config) {
 			  		console.log("course evaluations");
 			  		deferred.resolve(data);
+			  		console.log(data);
 			    }).
 			    error(function(data, status, headers, config) {
 			      // called asynchronously if an error occurs

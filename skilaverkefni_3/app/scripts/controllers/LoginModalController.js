@@ -15,12 +15,12 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,item
       console.log("success");
 
       HttpService.setUserobj(data);
-      if($("#username").val() == "admin")
-      {
+    if($("#username").val() == "admin")
+    {
         console.log("admin mode!");
         $location.path("/admin/");
         //$scope.$apply();
-      }
+    }
     else 
     {
       console.log("user mode!");
@@ -38,7 +38,7 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,item
     console.log($("#username").val());
     console.log($("#password").val());
 
-    
+
 
     
 
