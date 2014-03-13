@@ -36,4 +36,28 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 			      // or server returns response with an error status.
 			      console.log("NO EVALUATIONS!");
 			    });	
+
+		$scope.posteval = function(){
+
+			EvalService.postCourseEvaluation('T-427-WEPO', 'S2014', 1).then(function(data) {
+			console.log("Success, data: ", data);
+			$scope.evaluations1 = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
+		}
+
+		$scope.geteval = function (){
+			EvalService.getCourseEvaluation('T-427-WEPO', 'S2014', 1).then(function(data) {
+			console.log("Success, data: ", data);
+			//$scope.evaluations = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
+		}
+
 });

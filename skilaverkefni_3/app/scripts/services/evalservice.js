@@ -208,6 +208,76 @@ app.service("EvalService", [
 
 				return deferred.promise;
 
+			},
+			getCourseTeacher: function(course, semester){
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+    			console.log(HttpService.getToken());
+    			$http.get(HttpService.getSocket() + 'courses/' + course + '/' + semester + '/teachers').
+			    success(function(data, status, headers, config) {
+			  		console.log("teachers");
+			  		deferred.resolve(data);
+			    }).
+			    error(function(data, status, headers, config) {
+			      // called asynchronously if an error occurs
+			      // or server returns response with an error status.
+			      console.log("NO TEACHERS!");
+			      deferred.reject(status);
+			    });
+			    return deferred.promise;
+			},
+			getCourseEvaluation: function(course, semester, ID){
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+    			console.log(HttpService.getToken());
+    			$http.get(HttpService.getSocket() + 'courses/' + course + '/' + semester + '/evaluations/' + ID).
+			    success(function(data, status, headers, config) {
+			  		console.log("course evaluations");
+			  		deferred.resolve(data);
+			    }).
+			    error(function(data, status, headers, config) {
+			      // called asynchronously if an error occurs
+			      // or server returns response with an error status.
+			      console.log("NO COURSE EVALUATIONS!");
+			      deferred.reject(status);
+			    });
+			    return deferred.promise;
+			},
+			postCourseEvaluation: function(course, semester, ID){
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+    			console.log(HttpService.getToken());
+    			$http.post(HttpService.getSocket() + 'courses/' + course + '/' + semester + '/evaluations/' + ID, [
+					  {
+					    "QuestionID": 1,
+					    "TeacherSSN": "sample string 2",
+					    "Value": "sample string 3"
+					  },
+					  {
+					    "QuestionID": 2,
+					    "TeacherSSN": "sample string 2",
+					    "Value": "sample string 3"
+					  },
+					  {
+					    "QuestionID": 3,
+					    "TeacherSSN": "sample string 2",
+					    "Value": "sample string 3"
+					  }
+					]).
+			    success(function(data, status, headers, config) {
+			  		console.log("course evaluations");
+			  		deferred.resolve(data);
+			    }).
+			    error(function(data, status, headers, config) {
+			      // called asynchronously if an error occurs
+			      // or server returns response with an error status.
+			      console.log("NO COURSE EVALUATIONS!");
+			      deferred.reject(status);
+			    });
+			    return deferred.promise;
 			}
 		};
 	}
