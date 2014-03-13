@@ -1,6 +1,6 @@
 app.controller('EvaluationController', [
-	"$scope", "$compile", "EvalService",  "$routeParams",
-	function($scope, $compile, EvalService, $routeParams) {
+	"$scope", "EvalService",  "$routeParams",
+	function($scope, EvalService, $routeParams) {
 		var evaluationID = $routeParams.evaluationID;
 
 
@@ -8,14 +8,14 @@ app.controller('EvaluationController', [
 		$scope.isSingleQuestion = false;
 		$scope.isMultiQuestion = false;
 
-		$scope.maseter = {};
-
-	    $scope.orig = angular.copy($scope.data);
+		
 
 	    $scope.reset = function() {
 	    	console.log("hello from reset");
-
+	    	
+	    	$scope.mainQ.$setPristine();
 	    };		
+
 
 		if(evaluationID !== undefined) {
 			EvalService.getEvaluationById(evaluationID).then(function(data) {
@@ -37,7 +37,7 @@ app.controller('EvaluationController', [
 
 		$scope.addQ = function(){
 			console.log("Hello from addQ");
-			$scope.reset();
+			$("#mainQ")[0].reset();
 			
 			
 		}

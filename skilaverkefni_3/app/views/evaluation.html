@@ -1,6 +1,6 @@
 
 <div>
-	<form>
+	<form name="mainQ" ng-controller="EvaluationController">
 		Saved Template<input type="radio" name="new/old" value="old">
 		New Template<input type="radio" name="new/old" value="new"><br>
 
@@ -23,15 +23,15 @@
 
 		<div id="newQ">
 			<div id="qHeader" ng-init="isWordQuestion = false" ng-show="isWordQuestion">
-				<form>
+				<form id="mainQ">
 					Enter Question(Icelandic):
 					<input type="text" ng-model="question.qIs" required/>
 					<button type="button">-</button>
 					<button type="button">+</button><br>
 					Enter Question(English):
 					<input type="text" ng-model="question.qEn" required/>
-					Teacher<input ng-model="qInput" type="radio" name="teacher/course" value="teacher">
-					Course<input ng-model="qInput" type="radio" name="teacher/course" value="course">
+					Teacher<input ng-model="question.qInput" type="radio" name="teacher/course" value="teacher">
+					Course<input ng-model="question.qInput" type="radio" name="teacher/course" value="course">
 					
 					<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
 				</form>
