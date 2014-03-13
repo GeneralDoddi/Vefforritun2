@@ -39,19 +39,14 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 
 		//Get courses that administrator is signed up for
 
-		$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
-    		console.log(HttpService.getToken());
-    	$http.get(HttpService.getSocket() + 'my/courses').
-			    success(function(data, status, headers, config) {
-			  		console.log("courses");
-			  		$scope.courses = data;
-			  		console.log($scope.courses);
-			    }).
-			    error(function(data, status, headers, config) {
-			      // called asynchronously if an error occurs
-			      // or server returns response with an error status.
-			      console.log("NO COURSES!");
-			    });	
+		myCourses().then(function(data) {
+			console.log("Success, data: ", data);
+			$scope.evaluations = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
 
 
 	$scope.openEval = function () {
@@ -104,4 +99,25 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 		});
 
 	}
+
+	function myCourses(){
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+	    		console.log(HttpService.getToken());
+	    		$http.get(HttpService.getSocket() + 'my/courses').
+				    success(function(data, status, headers, config) {
+				  		console.log("courses");
+				  		//$scope.courses = data;
+				  		//console.log($scope.courses);
+				  		deferred.resolve(data);
+				    }).
+				    error(function(data, status, headers, config) {
+				      // called asynchronously if an error occurs
+				      // or server returns response with an error status.
+				      console.log("NO COURSES!");
+				      deferred.reject(status);
+				    });	
+				    return deferred.promise;
+			}
 });
