@@ -7,6 +7,11 @@ app.controller('EvaluationController', [
 		$scope.isWordQuestion = false;
 		$scope.isSingleQuestion = false;
 		$scope.isMultiQuestion = false;
+
+		$scope.addWordQuestion = false;
+		$scope.addSingleQuestion = false;
+		$scope.addMultiQuestion = false;
+
 		$scope.showHeaderQ = false;
 		$scope.showAdditionalInfo = false;
 		$scope.courses = [];
@@ -77,17 +82,102 @@ app.controller('EvaluationController', [
 		      console.log("NO COURSES!");
 		    });
 
-		    $scope.submitQ
+		
+
+		$scope.addImage = function(){
+			console.log("hello from addImage");
+			var img = $("#imageURLInput").val();
+			if(img !== ""){
+				console.log("input detected");
+				$.ajax({
+				    url: img,
+				    type:'HEAD',
+				    error:
+				        function(){
+				        	$('#imageURL').attr('src', "http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg");
+				        	
+				        },
+				    success:
+				        function(){
+							$('#imageURL').attr('src',$("#imageURLInput").val());
+				        }
+				});
+			}
+
+			
+			console.log(img);
+		}
+
+		$scope.submitQ = function(){
+			console.log("hello from submitQ");
+
+			var whatType = $( "input[name=teacherOrCourse]:checked" ).val();
+
+			if(whatType === "course"){
+				console.log("adding course question to array");
+				$scope.addCourseQuestion();
+			}
+			else if(whatType === "teacher"){
+				console.log("adding teacher question");
+			}
+			$scope.addQ();
+		}
 
 		$scope.addCourseQuestion = function() {
+			console.log("hello from addCourseQuestion");
+
+			var xType = "";
+			var additionalAnswers= [];
+
+			if($scope.addWordQuestion){
+				xType = "text";
+			}
+			else if($scope.addSingleQuestion){
+				xType = "single";
+			}
+			else if($scope.addMultiQuestion){
+				xType = "multiple";
+			}
+
+			if($scope.addMultiQuestion || $scope.addSingleQuestion){
+				console.log("adding answers options to array");
+				console.log($("#answer1IS").val());
+				additionalAnswers.push($("#answer1IS").val());
+				additionalAnswers.push($("#answer1EN").val());
+
+				additionalAnswers.push($("#answer2IS").val());
+				additionalAnswers.push($("#answer2EN").val());
+
+				additionalAnswers.push($("#answer3IS").val());
+				additionalAnswers.push($("#answer3EN").val());
+
+				additionalAnswers.push($("#answer4IS").val());
+				additionalAnswers.push($("#answer4EN").val());
+
+				additionalAnswers.push($("#answer5IS").val());
+				additionalAnswers.push($("#answer5EN").val());
+
+				console.log(additionalAnswers);
+
+			}
+			console.log(additionalAnswers);
+			var test = $("#qIs").val();
+			console.log(test);
+			console.log(xType);
 			$scope.evaluation.CourseQuestions.push({
 				ID: $scope.evaluation.CourseQuestions.length,
-				TextIS: "",
-				TextEN: "",
-				ImageURL: "",
-				Type: "single",
+				TextIS: $("#qIs").val(),
+				TextEN: $("#qEn").val(),
+				ImageURL: $("#imageURL").val(),
+				Type: xType,
 				Answers: []
 			});
+			$scope.evaluation.CourseQuestions.Answers.push($scope.additionalAnswers);
+			console.log($scope.evaluation.CourseQuestions);
+			$scope.addWordQuestion = false;
+			$scope.addSingleQuestion = false;
+			$scope.addMultiQuestion = false;
+			
 		}
 	}
 ]);

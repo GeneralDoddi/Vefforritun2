@@ -23,58 +23,54 @@
 		<div id="newQ">
 			<div id="qHeader" ng-show="showHeaderQ">					
 					Enter Question(Icelandic):
-					<input type="text" ng-model="question.qIs" required/>
-					<button type="button">-</button>
-					<button type="button">+</button><br>
+					<input type="text" id="qIs">
+					Teacher<input id="tQ" type="radio" name="teacherOrCourse" value="teacher">
+					Course<input id="cQ" type="radio" name="teacherOrCourse" value="course"><br>
 					Enter Question(English):
-					<input type="text" ng-model="question.qEn" required/>
-					Teacher<input ng-model="question.qInput" type="radio" name="teacher/course" value="teacher">
-					Course<input ng-model="question.qInput" type="radio" name="teacher/course" value="course">
+					<input type="text" id="qEn">
+					<input id="imageURLInput" type= "text" name="qURL" value="Image URL">
+					<button ng-click="addImage()">+<button><br>	
 					
-					<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+					<img id="imageURL"src="http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg" alt="The image was not loaded correctly"><br>
 			</div>
 
 			<div id="additionalInfo" ng-show="showAdditionalInfo">
 				<input id="answer1" type="radio" name="answer" value="button">
-				<input type="text" name="answerIS" value="Icelandic answer">
-				<button type="button">-</button>
-				<button type="button">+</button><br>	
-				<input type="text" name="answerEN" value="English answer">
-				<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				<input id="answer1IS" type="text" name="answerIS" value="Icelandic answer">
+				<input id="answer1EN" type="text" name="answerEN" value="English answer"><br>
 
 				<input id="answer2" type="radio" name="answer" value="button">
-				<input type="text" name="answerIS" value="Icelandic answer">
-				<button type="button">-</button>
-				<button type="button">+</button><br>	
-				<input type="text" name="answerEN" value="English answer">
-				<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				<input id="answer2IS" type="text" name="answerIS" value="Icelandic answer">	
+				<input id="answer2EN" type="text" name="answerEN" value="English answer"><br>
 
 				<input id="answer3" type="radio" name="answer" value="button">
-				<input type="text" name="answerIS" value="Icelandic answer">
-				<button type="button">-</button>
-				<button type="button">+</button><br>	
-				<input type="text" name="answerEN" value="English answer">
-				<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				<input id="answer3IS" type="text" name="answerIS" value="Icelandic answer">	
+				<input id="answer3EN" type="text" name="answerEN" value="English answer"><br>
 
 				<input id="answer4" type="radio" name="answer" value="button">
-				<input type="text" name="answerIS" value="Icelandic answer">
-				<button type="button">-</button>
-				<button type="button">+</button><br>	
-				<input type="text" name="answerEN" value="English answer">
-				<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				<input id="answer4IS" type="text" name="answerIS" value="Icelandic answer">	
+				<input id="answer4EN" type="text" name="answerEN" value="English answer"><br>
 
 				<input id="answer5" type="radio" name="answer" value="button">
-				<input type="text" name="answerIS" value="Icelandic answer">
-				<button type="button">-</button>
-				<button type="button">+</button><br>	
-				<input type="text" name="answerEN" value="English answer">
-				<img src="https://images.encyclopediadramatica.es/thumb/4/4b/FatDude.jpg/75px-FatDude.jpg" alt=""><br>
+				<input id="answer5IS" type="text" name="answerIS" value="Icelandic answer">	
+				<input id="answer5EN" type="text" name="answerEN" value="English answer"><br>
 			</div>
-			<button ng-click="isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; addQ()" 
-				ng-show="showHeaderQ" >Add Question</button><br>
+			<button ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
 		</div>
 
-		<div id="questions"></div>
+		<div id="questions">
+			<ul ng-repeat="courseQ in evaluation.CourseQuestions">
+				<li>{{courseQ.ID}}</li>
+				<li>{{courseQ.TextIS}}</li>
+				<li>{{courseQ.TextEN}}</li>
+				<li>{{courseQ.ImageURL}}</li>
+				<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
+					<li>{{ans}}</li>
+					
+				</ul>
+			</ul>
+		</div>
+
 
 		<input type="submit" value="Save Template">
 		<input type="submit" value="Submit Evaluation">	
