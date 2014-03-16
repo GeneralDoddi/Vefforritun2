@@ -42,7 +42,8 @@
     "karma": "~0.10.9",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-coverage": "~0.2.0",
-    "grunt-recess": "~0.6.0"
+    "grunt-recess": "~0.6.0",
+    "grunt-contrib-less": "~0.10.0"
   },
   "engines": {
     "node": ">=0.8.0"

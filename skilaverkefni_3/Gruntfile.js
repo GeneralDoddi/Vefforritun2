@@ -27,9 +27,9 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      recess: {
+      less: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
-                tasks: ['recess:dist']
+                tasks: ['less:dist']
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -143,20 +143,30 @@ module.exports = function (grunt) {
         }]
       }
     },
-    recess: {
-        options: {
-            compile: true
+    less: {
+            options: {
+                paths: ['app/components'],
+                //dumpLineNumbers: true
+            },
+            dist: {
+                files: [{
+                    expand: true,     // Enable dynamic expansion.
+                    cwd: '<%= yeoman.app %>/styles/',      // Src matches are relative to this path.
+                    src: ['**/*.less'], // Actual pattern(s) to match.
+                    dest: '.tmp/styles/',   // Destination path prefix.
+                    ext: '.css',   // Dest filepaths will have this extension.
+                }],
+            },
+            server: {
+                files: [{
+                    expand: true,     // Enable dynamic expansion.
+                    cwd: '<%= yeoman.app %>/styles/',      // Src matches are relative to this path.
+                    src: ['**/*.less'], // Actual pattern(s) to match.
+                    dest: '.tmp/styles/',   // Destination path prefix.
+                    ext: '.css',   // Dest filepaths will have this extension.
+                }],
+            }
         },
-        dist: {
-            files: [{
-                expand: true,
-                cwd: '<%= yeoman.app %>/styles',
-                src: '{,*/}*.less',
-                dest: '.tmp/styles/',
-                ext: '.css'
-            }]
-        }
-    },
 
     // Automatically inject Bower components into the app
     'bower-install': {
@@ -297,7 +307,7 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'copy:styles',
-        'recess'
+        'less'
       ],
       test: [
         'copy:styles'
@@ -306,7 +316,7 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin',
-        'recess'
+        'less'
       ]
     },
 
@@ -362,6 +372,7 @@ module.exports = function (grunt) {
       'bower-install',
       'concurrent:server',
       'autoprefixer',
+      'less',
       'connect:livereload',
       'watch'
     ]);
@@ -386,6 +397,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'ĺess',
     'concat',
     'ngmin',
     'copy:dist',
@@ -402,4 +414,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+grunt.loadNpmTasks('grunt-contrib-less');
 };

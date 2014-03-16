@@ -2,7 +2,7 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 		
 		$scope.items = HttpService.getUserobj();
 		$scope.courses = HttpService.getCourses();
-		$scope.evaluations = [];
+		$scope.evaluations = EvalService.getAllEvaluations();
 		$scope.teachers = [];
 
 		
@@ -27,7 +27,7 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 
 		myCourses().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.evaluations = data;
+			$scope.courses = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
