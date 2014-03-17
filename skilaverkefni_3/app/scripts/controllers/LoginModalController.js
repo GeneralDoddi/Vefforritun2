@@ -32,16 +32,8 @@ var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,item
       // or server returns response with an error status.
       console.log("No such User");
     }); 
-
-
-    
-    console.log($("#username").val());
-    console.log($("#password").val());
-
-
-
-    
-
+    //console.log($("#username").val());
+    //console.log($("#password").val());
     $modalInstance.close($scope.selected.item);
   };
 

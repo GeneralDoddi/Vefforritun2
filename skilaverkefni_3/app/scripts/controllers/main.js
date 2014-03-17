@@ -9,7 +9,7 @@ app.controller('MainCtrl', function ($scope,$modal,$log) {
 
   $scope.open = function () {
   	console.log("hello from modal");
-    var modalInstance = $modal.open({
+    $scope.modalInstance = $modal.open({
 
       templateUrl: 'views/login.html',
       controller: "LoginModalCtrl",
@@ -20,10 +20,10 @@ app.controller('MainCtrl', function ($scope,$modal,$log) {
         }
       }
     });
-
-    modalInstance.result.then(function (selectedItem) {
+    $scope.modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
     }, function () {
+      $scope.canceled = true;
       $log.info('Modal dismissed at: ' + new Date());
     });
   };

@@ -1,13 +1,14 @@
-app.controller('AdminController', function($scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+app.controller('AdminController', function($q,$scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 		
 
 		
-		$scope.userinfo = HttpService.getUserobj();
-		console.log($scope.userinfo);
+		//$scope.userinfo = HttpService.getUserobj();
+		//console.log($scope.userinfo);
 
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.evaluations = data;
+			console.log($scope.evaluations);
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
@@ -25,28 +26,28 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 
 		//Get courses that administrator is signed up for
 
-		myCourses().then(function(data) {
+		/*myCourses().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.evaluations = data;
+			$scope.courses = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
-		});
+		});*/
 
-	$scope.openEval = function () {
-	  	console.log("hello from openEval");
-	    var modalInstance = $modal.open({
+		$scope.openEval = function () {
+		  	console.log("hello from openEval");
+		    var modalInstance = $modal.open({
 
-	      templateUrl: 'views/evaluation.html',
-	      controller: "EvaluationController",
-	      backdrop: "static",
-	      resolve: {
-	        items: function () {
-	          return $scope.items;
-	        }
-	    }
-    });
+		      templateUrl: 'views/evaluation.html',
+		      controller: "EvaluationController",
+		      backdrop: "static",
+		      resolve: {
+		        items: function () {
+		          return $scope.items;
+		        }
+		    }
+	    });
 	}
 
 	$scope.TESTCLICK = function(){
@@ -85,14 +86,14 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 
 	}
 
-	function myCourses(){
+	/*function myCourses(){
 				var deferred = $q.defer();
 
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
-	    		console.log(HttpService.getToken());
+	    		//console.log(HttpService.getToken());
 	    		$http.get(HttpService.getSocket() + 'my/courses').
 				    success(function(data, status, headers, config) {
-				  		console.log("courses");
+				  		//console.log("courses");
 				  		//$scope.courses = data;
 				  		//console.log($scope.courses);
 				  		deferred.resolve(data);
@@ -104,5 +105,5 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 				      deferred.reject(status);
 				    });	
 				    return deferred.promise;
-			}
+			}*/
 });
