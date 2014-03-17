@@ -1,6 +1,9 @@
 app.controller('answerEvalController', [
-	"$scope", "EvalService",  "$routeParams","HttpService", "$http","token",
-	function($scope, EvalService, $routeParams, HttpService, $http, evalID,token) {
-		var evaluation = EvalService.getEvaluationById(evalID);
+	"$scope", "EvalService",  "$routeParams","HttpService", "$http",
+		function($scope, EvalService, $routeParams, HttpService, $http) {
+		console.log($routeParams.evalId);
+		var evaluation = $routeParams.evaluationId;
+		console.log(evaluation);
+
 
 	}]);
