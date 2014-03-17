@@ -3,6 +3,7 @@ app.controller('EvaluationController', [
 	function($scope, EvalService, $routeParams, HttpService, $http) {
 		var evaluationID = $routeParams.evaluationID;
 
+		$scope.templateid = 0;
 
 		$scope.isWordQuestion = false;
 		$scope.isSingleQuestion = false;
@@ -210,13 +211,32 @@ app.controller('EvaluationController', [
 
 		$scope.saveTemplate = function(){
 			console.log("hello from saveTemplate");
+
+			$scope.evaluation.ID = $scope.templateid;
+
 			$scope.evaluation.TitleIS = $("#evalIs").val();
 			$scope.evaluation.TitleEN = $("#evalEn").val();
 
 			$scope.evaluation.IntroTextIS = $("#introIs").val();
 			$scope.evaluation.IntroTextEN = $("#introEn").val();
 
+			$scope.templateid = $scope.templateid +1;
+
 			console.log($scope.evaluation);
+			EvalService.postEvaluationTemplate($scope.evaluation);
+		}
+		$scope.saveEvaluation = function(){
+			console.log("hello from saveEvaluation");
+			console.log($("#startDate").val());
+			console.log($scope.evaluation.ID);
+
+			var evalObj = {
+				TemplateID: $scope.templateid - 1,
+				StartDate:  $("#startDate").val(),
+				EndDate: $("#endDate").val(),
+			}
+			EvalService.addEvaluation(evalObj);
+
 		}
 	}
 ]);
