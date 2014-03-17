@@ -1,9 +1,21 @@
 
-<div ng-controller="EvaluationController">
-	<form name="mainQ" >
-		Saved Template<input type="radio" name="new/old" value="old">
-		New Template<input type="radio" name="new/old" value="new"><br>
-
+<div ng-controller="EvaluationController" class="template-modal">
+	<!--<div class="modal-header">
+		<h2>Template creation</h2>
+	</div>
+	<div class ="template-modal-body">
+		<div class="button-group">
+			<button class ="btn btn-primary" ng-click = "NewTemplate()">Create new template</button>
+			<button class ="btn btn-primary" ng-click = "LoadTemplate()">Load a saved template</button>
+		</div>				
+	</div>-->
+			
+				Saved Template<input type="radio" class ="input-medium"name="new/old" value="old" title = "Saved Templates">
+			</div>
+			<div class="col-md-1">	
+				New Template<input type="radio" name="new/old" value="new"><br>
+			</div>-->
+		
 		Evaluation name(Icelandic):<input id="evalIs" type="text" name="eval name IS" value=""><br>
 		Evaluation name(English):<input id="evalEn" type="text" name="eval name EN" value=""><br>
 		Course name:
@@ -65,7 +77,7 @@
 			<button ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
 		</div>
 
-		<div id="questions">
+		<div id="questions"></div>
 			<h2>Course Questions</h2>
 			<ul ng-repeat="courseQ in evaluation.CourseQuestions">
 				<li>{{courseQ.ID}}</li>
@@ -97,6 +109,7 @@
 
 		<input ng-click="saveTemplate()" type="submit" value="Save Template">
 		<input type="submit" value="Submit Evaluation">	
-	</form>
+	
+		
 </div>
 
