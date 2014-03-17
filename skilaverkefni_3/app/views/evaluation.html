@@ -37,28 +37,34 @@
 			<div id="additionalInfo" ng-show="showAdditionalInfo">
 				<input id="answer1" type="radio" name="answer" value="button">
 				<input id="answer1IS" type="text" name="answerIS" value="Icelandic answer">
-				<input id="answer1EN" type="text" name="answerEN" value="English answer"><br>
+				<input id="answer1EN" type="text" name="answerEN" value="English answer">
+				<input id="imageURLInput1" type= "text" name="qURL" value="Image URL"><br>
 
 				<input id="answer2" type="radio" name="answer" value="button">
 				<input id="answer2IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer2EN" type="text" name="answerEN" value="English answer"><br>
+				<input id="answer2EN" type="text" name="answerEN" value="English answer">
+				<input id="imageURLInput2" type= "text" name="qURL" value="Image URL"><br>
 
 				<input id="answer3" type="radio" name="answer" value="button">
 				<input id="answer3IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer3EN" type="text" name="answerEN" value="English answer"><br>
+				<input id="answer3EN" type="text" name="answerEN" value="English answer">
+				<input id="imageURLInput3" type= "text" name="qURL" value="Image URL"><br>
 
 				<input id="answer4" type="radio" name="answer" value="button">
 				<input id="answer4IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer4EN" type="text" name="answerEN" value="English answer"><br>
+				<input id="answer4EN" type="text" name="answerEN" value="English answer">
+				<input id="imageURLInput4" type= "text" name="qURL" value="Image URL"><br>
 
 				<input id="answer5" type="radio" name="answer" value="button">
 				<input id="answer5IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer5EN" type="text" name="answerEN" value="English answer"><br>
+				<input id="answer5EN" type="text" name="answerEN" value="English answer">
+				<input id="imageURLInput5" type= "text" name="qURL" value="Image URL"><br>
 			</div>
 			<button ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
 		</div>
 
 		<div id="questions">
+			<h2>Course Questions</h2>
 			<ul ng-repeat="courseQ in evaluation.CourseQuestions">
 				<li>{{courseQ.ID}}</li>
 				<li>{{courseQ.TextIS}}</li>
@@ -67,6 +73,18 @@
 				<li>{{corseQ.Type}}</li>
 				<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
 					<li>{{ans}}</li>
+					
+				</ul>
+			</ul>
+			<h2>Teacher Questions</h2>
+			<ul ng-repeat="teacherQ in evaluation.TeacherQuestions">
+				<li>{{teacherQ.ID}}</li>
+				<li>{{teacherQ.TextIS}}</li>
+				<li>{{teacherQ.TextEN}}</li>
+				<li>{{teacherQ.ImageURL}}</li>
+				<li>{{teacherQ.Type}}</li>
+				<ul ng-repeat="answ in evaluation.teacherQuestions.Answers">
+					<li>{{answ}}</li>
 					
 				</ul>
 			</ul>
