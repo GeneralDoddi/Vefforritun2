@@ -28,7 +28,7 @@
 					Course<input id="cQ" type="radio" name="teacherOrCourse" value="course"><br>
 					Enter Question(English):
 					<input type="text" id="qEn">
-					<input id="imageURLInput" type= "text" name="qURL" value="Image URL">
+					Image URL:<input id="imageURLInput" type= "text" name="qURL" value=" ">
 					<button ng-click="addImage()">+<button><br>	
 					
 					<img id="imageURL"src="http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg" alt="The image was not loaded correctly"><br>
@@ -36,24 +36,24 @@
 
 			<div id="additionalInfo" ng-show="showAdditionalInfo">
 				<input id="answer1" type="radio" name="answer" value="button">
-				<input id="answer1IS" type="text" name="answerIS" value="Icelandic answer">
-				<input id="answer1EN" type="text" name="answerEN" value="English answer"><br>
+				Icelandic answer:<input id="answer1IS" type="text" name="answerIS" value="">
+				English answer:<input id="answer1EN" type="text" name="answerEN" value=""><br>
 
 				<input id="answer2" type="radio" name="answer" value="button">
-				<input id="answer2IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer2EN" type="text" name="answerEN" value="English answer"><br>
+				Icelandic answer:<input id="answer2IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer2EN" type="text" name="answerEN" value=""><br>
 
 				<input id="answer3" type="radio" name="answer" value="button">
-				<input id="answer3IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer3EN" type="text" name="answerEN" value="English answer"><br>
+				Icelandic answer:<input id="answer3IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer3EN" type="text" name="answerEN" value=""><br>
 
 				<input id="answer4" type="radio" name="answer" value="button">
-				<input id="answer4IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer4EN" type="text" name="answerEN" value="English answer"><br>
+				Icelandic answer:<input id="answer4IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer4EN" type="text" name="answerEN" value=""><br>
 
 				<input id="answer5" type="radio" name="answer" value="button">
-				<input id="answer5IS" type="text" name="answerIS" value="Icelandic answer">	
-				<input id="answer5EN" type="text" name="answerEN" value="English answer"><br>
+				Icelandic answer:<input id="answer5IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer5EN" type="text" name="answerEN" value=""><br>
 			</div>
 			<button ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
 		</div>
