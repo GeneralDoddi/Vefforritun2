@@ -1,6 +1,4 @@
-app.service("EvalService", [
-	"$q", "$timeout", "HttpService", "$http",
-	function($q, $timeout, HttpService, $http) {
+app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($q, $timeout, HttpService, $http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function createEvaluation(id, titleIS, titleEN, introIS, introEN) {
 			return {

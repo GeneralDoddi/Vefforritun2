@@ -68,8 +68,8 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 		});
 		}
 		$scope.answerEval = function(evalId){
-			console.log(evalId);
-			$location.path("/answerEval/"+ "evalId"); 			
+			
+			$location.path("/answerEval/"+evalId); 			
 		}
 
 		function myEvaluations(){
