@@ -1,35 +1,37 @@
-<a ng-click= "openEval()">New Evaluation</a>
+<div class ="header">
 
-<h1>Evaluations</h1>
-<ul>
-	<li ng-repeat="evaluation in evaluations">
-		<ul>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</ul>
-	</li>
-</ul>
+	<img class="pull-right UserPic" src="/images/Dr_Evil.jpg"></img>
+	<p class = "pull-right UserName">Dr Evil</p>
+	<h2 class= "text">Skilaverkefni 3</h2>
+</div>
+<div class = "btn-toolbar">
+	<input type = "button" class ="btn btn-primary" ng-click="TESTCLICK()" value = "CLICKTOGETSINGLE"></button>
+	<input type = "button" class ="btn btn-primary" ng-click="TESTCLICK2()" value = "CLICKTOPOST-TEMPLATE"></button>
+	<input type = "button" class ="btn btn-primary" ng-click="TESTCLICK3()" value = "CLICKTOPOST-EVAL"></button>
+	<input type = "button" class = "btn btn-primary" ng-click="openEval()" value = "New Evaluation"></button>
+</div>
+<div class="container">
+	<div class= "row">
+		<div class = "col-md-4 list-custom">
+			<div class = "panel-heading">Evaluations</div>
+			<ul ng-repeat="evaluation in evaluations">
+				<li>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</li>
+			</ul>
 
-<h1>Evaluation templates</h1>
-<ul>
-	<li ng-repeat="evaluation in evaluationtemplates">
-		<ul>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</ul>
-	</li>
-</ul>
-
-<input type = "button" ng-click="TESTCLICK()" value = "CLICKTOGETSINGLE"></button>
-<input type = "button" ng-click="TESTCLICK2()" value = "CLICKTOPOST-TEMPLATE"></button>
-<input type = "button" ng-click="TESTCLICK3()" value = "CLICKTOPOST-EVAL"></button>
-
-<div>
-	<p>Username: {{ userinfo.Username }}</p>
-	<p>Full Name: {{ userinfo.FullName }}</p>
-	<p>SSN: {{ userinfo.SSN }}</p>
-	<p>Email: {{ userinfo.Email }}</p>
-	<p>Role: {{ userinfo.Role }}</p>
-	<img src="{{ userinfo.ImageURL }}"></img>
-	
+		</div>
+		<div class="col-md-4 list-custom">		
+			
+			<div class ="panel-heading">Evaluation templates</div>
+			<ul ng-repeat="evaluation in evaluationtemplates">
+				<li>{{ evaluation.ID }} - {{ evaluation.TitleIS }}</li>
+			</ul>
+		</div>
+		<div class="col-md-4 list-custom">
+			<div class = "panel-heading">Courses</div>
+			<ul ng-repeat="course in courses">
+				<li>{{ course.CourseID }} - {{ course.NameIS }}</li>
+			</ul>
+		</div>
+	</div>
 </div>
 
-<div>
-	<li ng-repeat="course in courses">
-		<ul>{{ course.CourseID }} - {{ course.NameIS }}</ul>
-	</li>
-</div>
