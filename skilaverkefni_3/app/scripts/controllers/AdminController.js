@@ -1,4 +1,6 @@
-app.controller('AdminController', function($q,$scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+
+app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+
 		
 
 		

@@ -4,15 +4,17 @@
 		Saved Template<input type="radio" name="new/old" value="old">
 		New Template<input type="radio" name="new/old" value="new"><br>
 
-		Evaluation name(Icelandic):<input type="text" name="eval name IS" value=""><br>
-		Evaluation name(English):<input type="text" name="eval name EN" value=""><br>
+		Evaluation name(Icelandic):<input id="evalIs" type="text" name="eval name IS" value=""><br>
+		Evaluation name(English):<input id="evalEn" type="text" name="eval name EN" value=""><br>
 		Course name:
 		<select ng-model="teacherCourses" >
 			<option ng-repeat="course in courses" value="{{ course.CourseID }}">{{ course.NameIS }}</option>
-		</select><br>
+		</select>
+		Pick a date between in 2013:
+		   <input type="date" id="exampleInput" name="input" ng-model="value" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" /><br>
 
-		Intro(Icelandic):<input type="text" name="intro" value=""><br>
-		Intro(English):<input type="text" name="intro" value=""><br>
+		Intro(Icelandic):<input id="introIs" type="text" name="intro" value=""><br>
+		Intro(English):<input id="introEn" type="text" name="intro" value=""><br>
 
 		<div id="addButtons">
 			<button ng-click="isWordQuestion = !isWordQuestion; isSingleQuestion = false; isMultiQuestion = false; addQ()">Add Word Question</button>
@@ -72,8 +74,9 @@
 				<li>{{courseQ.ImageURL}}</li>
 				<li>{{corseQ.Type}}</li>
 				<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
-					<li>{{ans}}</li>
-					
+					<li>{{ans.TextIS}}</li>
+					<li>{{ans.TextEN}}</li>
+					<li>{{ans.ImageURL}}</li>
 				</ul>
 			</ul>
 			<h2>Teacher Questions</h2>
@@ -84,14 +87,15 @@
 				<li>{{teacherQ.ImageURL}}</li>
 				<li>{{teacherQ.Type}}</li>
 				<ul ng-repeat="answ in evaluation.teacherQuestions.Answers">
-					<li>{{answ}}</li>
-					
+					<li>{{answ.IS}}</li>
+					<li>{{answ.TextEN}}</li>
+					<li>{{answ.ImageURL}}</li>
 				</ul>
 			</ul>
 		</div>
 
 
-		<input type="submit" value="Save Template">
+		<input ng-click="saveTemplate()" type="submit" value="Save Template">
 		<input type="submit" value="Submit Evaluation">	
 	</form>
 </div>
