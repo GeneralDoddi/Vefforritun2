@@ -1,31 +1,39 @@
-<h1>User Evaluations</h1>
-<ul>
-	<li ng-repeat="evaluation in evaluations">
-		<a ng-href="#/evaluation/{{ evaluation.ID }}">{{ evaluation.TitleIS }}</a>
-	</li>
-</ul>
+<div class ="header">
 
-<input type = "button" ng-click="geteval()" value = "CLICKGETEVAL"></button>
-<input type = "button" ng-click="posteval()" value = "CLICKPOSTEVAL"></button>
+	<img class="pull-right UserPic" src="{{ items.ImageURL }}"></img>
+		<p class = "pull-right UserName">{{items.FullName}}</p>
+		<h2 class= "text">Skilaverkefni 3</h2>
+</div>
 
-<div>
-	<p>Username: {{ items.Username }}</p>
-	<p>Full Name: {{ items.FullName }}</p>
-	<p>SSN: {{ items.SSN }}</p>
-	<p>Email: {{ items.Email }}</p>
-	<p>Role: {{ items.Role }}</p>
-	<img src="{{ items.ImageURL }}"></img>
+<div class ="container">
+	<div class"btn-toolbar">
+		<div class = "btn-group">
+			<input type = "button" class ="btn btn-primary"  ng-click="geteval()" value = "CLICKGETEVAL"></button>
+			<input type = "button" class = "btn btn-primary" ng-click="posteval()" value = "CLICKPOSTEVAL"></button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 list-custom">
+			<div class ="panel-heading">Courses</div>
+				<ul class = "list-group" ng-repeat="course in courses">
+					<li class = " list-group-item list-custom">{{ course.CourseID }} - {{ course.NameIS }}</li>
+				</ul>		
+		</div>
+		<div class="col-md-4 list-custom">
+			<div class = "panel-heading">Teachers</div>
+				<ul ng-repeat="teacher in teachers">
+					<li class= "list-group-item list-custom">{{ teacher.FullName }}</li>
+				</ul>
+				
+		</div>
+		<div class = "col-md-4 list-custom">
+			<div class = "panel-heading">Evaluations</div>
+			<ul ng-repeat="evaluation in evaluations">
+				<li class = "list-group-item list-custom"><a ng-href="#/evaluation/{{ evaluation.ID }}">{{ evaluation.TemplateTitleEng }}</a></li>
+			</ul>
+		</div>
 	
-</div>
+	</div>	
+	
+	
 
-<div>
-	<li ng-repeat="course in courses">
-		<ul>{{ course.CourseID }} - {{ course.NameIS }}</ul>
-	</li>
-</div>
-
-<div>
-	<li ng-repeat="teacher in teachers">
-		<ul>{{ teacher.FullName }}</ul>
-	</li>
-</div>

@@ -1,15 +1,23 @@
-<div>
+<div class= "login-modal">
         <div class="modal-header">
-            <h3>Login</h3>
+            <h2>Login</h2>
         </div>
         
         <div class="modal-body">
-             Username:  <input type="text" id="username" ng-keypress="keyPress($event)"></input><br> <br> 
-             Password:  <input type="password" id="password" ng-keypress="keyPress($event)"></input>
+            
+            <div class="col-md-6">
+            
+             <input type="text" class ="form-control" id="username" ng-keypress="keyPress($event)" placeholder= "User name"></input> 
+            </div>
+            <div class="col-md-6">
+
+            <input type="password" class ="form-control" id="password" ng-keypress="keyPress($event)" placeholder= "Password"></input>
+            </div>
+            
         </div>
         
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-primary" ng-click="ok()">Login</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
