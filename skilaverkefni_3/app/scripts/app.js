@@ -26,6 +26,9 @@ app.config(["$routeProvider", function($routeProvider) {
 	}).when("/user/",{
 		templateUrl: "views/user.html",
 		controller: "UserController"
+	}).when("/answerEval/:evaluationID",{
+		templateUrl:"views/answerEval.html",
+		controller: "answerEvalController",
 	}).otherwise({ redirectTo: '/' });
 
 }]);

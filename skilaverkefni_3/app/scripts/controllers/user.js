@@ -1,4 +1,4 @@
-app.controller('UserController', function($scope,$modal,$log,$http, EvalService, HttpService, $routeParams, $q){
+app.controller('UserController', function($scope,$modal,$log,$http,$location, EvalService, HttpService, $routeParams, $q){
 		
 		$scope.items = HttpService.getUserobj();
 		$scope.courses = HttpService.getCourses();
@@ -66,6 +66,10 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
 		});
+		}
+		$scope.answerEval = function(evalId){
+			console.log(evalId);
+			$location.path("/answerEval/"+ "evalId"); 			
 		}
 
 		function myEvaluations(){
