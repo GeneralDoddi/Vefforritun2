@@ -206,7 +206,32 @@ app.controller('EvaluationController', [
 			$scope.addWordQuestion = false;
 			$scope.addSingleQuestion = false;
 			$scope.addMultiQuestion = false;
+			$scope.resetForm();
 			$scope.addQ();
+		}
+		$scope.resetForm = function(){
+			$("#answer1IS").val("");
+			$("#answer2IS").val("");
+			$("#answer3IS").val("");
+			$("#answer4IS").val("");
+			$("#answer5IS").val("");
+
+			$("#answer1EN").val("");
+			$("#answer2EN").val("");
+			$("#answer3EN").val("");
+			$("#answer4EN").val("");
+			$("#answer5EN").val("");
+			
+			$("#imageURLInput1").val("");
+			$("#imageURLInput2").val("");
+			$("#imageURLInput3").val("");
+			$("#imageURLInput4").val("");
+			$("#imageURLInput5").val("");
+
+			$("#qIs").val("");
+			$("#qEn").val("");
+
+
 		}
 
 		$scope.saveTemplate = function(){
