@@ -4,7 +4,8 @@ app.controller('MainCtrl', function ($scope,$modal,$log) {
       'AngularJS',
       'Karma'
     ];
-	$scope.items = ['item1', 'item2', 'item3'];
+	
+    $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.open = function () {
   	console.log("hello from modal");

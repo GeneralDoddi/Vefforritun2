@@ -377,7 +377,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma:server'
   ]);
 
   grunt.registerTask('build', [
