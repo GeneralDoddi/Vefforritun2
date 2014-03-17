@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+app.controller('AdminController', function($q,$scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+=======
 
 app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 
+>>>>>>> 4bb9c9c270c9067ecce61e0c6d416dc22c8ed73d
 		
 
 		
@@ -38,32 +42,32 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 			console.log("Update: " + updateMessage);
 		});*/
 
+<<<<<<< HEAD
+		$scope.openEval = function () {
+		  	console.log("hello from openEval");
+		    var modalInstance = $modal.open({
 
+		      templateUrl: 'views/evaluation.html',
+		      controller: "EvaluationController",
+		      backdrop: "static",
+		      resolve: {
+		        items: function () {
+		          return $scope.items;
+		        }
+		    }
+	    });
+	}
+=======
+	$scope.openEval = function () {
+		console.log("hello from openEval");
+		var modalInstance = $modal.open({
 
+	      templateUrl: 'views/evaluation.html',
+	      controller: "EvaluationController",
+	  });
+>>>>>>> 4bb9c9c270c9067ecce61e0c6d416dc22c8ed73d
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	};
 	$scope.TESTCLICK = function(){
 			console.log("success");
 			EvalService.getEvaluationTemplateByID(1002).then(function(data){

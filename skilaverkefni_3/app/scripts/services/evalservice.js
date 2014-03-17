@@ -1,6 +1,4 @@
-app.service("EvalService", [
-	"$q", "$timeout", "HttpService", "$http",
-	function($q, $timeout, HttpService, $http) {
+app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($q, $timeout, HttpService, $http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     function createEvaluation(id, titleIS, titleEN, introIS, introEN) {
 			return {
@@ -85,12 +83,7 @@ app.service("EvalService", [
 
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
 
-				$http.post(HttpService.getSocket() + 'evaluations', {
-					  "TemplateID": 1,
-					  "StartDate": "2014-03-13T16:15:57.7829528+00:00",
-					  "EndDate": "2014-03-13T16:15:57.7829528+00:00"
-					
-			    }).success(function(data, status, headers, config){
+				$http.post(HttpService.getSocket() + 'evaluations', evaluation).success(function(data, status, headers, config){
 
 			        console.log("POSTED!");
 			        deferred.resolve(data);
@@ -141,83 +134,13 @@ app.service("EvalService", [
 			    });
 			    return deferred.promise;
 			},
-			postEvaluationTemplate: function(){
+			postEvaluationTemplate: function(evalObj){
 
 				var deferred = $q.defer();
 
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
 
-				$http.post(HttpService.getSocket() + 'evaluationtemplates',{
-				  "ID": 1005,
-				  "TitleIS": "Doddi2",
-				  "TitleEN": "sample string 3",
-				  "IntroTextIS": "sample string 4",
-				  "IntroTextEN": "sample string 5",
-				  "CourseQuestions": [
-				    {
-				      "ID": 1,
-				      "TextIS": "sample string 2",
-				      "TextEN": "sample string 3",
-				      "ImageURL": "sample string 4",
-				      "Type": "sample string 5",
-				      "Answers": [
-				        {
-				          "ID": 1,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        },
-				        {
-				          "ID": 2,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        },
-				        {
-				          "ID": 3,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        }
-				      ]
-
-				    }],
-				  	"TeacherQuestions": [
-				    {
-				      "ID": 1,
-				      "TextIS": "sample string 2",
-				      "TextEN": "sample string 3",
-				      "ImageURL": "sample string 4",
-				      "Type": "sample string 5",
-				      "Answers": [
-				        {
-				          "ID": 1,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        },
-				        {
-				          "ID": 2,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        },
-				        {
-				          "ID": 3,
-				          "TextIS": "sample string 2",
-				          "TextEN": "sample string 3",
-				          "ImageURL": "sample string 4",
-				          "Weight": 5
-				        }
-				      ]
-				  	}
-				  ] 
-			    }).success(function(data, status, headers, config){
+				$http.post(HttpService.getSocket() + 'evaluationtemplates', evalObj).success(function(data, status, headers, config){
 
 			        console.log("POSTED!");
 			        deferred.resolve(data);

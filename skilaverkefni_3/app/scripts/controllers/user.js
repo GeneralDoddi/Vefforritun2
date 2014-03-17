@@ -1,8 +1,9 @@
-app.controller('UserController', function($scope,$modal,$log,$http, EvalService, HttpService, $routeParams, $q){
+app.controller('UserController', function($scope,$modal,$log,$http,$location, EvalService, HttpService, $routeParams, $q){
 		
 		$scope.items = HttpService.getUserobj();
 		$scope.courses = HttpService.getCourses();
 		$scope.evaluations = EvalService.getAllEvaluations();
+		$scope.myEval = [];
 		$scope.teachers = [];
 
 		
@@ -18,7 +19,7 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 		
 		myEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.evaluations = data;
+			$scope.myEval = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
@@ -35,7 +36,7 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 		});
 			
 
-		EvalService.getCourseTeacher('T-427-WEPO', 'S2014').then(function(data) {
+		EvalService.getCourseTeacher('T-501-FMAL', 'S2014').then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.teachers = data;
 		}, function(errorMessage) {
@@ -65,6 +66,10 @@ app.controller('UserController', function($scope,$modal,$log,$http, EvalService,
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
 		});
+		}
+		$scope.answerEval = function(evalId){
+			
+			$location.path("/answerEval/"+evalId); 			
 		}
 
 		function myEvaluations(){
