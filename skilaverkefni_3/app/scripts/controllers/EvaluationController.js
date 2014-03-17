@@ -132,22 +132,27 @@ app.controller('EvaluationController', [
 				additionalAnswers.push($("#answer1IS").val());
 				additionalAnswers.push($("#answer1EN").val());
 				additionalAnswers.push($("#imageURLInput1").val());
+				additionalAnswers.push("1");
 
 				additionalAnswers.push($("#answer2IS").val());
 				additionalAnswers.push($("#answer2EN").val());
 				additionalAnswers.push($("#imageURLInput2").val());
+				additionalAnswers.push("2");
 
 				additionalAnswers.push($("#answer3IS").val());
 				additionalAnswers.push($("#answer3EN").val());
 				additionalAnswers.push($("#imageURLInput3").val());
+				additionalAnswers.push("3");
 
 				additionalAnswers.push($("#answer4IS").val());
 				additionalAnswers.push($("#answer4EN").val());
 				additionalAnswers.push($("#imageURLInput4").val());
+				additionalAnswers.push("4");
 
 				additionalAnswers.push($("#answer5IS").val());
 				additionalAnswers.push($("#answer5EN").val());
 				additionalAnswers.push($("#imageURLInput5").val());
+				additionalAnswers.push("5");
 
 				console.log(additionalAnswers);
 
@@ -188,6 +193,17 @@ app.controller('EvaluationController', [
 			$scope.addSingleQuestion = false;
 			$scope.addMultiQuestion = false;
 			$scope.addQ();
+		}
+
+		$scope.saveTemplate = function(){
+			console.log("hello from saveTemplate");
+			$scope.evaluation.TitleIS = $("#evalIs").val();
+			$scope.evaluation.TitleEN = $("#evalEn").val();
+
+			$scope.evaluation.IntroTextIS = $("#introIs").val();
+			$scope.evaluation.IntroTextEN = $("#introEn").val();
+
+			console.log($scope.evaluation);
 		}
 	}
 ]);
