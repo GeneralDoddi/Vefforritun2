@@ -22,8 +22,9 @@
 		<select ng-model="teacherCourses" >
 			<option ng-repeat="course in courses" value="{{ course.CourseID }}">{{ course.NameIS }}</option>
 		</select>
-		Pick a date between in 2013:
-		   <input type="date" id="exampleInput" name="input" ng-model="value" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" /><br>
+		Pick a start and end date:
+			<input type="datetime" id="startDate" name="start" placeholder="yyyy-MM-dd HH:mm:ss.SSSZ" /><br>
+		   <input type="datetime" id="endDate" name="end" placeholder="yyyy-MM-dd HH:mm:ss.SSSZ" min="2014-01-01" max="2015-12-31" /><br>
 
 		Intro(Icelandic):<input id="introIs" type="text" name="intro" value=""><br>
 		Intro(English):<input id="introEn" type="text" name="intro" value=""><br>
@@ -98,7 +99,7 @@
 				<li>{{teacherQ.TextEN}}</li>
 				<li>{{teacherQ.ImageURL}}</li>
 				<li>{{teacherQ.Type}}</li>
-				<ul ng-repeat="answ in evaluation.teacherQuestions.Answers">
+				<ul ng-repeat="answ in evaluation.TeacherQuestions.Answers">
 					<li>{{answ.IS}}</li>
 					<li>{{answ.TextEN}}</li>
 					<li>{{answ.ImageURL}}</li>
@@ -108,8 +109,7 @@
 
 
 		<input ng-click="saveTemplate()" type="submit" value="Save Template">
-		<input type="submit" value="Submit Evaluation">	
-	
-		
+		<input ng-click="saveEvaluation()" type="submit" value="Submit Evaluation">	
+	</form>
 </div>
 

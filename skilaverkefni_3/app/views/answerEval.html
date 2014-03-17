@@ -1,0 +1,16 @@
+<div ng-controller="answerEvalController">
+	<form>
+		{{evaluation.TemplateTitleIS}}
+		{{evaluation.TemplateTitleEN}}
+		<ul ng-repeat="q in evaluation.Questions">
+			<li>{{q.ID}}</li>
+			<li>{{q.TextIS}}</li>
+			<li>{{q.TextEN}}</li>
+			<li>{{q.TeacherSSN}}</li>
+			<li>{{q.Type}}</li>
+			<ul ng-repeat="answers in evaluation.Questions.Results">
+				<li>{{.Results}}</li>
+			</ul>
+		</ul>
+	</form>
+</div>
