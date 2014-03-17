@@ -1,9 +1,10 @@
-app.controller('AdminController', function($scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+app.controller('AdminController', function($q,$scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 		
 
 		
 		$scope.userinfo = HttpService.getUserobj();
 		console.log($scope.userinfo);
+
 
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
@@ -22,7 +23,7 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
 		});
-
+		
 		//Get courses that administrator is signed up for
 
 		myCourses().then(function(data) {
@@ -35,20 +36,14 @@ app.controller('AdminController', function($scope,$modal,$log, EvalService, Http
 		});
 
 	$scope.openEval = function () {
-	  	console.log("hello from openEval");
-	    var modalInstance = $modal.open({
+		console.log("hello from openEval");
+		var modalInstance = $modal.open({
 
 	      templateUrl: 'views/evaluation.html',
 	      controller: "EvaluationController",
-	      backdrop: "static",
-	      resolve: {
-	        items: function () {
-	          return $scope.items;
-	        }
-	    }
-    });
-	}
+	  });
 
+	};
 	$scope.TESTCLICK = function(){
 			console.log("success");
 			EvalService.getEvaluationTemplateByID(1002).then(function(data){
