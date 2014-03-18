@@ -3,7 +3,7 @@ app.controller('EvaluationController', [
 	function($scope, EvalService, $routeParams, HttpService, $http) {
 		var evaluationID = $routeParams.evaluationID;
 
-		$scope.templateid = 0;
+		$scope.templateid = 1;
 
 		$scope.isWordQuestion = false;
 		$scope.isSingleQuestion = false;

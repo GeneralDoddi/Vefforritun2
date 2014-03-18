@@ -1,3 +1,85 @@
+<div ng-controller="EvaluationController">
+	<form name="mainQ" >
+		Saved Template<input type="radio" name="new/old" value="old">
+		New Template<input type="radio" name="new/old" value="new"><br>
+
+		Evaluation name(Icelandic):<input type="text" name="eval name IS" value=""><br>
+		Evaluation name(English):<input type="text" name="eval name EN" value=""><br>
+		Course name:
+		<select ng-model="teacherCourses" >
+			<option ng-repeat="course in courses" value="{{ course.CourseID }}">{{ course.NameIS }}</option>
+		</select><br>
+
+		Intro(Icelandic):<input type="text" name="intro" value=""><br>
+		Intro(English):<input type="text" name="intro" value=""><br>
+
+		<div id="addButtons">
+			<button ng-click="isWordQuestion = !isWordQuestion; isSingleQuestion = false; isMultiQuestion = false; addQ()">Add Word Question</button>
+			<button ng-click="isSingleQuestion = !isSingleQuestion; isWordQuestion = false; isMultiQuestion = false; addQ()">Add Single Choice Question</button>
+			<button ng-click="isMultiQuestion = !isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; addQ()">Add Multiple Choice Question</button><br>
+		</div>
+
+		<div id="newQ">
+			<div id="qHeader" ng-show="showHeaderQ">					
+					Enter Question(Icelandic):
+					<input type="text" id="qIs">
+					Teacher<input id="tQ" type="radio" name="teacherOrCourse" value="teacher">
+					Course<input id="cQ" type="radio" name="teacherOrCourse" value="course"><br>
+					Enter Question(English):
+					<input type="text" id="qEn">
+					Image URL:<input id="imageURLInput" type= "text" name="qURL" value=" ">
+					<button ng-click="addImage()">+<button><br>	
+
+					<img id="imageURL"src="http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg" alt="The image was not loaded correctly"><br>
+			</div>
+
+			<div id="additionalInfo" ng-show="showAdditionalInfo">
+				<input id="answer1" type="radio" name="answer" value="button">
+				Icelandic answer:<input id="answer1IS" type="text" name="answerIS" value="">
+				English answer:<input id="answer1EN" type="text" name="answerEN" value=""><br>
+
+				<input id="answer2" type="radio" name="answer" value="button">
+				Icelandic answer:<input id="answer2IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer2EN" type="text" name="answerEN" value=""><br>
+
+				<input id="answer3" type="radio" name="answer" value="button">
+				Icelandic answer:<input id="answer3IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer3EN" type="text" name="answerEN" value=""><br>
+
+				<input id="answer4" type="radio" name="answer" value="button">
+				Icelandic answer:<input id="answer4IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer4EN" type="text" name="answerEN" value=""><br>
+
+				<input id="answer5" type="radio" name="answer" value="button">
+				Icelandic answer:<input id="answer5IS" type="text" name="answerIS" value="">	
+				English answer:<input id="answer5EN" type="text" name="answerEN" value=""><br>
+			</div>
+			<button ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
+		</div>
+
+		<div id="questions">
+			<ul ng-repeat="courseQ in evaluation.CourseQuestions">
+				<li>{{courseQ.ID}}</li>
+				<li>{{courseQ.TextIS}}</li>
+				<li>{{courseQ.TextEN}}</li>
+				<li>{{courseQ.ImageURL}}</li>
+				<li>{{corseQ.Type}}</li>
+				<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
+					<li>{{ans}}</li>
+
+				</ul>
+			</ul>
+		</div>
+
+
+		<input type="submit" value="Save Template">
+		<input type="submit" value="Submit Evaluation">	
+	</form>
+</div>
+
+
+
+<!--
 <div class ="header">
 
 	<img class="pull-right UserPic" src="/images/Dr_Evil.jpg"></img>
@@ -6,14 +88,6 @@
 </div>
 <div class ="container">
 	<form class="form-custom">
-		<div class="form-inline">
-			<label>Saved Template</label>
-				<input type="radio" name="new/old" value="old">	
-			
-			<label>New Template</label>
-				<input type="radio" name="new/old" value="new">
-			
-		</div>
 		
 		<div class="form-group col-md-6">
 			<label for="IslEval">Evaluation name(Is)</label>
@@ -31,41 +105,33 @@
 		</div>
 		<div class="form-group col-md-6">
 			<label>Intro(Is):</label>
-			<textarea class="form-control" rows="3"></textarea>
+			<textarea class="form-control" rows="3" id="IntroIs"></textarea>
 		</div>
 		<div class ="form-group col-md-6">
 			<label>Intro(Eng)</label>
-			<textarea class="form-control" rows="3"></textarea> 			
+			<textarea class="form-control" id="IntroEn"rows="3"></textarea> 			
 		</div>
+		
 		<div id="newQ">
 
 			<div class="form-group " id="qHeader" ng-show="showHeaderQ">					
 					<lable>Enter Question(Icelandic):</lable>
 					<input class="form-control" type="text" id="qIs">
+					<lable>Enter Question(English):</lable>
+					<input class="form-control"type="text" id="qEn">
+			
 			<div id="qHeader" ng-show="showHeaderQ">					
-					Enter Question(Icelandic):
-					<input type="text" id="qIs">
 					Teacher<input id="tQ" type="radio" name="teacherOrCourse" value="teacher">
 					Course<input id="cQ" type="radio" name="teacherOrCourse" value="course"><br>
-					Enter Question(English):
-					<input type="text" id="qEn">
-					Image URL:<input id="imageURLInput" type= "text" name="qURL" value=" ">
-					<button ng-click="addImage()">+<button><br>	
 					
-					<img id="imageURL"src="http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg" alt="The image was not loaded correctly"><br>
+					
+					
 			</div>
 			<div class="form-group col-md-6-offset-4">		
 					<lable for="tQ">Teacher</lable>
 					<input class="col-md-0-offset-4" id="tQ" type="radio" name="teacherOrCourse" value="teacher">
 			</div>
-			<div class="form-group">		
-					<lable>Course</lable>
-					<input id="cQ" type="radio" name="teacherOrCourse" value="course">
-			</div>
-			<div class="form-group">		
-					<lable>Enter Question(English):</lable>
-					<input class="form-control"type="text" id="qEn">
-			</div>
+			<!--
 			<div class="input-group">
 					<div class="col-md-1">
 						<lable for="imageUrlInpup">Image</lable>
@@ -75,11 +141,12 @@
 					<div class="col-md-1">
 							
 					</div>
+					
 					<div class="col-md-1">
 						<img class="form-image col-md-offset-12" id="imageURL"src="http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg" alt="The image was not loaded correctly">
 					</div>
 					
-			</div>		
+			</div>	
 					
 		</div>
 			<div id="additionalInfo" ng-show="showAdditionalInfo">
@@ -116,34 +183,26 @@
 				<button class="btn btn-primary" ng-click="addWordQuestion = isWordQuestion; addSingleQuestion = isSingleQuestion; addMultiQuestion = isMultiQuestion; isWordQuestion = false; isSingleQuestion = false; isMultiQuestion = false; submitQ()" ng-show="showHeaderQ" >Add Question</button><br>
 			</div>
 		</div>	
-	</div>
-</div>		
-					
-	
-
-		
-		
-			
-			
-		
-
-		<!--<div id="questions">
+		<div id="questions" class="list-custom">
+			<p>fdsfgsdgfsdg</p>
 			<ul ng-repeat="courseQ in evaluation.CourseQuestions">
 				<li>{{courseQ.ID}}</li>
 				<li>{{courseQ.TextIS}}</li>
 				<li>{{courseQ.TextEN}}</li>
 				<li>{{courseQ.ImageURL}}</li>
 				<li>{{corseQ.Type}}</li>
-				<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
-					<li>{{ans}}</li>
-					
-				</ul>
+					<ul ng-repeat="ans in evaluation.CourseQuestions.Answers">
+						<li>{{ans}}</li>
+					</ul>
 			</ul>
 		</div>
-
+	</div>
+		
+		
 
 			
 	</form>
-</div>-->
+</div>
+</div>
 
-
+-->

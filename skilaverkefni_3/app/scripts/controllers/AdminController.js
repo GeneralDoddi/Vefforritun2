@@ -1,16 +1,16 @@
-app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
+
+app.controller('AdminController', function($q, $location, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 
 		
 
 		
-		//$scope.userinfo = HttpService.getUserobj();
-		//console.log($scope.userinfo);
+		$scope.userinfo = HttpService.getUserobj();
+		console.log($scope.userinfo);
 
 
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.evaluations = data;
-			console.log($scope.evaluations);
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
@@ -28,43 +28,20 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 		
 		//Get courses that administrator is signed up for
 
-		/*myCourses().then(function(data) {
+		myCourses().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.courses = data;
+			$scope.evaluations = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
-		});*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		});
 
 	$scope.openEval = function () {
 		console.log("hello from openEval");
 		$location.path("/evaluation/");
 
+	};
 	$scope.TESTCLICK = function(){
 			console.log("success");
 			EvalService.getEvaluationTemplateByID(1002).then(function(data){
@@ -101,14 +78,14 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 	}
 
-	/*function myCourses(){
+	function myCourses(){
 				var deferred = $q.defer();
 
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
-	    		//console.log(HttpService.getToken());
+	    		console.log(HttpService.getToken());
 	    		$http.get(HttpService.getSocket() + 'my/courses').
 				    success(function(data, status, headers, config) {
-				  		//console.log("courses");
+				  		console.log("courses");
 				  		//$scope.courses = data;
 				  		//console.log($scope.courses);
 				  		deferred.resolve(data);
@@ -120,5 +97,5 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 				      deferred.reject(status);
 				    });	
 				    return deferred.promise;
-			}*/
+			}
 });
