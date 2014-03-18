@@ -23,10 +23,15 @@ describe('Controller: EvaluationController', function () {
     		return deferred.promise;
     	},
     	addEvaluation: function(){
-        deferred = q.defer();
-        deferred.resolve(mockData);
-        return deferred.promise;
-      }
+        	deferred = q.defer();
+        	deferred.resolve(mockData);
+        	return deferred.promise;
+      	},
+      	getAllEvaluationTemplates: function(){
+      		deferred = q.defer();
+        	deferred.resolve(mockData);
+        	return deferred.promise;
+      	}
 
     }
 
@@ -39,7 +44,7 @@ describe('Controller: EvaluationController', function () {
     rootScope = $rootScope;
     q = $q;
     routeParams = {};
-    element = $compile('<input id="cQ" type="radio" name="teacherOrCourse" value="course">')($rootScope);
+    //element = $compile('<input id="cQ" type="radio" name="teacherOrCourse" value="course">')($rootScope);
 
     
     EvalCtrl = $controller('EvaluationController', {
@@ -91,6 +96,14 @@ describe('Controller: EvaluationController', function () {
   	scope.addQ();
   	expect(scope.showHeaderQ).toBeTruthy();
   	expect(scope.showAdditionalInfo).toBeTruthy();
+  });
+
+  it('should get all evaluation templates', function(){
+
+  	mockService.getAllEvaluationTemplates();
+    scope.$apply();
+    expect(scope.evaluationtemplates).toBe(mockData);
+
   });
   it('should resolve addQ else if statement', function(){
   	scope.isMultiQuestion = true;

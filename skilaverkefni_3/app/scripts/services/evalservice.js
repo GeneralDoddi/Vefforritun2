@@ -1,27 +1,7 @@
 app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($q, $timeout, HttpService, $http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
-    function createEvaluation(id, titleIS, titleEN, introIS, introEN) {
-			return {
-				ID: id,
-				TitleIS: titleIS,
-				TitleEN: titleEN,
-				IntroTextIS: introIS,
-				IntroTextEN: introEN,
-				CourseQuestions: [],
-				TeacherQuestions: []
-			};
-		}
-
-		function createQuestion(id, textIS, textEN, imageUrl, type) {
-			return {
-				ID: id,
-				TextIS: textIS,
-				TextEN: textEN,
-				ImageURL: imageUrl,
-				Type: type,
-				Answers: []
-			}
-		}
+    
+	
 		//var evaluations = generateEvaluations();
 
 		return {
@@ -191,7 +171,7 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 			    });
 			    return deferred.promise;
 			},
-			postCourseEvaluation: function(course, semester, ID){
+			postCourseEvaluation: function(course, semester, ID, obj){
 				var deferred = $q.defer();
 
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
