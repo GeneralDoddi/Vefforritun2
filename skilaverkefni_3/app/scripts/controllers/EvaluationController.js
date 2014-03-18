@@ -43,10 +43,6 @@ app.controller('EvaluationController', [
 		EvalService.getAllEvaluationTemplates().then(function(data){
 			console.log("Success getAllEvaluationTemplates, data: ", data);
 			$scope.evaluationtemplates = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 		$scope.addQ = function(){
