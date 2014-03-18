@@ -5,7 +5,7 @@ describe('Controller: AdminController', function () {
   // load the controller's module
   beforeEach(module('skilaverkefni3App'));
 
-  var AdminCtrl, scope, q, deferred, mockService, rootScope, fakeModal, mockData; 
+  var AdminCtrl, scope, q, deferred, mockService, rootScope, fakeModal, mockData, location; 
 
   beforeEach(function(){
 
@@ -49,10 +49,11 @@ describe('Controller: AdminController', function () {
       $provide.value('EvalService', mockService);
     });
 
-    inject(function ($controller, $rootScope, $q) {
+    inject(function ($controller, $rootScope, $q, $location) {
     scope = $rootScope.$new();
     rootScope = $rootScope;
     q = $q;
+    location = $location;
 
     
     AdminCtrl = $controller('AdminController', {
@@ -63,6 +64,11 @@ describe('Controller: AdminController', function () {
     rootScope.$apply();
     });
 
+  });
+
+  it('should cover redirection of eval', function(){
+    scope.openEval();
+    expect(location.path()).toBe('/evaluation/');
   });
 
   it('should get all evaluations', function(){
