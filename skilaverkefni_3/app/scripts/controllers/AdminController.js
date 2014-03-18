@@ -58,6 +58,4 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 		});
 
 	}
-
-	
 });
