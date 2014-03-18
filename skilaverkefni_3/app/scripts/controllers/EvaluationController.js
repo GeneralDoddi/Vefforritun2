@@ -24,8 +24,6 @@ app.controller('EvaluationController', [
 		(evaluationID !== undefined) {
 			EvalService.getEvaluationById(evaluationID).then(function(data) {
 				$scope.evaluation = data;
-			}, function(errorMessage) {
-				console.log("Error fetching evaluation: " + errorMessage);
 			});
 		}
 		else {
@@ -71,21 +69,6 @@ app.controller('EvaluationController', [
 			}
 		}
 
-		
-    	$http.get(HttpService.getSocket() + 'my/courses').
-		    success(function(data, status, headers, config) {
-		  		console.log("courses");
-		  		$scope.courses = data;
-		  		console.log($scope.courses);
-		    }).
-		    error(function(data, status, headers, config) {
-		      // called asynchronously if an error occurs
-		      // or server returns response with an error status.
-		      console.log("NO COURSES!");
-		    });
-
-		
-
 		$scope.addImage = function(){
 			console.log("hello from addImage");
 			var img = $("#imageURLInput").val();
@@ -114,18 +97,19 @@ app.controller('EvaluationController', [
 		$scope.submitQ = function() {
 			console.log("hello from submitQ");
 
-			var whatType = $( "input[name=teacherOrCourse]:checked" ).val();
-			var xType = "";
+			$scope.whatType = $( "input[name=teacherOrCourse]:checked" ).val();
+			
+			$scope.xType = "";
 			var additionalAnswers= [];
 
 			if($scope.addWordQuestion){
-				xType = "text";
+				$scope.xType = "text";
 			}
 			else if($scope.addSingleQuestion){
-				xType = "single";
+				$scope.xType = "single";
 			}
 			else if($scope.addMultiQuestion){
-				xType = "multiple";
+				$scope.xType = "multiple";
 			}
 
 			if($scope.addMultiQuestion || $scope.addSingleQuestion){
@@ -171,7 +155,7 @@ app.controller('EvaluationController', [
 			}
 			
 			console.log($scope.evaluation.CourseQuestions.Type);
-			if(whatType === "course"){
+			if($scope.whatType === "course"){
 				console.log("adding course question to array");
 				$scope.evaluation.CourseQuestions.push({
 
@@ -187,7 +171,7 @@ app.controller('EvaluationController', [
 				}
 				$scope.evaluation.CourseQuestions.Type = xType;
 			}
-			else if(whatType === "teacher"){
+			else if($scope.whatType === "teacher"){
 				console.log("adding teacher question");
 				$scope.evaluation.TeacherQuestions.push({
 
@@ -249,7 +233,10 @@ app.controller('EvaluationController', [
 			$scope.templateid = $scope.templateid +1;
 
 			console.log($scope.evaluation);
-			EvalService.postEvaluationTemplate($scope.evaluation);
+			EvalService.postEvaluationTemplate($scope.evaluation).then(function(data){
+			console.log("Success, data: ", data);
+			$scope.evaluationtemplatesID = data;
+		});
 		}
 		$scope.saveEvaluation = function(){
 			console.log("hello from saveEvaluation");
@@ -259,7 +246,10 @@ app.controller('EvaluationController', [
 				StartDate:  $("#startDate").val(),
 				EndDate: $("#endDate").val(),
 			}
-			EvalService.addEvaluation(evalObj);
+			EvalService.addEvaluation(evalObj).then(function(data){
+			console.log("Success, data: ", data);
+			$scope.addedEvaluation = data;
+		});
 
 		}
 	}

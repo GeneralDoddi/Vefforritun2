@@ -71,7 +71,7 @@ describe('Controller: UserController', function () {
     q = $q;
     location = $location;
     httpBackend = $httpBackend;
-    
+    httpBackend.when("GET", "http://dispatch.hir.is/h01/api/v1/my/evaluations").respond({data: {data1: 'data1', data2: 'data2'}});
     //httpBackend.when("GET", "http://dispatch.hir.is/h01/api/v1/my/evaluations").respond(404,'error object');
     httpBackend.when("GET", "http://dispatch.hir.is/h01/api/v1/my/courses").respond({data: {data1: 'data1', data2: 'data2'}});
     
@@ -87,12 +87,6 @@ describe('Controller: UserController', function () {
     
 
   });
-  
-  function rass(){
-      console.log('rasstest');
-
-    }
-
   it('should get all evaluations', function(){
     expect(scope.evaluations).toEqual(mockData);
   });
@@ -113,8 +107,6 @@ describe('Controller: UserController', function () {
   });
 
   it('should get all evaluations for student', function(){
-    httpBackend.when("GET", "http://dispatch.hir.is/h01/api/v1/my/evaluations").respond({data: {data1: 'data1', data2: 'data2'}});
-    scope.$apply();
     httpBackend.flush();
     expect(scope.myEval).toEqual(mockData);
   });
