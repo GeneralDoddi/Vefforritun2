@@ -119,6 +119,20 @@ describe('Controller: UserController', function () {
   it('should redirect to an evaluation', function(){
     scope.answerEval(1);
     expect(location.path()).toBe('/answerEval/1');
-  })
+  });
+
+  it('should reach isOpen if statement', function(){
+    var item = {item: 4, Status: 'closed'};
+    console.log(item);
+    scope.isOpen(item);
+    expect(item.Status).toEqual('closed');
+  });
+
+  it('should reach isOpen if statement', function(){
+    var item = {item: 4, Status: 'open'};
+    console.log(item);
+    scope.isOpen(item);
+    expect(item.Status).toEqual('open');
+  });
 
 });
