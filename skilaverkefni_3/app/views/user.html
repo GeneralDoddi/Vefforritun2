@@ -29,10 +29,17 @@
 		<div class = "col-md-4 list-custom">
 			<div class = "panel-heading">Evaluations</div>
 			<ul ng-repeat="evaluation in evaluations">
-				<li class = "list-group-item list-custom"><a ng-click= "answerEval(evaluation.ID)">{{ evaluation.TemplateTitleEN }}</a></li>
+				<li ng-if="isOpen(evaluation)" class = "list-group-item list-custom"><a ng-click= "answerEval(evaluation.ID)">{{ evaluation.ID }} - {{ evaluation.TemplateTitleEN }}</a></li>
 			</ul>
 		</div>
-	
+		<div class="col-md-4 list-custom">		
+			
+			<div class ="panel-heading">My Evaluations</div>
+			<ul ng-repeat="eval in myEval">
+				<li><a ng-click= "answerEval(eval.ID)">{{ eval.ID }} - {{ eval.TemplateTitleEN }}</a></li>
+			</ul>
+		</div>
+
 	</div>	
 	
 	

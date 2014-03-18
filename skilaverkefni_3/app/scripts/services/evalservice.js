@@ -84,7 +84,6 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
 
 				$http.post(HttpService.getSocket() + 'evaluations', evaluation).success(function(data, status, headers, config){
-
 			        console.log("POSTED!");
 			        deferred.resolve(data);
 
@@ -94,7 +93,8 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 			      console.log("failed to post");
 			      	deferred.reject(status);
 			    }); 
-
+			    
+			    console.log(evaluation);
 				return deferred.promise;
 
 			},

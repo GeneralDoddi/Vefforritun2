@@ -253,8 +253,6 @@ app.controller('EvaluationController', [
 		}
 		$scope.saveEvaluation = function(){
 			console.log("hello from saveEvaluation");
-			console.log($("#startDate").val());
-			console.log($scope.evaluation.ID);
 
 			var evalObj = {
 				TemplateID: $scope.templateid - 1,
