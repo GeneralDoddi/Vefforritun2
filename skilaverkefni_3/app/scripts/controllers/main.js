@@ -4,11 +4,12 @@ app.controller('MainCtrl', function ($scope,$modal,$log) {
       'AngularJS',
       'Karma'
     ];
-	$scope.items = ['item1', 'item2', 'item3'];
+	
+    $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.open = function () {
   	console.log("hello from modal");
-    var modalInstance = $modal.open({
+    $scope.modalInstance = $modal.open({
 
       templateUrl: 'views/login.html',
       controller: "LoginModalCtrl",
@@ -19,10 +20,10 @@ app.controller('MainCtrl', function ($scope,$modal,$log) {
         }
       }
     });
-
-    modalInstance.result.then(function (selectedItem) {
+    $scope.modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;
     }, function () {
+      $scope.canceled = true;
       $log.info('Modal dismissed at: ' + new Date());
     });
   };

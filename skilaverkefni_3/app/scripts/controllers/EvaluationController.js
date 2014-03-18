@@ -222,6 +222,7 @@ app.controller('EvaluationController', [
 			$("#answer4EN").val("");
 			$("#answer5EN").val("");
 			
+			$("#imageURLInput").val(" ");
 			$("#imageURLInput1").val("");
 			$("#imageURLInput2").val("");
 			$("#imageURLInput3").val("");
