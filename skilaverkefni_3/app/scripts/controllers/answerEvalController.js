@@ -1,5 +1,4 @@
-app.controller('answerEvalController', [
-	"$scope", "EvalService",  "$routeParams","HttpService", "$http",
+app.controller('answerEvalController', 
 		function($scope, EvalService, $routeParams, HttpService, $http) {
 		
 		var evaluationID = $routeParams.evaluationID;
@@ -10,20 +9,12 @@ app.controller('answerEvalController', [
 			console.log("Success from answerEvalController EvalService.getEvaluationById, data: ", data);
 			$scope.evaluationTemplate = data;
 			console.log($scope.evaluationTemp);
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 		EvalService.getEvaluationTemplateByID(evaluationID).then(function(data) {
 			console.log("Success from answerEvalController Evalservice.getEvaluationTemplateByID, data: ", data);
 			$scope.evaluation = data;
 			console.log($scope.evaluations);
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 		$scope.questionType = function(qType){
@@ -38,4 +29,4 @@ app.controller('answerEvalController', [
 				return 2;
 			}
 		}
-	}]);
+	});
