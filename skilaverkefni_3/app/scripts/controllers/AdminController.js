@@ -1,9 +1,5 @@
+app.controller('AdminController', function($q, $location, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
 
-app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, HttpService, $http, $routeParams){
-
-		
-
-		
 		$scope.userinfo = HttpService.getUserobj();
 		console.log($scope.userinfo);
 
@@ -30,7 +26,7 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 		myCourses().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.evaluations = data;
+			$scope.courses = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
@@ -39,11 +35,7 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 	$scope.openEval = function () {
 		console.log("hello from openEval");
-		var modalInstance = $modal.open({
-
-	      templateUrl: 'views/evaluation.html',
-	      controller: "EvaluationController",
-	  });
+		$location.path("/evaluation/");
 
 	};
 	$scope.TESTCLICK = function(){
