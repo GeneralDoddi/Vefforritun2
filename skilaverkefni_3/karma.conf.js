@@ -19,6 +19,7 @@ module.exports = function(config) {
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'node_modules/karma-jasmine/lib/jasmine.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
