@@ -35,7 +35,7 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 		      // this callback will be called asynchronously
 		      // when the response is available
 		      console.log(data);
-		      console.log("success");
+		      console.log("success from EvalService.getAllEvaluations");
 		      deferred.resolve(data);
 		      
 		    }).
@@ -62,7 +62,7 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 		      // this callback will be called asynchronously
 		      // when the response is available
 		      console.log(data);
-		      console.log("success");
+		      console.log("success from EvalService.getEvaluationById");
 		      deferred.resolve(data);
 		      
 		    }).

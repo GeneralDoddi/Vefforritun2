@@ -20,6 +20,8 @@ app.controller('EvaluationController', [
 		$scope.userinfo = HttpService.getUserobj();
 		console.log($scope.userinfo);						
 
+		
+
 		if
 		(evaluationID !== undefined) {
 			EvalService.getEvaluationById(evaluationID).then(function(data) {
@@ -39,6 +41,15 @@ app.controller('EvaluationController', [
 				TeacherQuestions: []
 			};
 		}
+		
+		EvalService.getAllEvaluationTemplates().then(function(data){
+			console.log("Success getAllEvaluationTemplates, data: ", data);
+			$scope.evaluationtemplates = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+		});
 
 		$scope.addQ = function(){
 			console.log("Hello from addQ");
@@ -179,11 +190,13 @@ app.controller('EvaluationController', [
 					TextIS: $("#qIs").val(),
 					TextEN: $("#qEn").val(),
 					ImageURL: $("#imageURL").val(),
-					Type: "",
-					Answers: []
+					Type: $scope.whatType,
+					Answers: additionalAnswers.slice(0)
 				});
 				if($scope.addMultiQuestion || $scope.addSingleQuestion){
+					console.log("lkasndflnadsfksandf");
 					$scope.evaluation.CourseQuestions.Answers = additionalAnswers.slice(0);
+					console.log($scope.evaluation.CourseQuestions.Answers);
 				}
 				$scope.evaluation.CourseQuestions.Type = xType;
 			}
@@ -195,11 +208,13 @@ app.controller('EvaluationController', [
 					TextIS: $("#qIs").val(),
 					TextEN: $("#qEn").val(),
 					ImageURL: $("#imageURL").val(),
-					Type: "",
-					Answers: []
+					Type: $scope.whatType,
+					Answers: additionalAnswers.slice(0)
 				});
 				if($scope.addMultiQuestion || $scope.addSingleQuestion){
+					console.log("lkasndflnadsfksandf");
 					$scope.evaluation.TeacherQuestions.Answers = additionalAnswers.slice(0);
+					console.log($scope.evaluation.TeacherQuestions.Answers);
 				}
 				$scope.evaluation.TeacherQuestions.Type = xType;
 			}
@@ -237,8 +252,9 @@ app.controller('EvaluationController', [
 
 		$scope.saveTemplate = function(){
 			console.log("hello from saveTemplate");
-
-			$scope.evaluation.ID = $scope.templateid;
+			EvalService.getAllEvaluationTemplates();
+			console.log($scope.evaluationtemplates.length);
+			$scope.evaluation.ID = $scope.evaluationtemplates.length + 1;
 
 			$scope.evaluation.TitleIS = $("#evalIs").val();
 			$scope.evaluation.TitleEN = $("#evalEn").val();
@@ -246,16 +262,17 @@ app.controller('EvaluationController', [
 			$scope.evaluation.IntroTextIS = $("#introIs").val();
 			$scope.evaluation.IntroTextEN = $("#introEn").val();
 
-			$scope.templateid = $scope.templateid +1;
+			$scope.templateid = $scope.evaluationtemplates.length + 1;
 
 			console.log($scope.evaluation);
 			EvalService.postEvaluationTemplate($scope.evaluation);
 		}
 		$scope.saveEvaluation = function(){
 			console.log("hello from saveEvaluation");
+			console.log($scope.templateid);
 
 			var evalObj = {
-				TemplateID: $scope.templateid - 1,
+				TemplateID: $scope.templateid,
 				StartDate:  $("#startDate").val(),
 				EndDate: $("#endDate").val(),
 			}

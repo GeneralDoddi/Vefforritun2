@@ -3,24 +3,22 @@
 	<div class ="header">
 
 	<form >
-		hi from answerEval.htlm
-		<h2>{{evaluationTemp.TemplateTitleIS}}</h2>
-		<h2>{{evaluationTemp.TemplateTitleEN}}</h2>
+		<h2>{{evaluation.TitleIS}}</h2>
+		<h2>{{evaluation.TitleEN}}</h2>
 
-		
-		<ul ng-repeat="q in evaluationTemp.Courses.0.Questions">
-			hey hey
-			<li>{{q.QuestionID}}</li>
-			<li>{{q.TextIS}}</li>
-			<li>{{q.TextEN}}</li>
-			<li>{{q.TeacherSSN}}</li>
-			<li>{{q.Type}}</li>
-			<div ng-if="questionType(q.Type) !==">hello</div>
-			<ul ng-if="questionType(q.Type) != 0" ng-repeat="ans in q.TextResults">
-				<li ng-if="questionType(q.Type) === 1"></li>
-				<li ng-if="questionType(q.Type) === 2"><input type="radio"></li>
-				<li>{{ans}}</li>
-			</ul>
+		<h2>{{evaluation.IntroTextIS}}</h2>
+		<h2>{{evaluation.IntroTextEN}}</h2>
+
+		Course Questions: 
+		<ul ng-repeat="courseQ in evaluation.CourseQuestions">
+			<li>{{courseQ.TextEN}}</li>
+			<li>{{courseQ.TextIS}}</li>
+			<li>{{courseQ.ImageURL}}</li>
+		</ul>
+		<ul ng-repeat="teacherQ in evaluation.TeacherQuestions">
+			<li>{{teacherQ.TextEN}}</li>
+			<li>{{teacherQ.TextIS}}</li>
+			<li>{{teacherQ.ImageURL}}</li>
 		</ul>
 	</form>
 </div>
