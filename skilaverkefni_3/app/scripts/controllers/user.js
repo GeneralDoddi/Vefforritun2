@@ -11,38 +11,22 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success getAllEvaluations, data: ", data);
 			$scope.evaluations = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 		
 		myEvaluations().then(function(data) {
 			console.log("Success myeval, data: ", data);
 			$scope.myEval = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 		myCourses().then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.courses = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 			
 
 		EvalService.getCourseTeacher('T-501-FMAL', 'S2014').then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.teachers = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 		$scope.posteval = function(){
@@ -50,10 +34,6 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 			EvalService.postCourseEvaluation('T-427-WEPO', 'S2014', 1).then(function(data) {
 			console.log("Success, data: ", data);
 			$scope.evaluations1 = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 		}
 		$scope.isOpen = function(evaluation){
@@ -70,11 +50,7 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 		$scope.geteval = function (){
 			EvalService.getCourseEvaluation('T-427-WEPO', 'S2014', 1).then(function(data) {
 			console.log("Success, data: ", data);
-			//$scope.evaluations = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
+			$scope.evaluations = data;
 		});
 		}
 		$scope.answerEval = function(evalId){

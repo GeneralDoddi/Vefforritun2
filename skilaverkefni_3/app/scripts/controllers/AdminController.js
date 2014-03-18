@@ -14,26 +14,20 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
 			console.log("Update: " + updateMessage);
+
 		});
 
 		EvalService.getAllEvaluationTemplates().then(function(data){
 			console.log("Success getAllEvaluationTemplates, data: ", data);
 			$scope.evaluationtemplates = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 		
 		//Get courses that administrator is signed up for
 
-		myCourses().then(function(data) {
-			console.log("Success myCourses, data: ", data);
-			$scope.myCourses = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
+
+		EvalService.myCourses().then(function(data) {
+			console.log("Success, data: ", data);
+			$scope.courses = data;
 		});
 
 	$scope.openEval = function () {
@@ -42,14 +36,10 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 
 	};
 	$scope.TESTCLICK = function(){
-			console.log("success");
+
 			EvalService.getEvaluationTemplateByID(1002).then(function(data){
 			console.log("Success, data: ", data);
 			$scope.evaluationtemplatesID = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 			console.log($scope.evaluationtemplatesID);
 		}
@@ -57,10 +47,6 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 		EvalService.postEvaluationTemplate().then(function(data){
 			console.log("Success, data: ", data);
 			$scope.evaluationtemplatesID = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
 		});
 
 	}
@@ -68,33 +54,10 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 	$scope.TESTCLICK3 = function(){
 		EvalService.addEvaluation().then(function(data){
 			console.log("Success, data: ", data);
-			//$scope.evaluationtemplatesID = data;
-		}, function(errorMessage) {
-			console.log("Error: " + errorMessage);
-		}, function(updateMessage) {
-			console.log("Update: " + updateMessage);
+			$scope.evaluationtemplatesID = data;
 		});
 
 	}
 
-	function myCourses(){
-				var deferred = $q.defer();
-
-				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
-	    		console.log(HttpService.getToken());
-	    		$http.get(HttpService.getSocket() + 'my/courses').
-				    success(function(data, status, headers, config) {
-				  		console.log("courses");
-				  		//$scope.courses = data;
-				  		//console.log($scope.courses);
-				  		deferred.resolve(data);
-				    }).
-				    error(function(data, status, headers, config) {
-				      // called asynchronously if an error occurs
-				      // or server returns response with an error status.
-				      console.log("NO COURSES!");
-				      deferred.reject(status);
-				    });	
-				    return deferred.promise;
-			}
+	
 });
