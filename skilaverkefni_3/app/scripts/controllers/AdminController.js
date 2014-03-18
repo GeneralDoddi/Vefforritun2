@@ -9,7 +9,7 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 
 		EvalService.getAllEvaluations().then(function(data) {
-			console.log("Success, data: ", data);
+			console.log("Success evaluations, data: ", data);
 			$scope.evaluations = data;
 		
 		});

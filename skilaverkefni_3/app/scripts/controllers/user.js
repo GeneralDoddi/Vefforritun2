@@ -3,18 +3,18 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 		$scope.items = HttpService.getUserobj();
 		$scope.courses = HttpService.getCourses();
 		$scope.evaluations = EvalService.getAllEvaluations();
-		$scope.myEval = [];
+		$scope.myEval = myEvaluations();
 		$scope.teachers = [];
 
 		
 
 		EvalService.getAllEvaluations().then(function(data) {
-			console.log("Success, data: ", data);
+			console.log("Success getAllEvaluations, data: ", data);
 			$scope.evaluations = data;
 		});
 		
 		myEvaluations().then(function(data) {
-			console.log("Success, data: ", data);
+			console.log("Success myeval, data: ", data);
 			$scope.myEval = data;
 		});
 
@@ -36,6 +36,16 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 			$scope.evaluations1 = data;
 		});
 		}
+		$scope.isOpen = function(evaluation){
+			if(evaluation.Status === "closed"){
+				console.log("the evaluation is closed");
+				return 0;
+			}
+			else if(evaluation.Status === "open"){
+				console.log("the evaluation is open");
+				return 1;
+			}
+		}
 
 		$scope.geteval = function (){
 			EvalService.getCourseEvaluation('T-427-WEPO', 'S2014', 1).then(function(data) {
@@ -53,7 +63,8 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 			$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
 			$http.get(HttpService.getSocket() + 'my/evaluations').
 			    success(function(data, status, headers, config) {
-			  		console.log("evaluations");
+			  		console.log("my evaluations");
+			  		console.log(data);
 			  		//$scope.evaluation = data;
 			  		//console.log($scope.evaluation);
 			  		deferred.resolve(data);
@@ -64,6 +75,7 @@ app.controller('UserController', function($scope,$modal,$log,$http,$location, Ev
 			      console.log("NO EVALUATIONS!");
 			      deferred.reject(status);
 			    });
+
 			    return deferred.promise;
 			}
 		function myCourses(){

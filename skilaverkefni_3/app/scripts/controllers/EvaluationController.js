@@ -3,7 +3,7 @@ app.controller('EvaluationController', [
 	function($scope, EvalService, $routeParams, HttpService, $http) {
 		var evaluationID = $routeParams.evaluationID;
 
-		$scope.templateid = 0;
+		$scope.templateid = 1;
 
 		$scope.isWordQuestion = false;
 		$scope.isSingleQuestion = false;
@@ -253,8 +253,6 @@ app.controller('EvaluationController', [
 		}
 		$scope.saveEvaluation = function(){
 			console.log("hello from saveEvaluation");
-			console.log($("#startDate").val());
-			console.log($scope.evaluation.ID);
 
 			var evalObj = {
 				TemplateID: $scope.templateid - 1,
