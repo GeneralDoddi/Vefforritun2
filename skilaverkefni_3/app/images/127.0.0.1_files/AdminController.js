@@ -10,6 +10,11 @@ app.controller('AdminController', function($q, $location, $scope,$modal,$log, Ev
 		EvalService.getAllEvaluations().then(function(data) {
 			console.log("Success getAllevaluations, data: ", data);
 			$scope.evaluations = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
+
 		});
 
 		EvalService.getAllEvaluationTemplates().then(function(data){

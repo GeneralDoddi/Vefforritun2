@@ -4,15 +4,6 @@ app.controller('EvaluationController', [
 		var evaluationID = $routeParams.evaluationID;
 
 		$scope.templateid = 1;
-		$scope.finalEval = {
-				ID:"",
-				TitleIS: "",
-				TitleEN: "",
-				IntroTextIS: "",
-				IntroTextEN: "",
-				CourseQuestions: [],
-				TeacherQuestions: []
-			};
 
 		$scope.isWordQuestion = false;
 		$scope.isSingleQuestion = false;
@@ -29,14 +20,12 @@ app.controller('EvaluationController', [
 		$scope.userinfo = HttpService.getUserobj();
 		console.log($scope.userinfo);						
 
-
+		
 
 		if
 		(evaluationID !== undefined) {
 			EvalService.getEvaluationById(evaluationID).then(function(data) {
-				$scope.evaluation1 = data;
-			}, function(errorMessage) {
-				console.log("Error fetching evaluation: " + errorMessage);
+				$scope.evaluation = data;
 			});
 		}
 		else {
@@ -50,10 +39,14 @@ app.controller('EvaluationController', [
 				TeacherQuestions: []
 			};
 		}
-
+		
 		EvalService.getAllEvaluationTemplates().then(function(data){
 			console.log("Success getAllEvaluationTemplates, data: ", data);
 			$scope.evaluationtemplates = data;
+		}, function(errorMessage) {
+			console.log("Error: " + errorMessage);
+		}, function(updateMessage) {
+			console.log("Update: " + updateMessage);
 		});
 
 		$scope.addQ = function(){
@@ -87,21 +80,6 @@ app.controller('EvaluationController', [
 			}
 		}
 
-
-    	$http.get(HttpService.getSocket() + 'my/courses').
-		    success(function(data, status, headers, config) {
-		  		console.log("courses");
-		  		$scope.courses = data;
-		  		console.log($scope.courses);
-		    }).
-		    error(function(data, status, headers, config) {
-		      // called asynchronously if an error occurs
-		      // or server returns response with an error status.
-		      console.log("NO COURSES!");
-		    });
-
-
-
 		$scope.addImage = function(){
 			console.log("hello from addImage");
 			var img = $("#imageURLInput").val();
@@ -113,7 +91,7 @@ app.controller('EvaluationController', [
 				    error:
 				        function(){
 				        	$('#imageURL').attr('src', "http://armphoto.am/components/com_polygraphy/tmpl/source/nophotoavailable.jpg");
-
+				        	
 				        },
 				    success:
 				        function(){
@@ -122,7 +100,7 @@ app.controller('EvaluationController', [
 				});
 			}
 
-
+			
 			console.log(img);
 		}
 
@@ -130,18 +108,19 @@ app.controller('EvaluationController', [
 		$scope.submitQ = function() {
 			console.log("hello from submitQ");
 
-			var whatType = $( "input[name=teacherOrCourse]:checked" ).val();
-			var xType = "";
+			$scope.whatType = $( "input[name=teacherOrCourse]:checked" ).val();
+			
+			$scope.xType = "";
 			var additionalAnswers= [];
 
 			if($scope.addWordQuestion){
-				xType = "text";
+				$scope.xType = "text";
 			}
 			else if($scope.addSingleQuestion){
-				xType = "single";
+				$scope.xType = "single";
 			}
 			else if($scope.addMultiQuestion){
-				xType = "multiple";
+				$scope.xType = "multiple";
 			}
 
 			if($scope.addMultiQuestion || $scope.addSingleQuestion){
@@ -185,57 +164,49 @@ app.controller('EvaluationController', [
 				console.log(additionalAnswers);
 
 			}
-			var tempArr = getEval();
+			
 			console.log($scope.evaluation.CourseQuestions.Type);
-			if(whatType === "course"){
+			if($scope.whatType === "course"){
 				console.log("adding course question to array");
-				tempArr.CourseQuestions.push({
+				$scope.evaluation.CourseQuestions.push({
 
 					ID: $scope.evaluation.CourseQuestions.length,
 					TextIS: $("#qIs").val(),
 					TextEN: $("#qEn").val(),
 					ImageURL: $("#imageURL").val(),
 					Type: $scope.whatType,
-					Answers: []
+					Answers: additionalAnswers.slice(0)
 				});
 				if($scope.addMultiQuestion || $scope.addSingleQuestion){
 					console.log("lkasndflnadsfksandf");
-					tempArr.CourseQuestions.Answers = additionalAnswers;
+					$scope.evaluation.CourseQuestions.Answers = additionalAnswers.slice(0);
 					console.log($scope.evaluation.CourseQuestions.Answers);
 				}
-				tempArr.CourseQuestions.Type = xType;
+				$scope.evaluation.CourseQuestions.Type = xType;
 			}
-			else if(whatType === "teacher"){
+			else if($scope.whatType === "teacher"){
 				console.log("adding teacher question");
-				tempArr.TeacherQuestions.push({
+				$scope.evaluation.TeacherQuestions.push({
 
 					ID: $scope.evaluation.TeacherQuestions.length,
 					TextIS: $("#qIs").val(),
 					TextEN: $("#qEn").val(),
 					ImageURL: $("#imageURL").val(),
 					Type: $scope.whatType,
-					Answers: []
+					Answers: additionalAnswers.slice(0)
 				});
 				if($scope.addMultiQuestion || $scope.addSingleQuestion){
 					console.log("lkasndflnadsfksandf");
-					tempArr.TeacherQuestions.Answers = additionalAnswers;
-					console.log(additionalAnswers);
+					$scope.evaluation.TeacherQuestions.Answers = additionalAnswers.slice(0);
 					console.log($scope.evaluation.TeacherQuestions.Answers);
 				}
-				tempArr.TeacherQuestions.Type = xType;
+				$scope.evaluation.TeacherQuestions.Type = xType;
 			}
-			console.log(tempArr);
 			$scope.addWordQuestion = false;
 			$scope.addSingleQuestion = false;
 			$scope.addMultiQuestion = false;
 			$scope.resetForm();
 			$scope.addQ();
-		}
-		function setEval(arr){
-			$scope.finalEval = arr;
-		}
-		function getEval(){
-			return $scope.finalEval;
 		}
 		$scope.resetForm = function(){
 			$("#answer1IS").val("");
@@ -249,7 +220,7 @@ app.controller('EvaluationController', [
 			$("#answer3EN").val("");
 			$("#answer4EN").val("");
 			$("#answer5EN").val("");
-
+			
 			$("#imageURLInput").val(" ");
 			$("#imageURLInput1").val("");
 			$("#imageURLInput2").val("");
@@ -265,32 +236,23 @@ app.controller('EvaluationController', [
 
 		$scope.saveTemplate = function(){
 			console.log("hello from saveTemplate");
-			console.log($scope.evaluation);
-			var blah = getEval();
 			EvalService.getAllEvaluationTemplates();
 			console.log($scope.evaluationtemplates.length);
-			blah.ID = $scope.evaluationtemplates.length +1;
+			$scope.evaluation.ID = $scope.evaluationtemplates.length + 1;
 
-			blah.TitleIS = $("#evalIs").val();
-			blah.TitleEN = $("#evalEn").val();
+			$scope.evaluation.TitleIS = $("#evalIs").val();
+			$scope.evaluation.TitleEN = $("#evalEn").val();
 
-			blah.IntroTextIS = $("#introIs").val();
-			blah.IntroTextEN = $("#introEn").val();
-			//lenti í veseni með spurninguna rétt fyrir skil þannig ég hardkóðaði inn spurningu
-			blah.CourseQuestions = [{
-					ID: 1,
-					TextIS: "blah",
-					TextEN: "blah",
-					ImageURL: "blah",
-					Type: "text",
-					Answers:[]
-				}]
-
+			$scope.evaluation.IntroTextIS = $("#introIs").val();
+			$scope.evaluation.IntroTextEN = $("#introEn").val();
 
 			$scope.templateid = $scope.evaluationtemplates.length + 1;
 
-			console.log(blah);
-			EvalService.postEvaluationTemplate(blah);
+			console.log($scope.evaluation);
+			EvalService.postEvaluationTemplate($scope.evaluation).then(function(data){
+			console.log("Success, data: ", data);
+			$scope.evaluationtemplatesID = data;
+		});
 		}
 		$scope.saveEvaluation = function(){
 			console.log("hello from saveEvaluation");
@@ -301,7 +263,10 @@ app.controller('EvaluationController', [
 				StartDate:  $("#startDate").val(),
 				EndDate: $("#endDate").val(),
 			}
-			EvalService.addEvaluation(evalObj);
+			EvalService.addEvaluation(evalObj).then(function(data){
+			console.log("Success, data: ", data);
+			$scope.addedEvaluation = data;
+		});
 
 		}
 	}

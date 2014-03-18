@@ -1,4 +1,4 @@
-app.controller('LoginModalCtrl', function($scope, $modalInstance, $modal, HttpService ,items, $routeParams, $location, $http) {
+var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,items, $routeParams, $location, $http) {
   //console.log('hello from login');
   $scope.items = items;
   $scope.selected = {
@@ -47,4 +47,4 @@ app.controller('LoginModalCtrl', function($scope, $modalInstance, $modal, HttpSe
     }
     
   }
-});
+};
