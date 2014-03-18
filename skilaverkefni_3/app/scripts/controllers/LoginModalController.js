@@ -1,5 +1,5 @@
 var LoginModalCtrl = function ($scope, $modalInstance, $modal, HttpService ,items, $routeParams, $location, $http) {
-  console.log('hello from login');
+  //console.log('hello from login');
   $scope.items = items;
   $scope.selected = {
     item: $scope.items[0]

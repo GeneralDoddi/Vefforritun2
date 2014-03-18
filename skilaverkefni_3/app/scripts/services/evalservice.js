@@ -225,6 +225,26 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
 			      deferred.reject(status);
 			    });
 			    return deferred.promise;
+			},
+			myCourses: function(){
+				var deferred = $q.defer();
+
+				$http.defaults.headers.common.Authorization = "Basic " + HttpService.getToken();
+	    		//console.log(HttpService.getToken());
+	    		$http.get(HttpService.getSocket() + 'my/courses').
+				    success(function(data, status, headers, config) {
+				  		//console.log("courses");
+				  		//$scope.courses = data;
+				  		//console.log($scope.courses);
+				  		deferred.resolve(data);
+				    }).
+				    error(function(data, status, headers, config) {
+				      // called asynchronously if an error occurs
+				      // or server returns response with an error status.
+				      console.log("NO COURSES!");
+				      deferred.reject(status);
+				    });	
+				    return deferred.promise;
 			}
 
 
