@@ -17,9 +17,10 @@ module.exports = function(config) {
       'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap.js',
+      'node_modules/karma-jasmine/lib/jasmine.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
 
     ],

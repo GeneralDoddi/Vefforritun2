@@ -105,13 +105,13 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
     			console.log(HttpService.getToken());
     			$http.get(HttpService.getSocket() + 'evaluationtemplates').
 			    success(function(data, status, headers, config) {
-			  		console.log("YAY");
+			  		console.log("found courses!");
 			  		deferred.resolve(data);
 			    }).
 			    error(function(data, status, headers, config) {
 			      // called asynchronously if an error occurs
 			      // or server returns response with an error status.
-			      console.log("NO COURSES!");
+			      //console.log("NO COURSES!");
 			      deferred.reject(status);
 			    });
 			    return deferred.promise;
@@ -123,7 +123,7 @@ app.service("EvalService", ["$q", "$timeout", "HttpService", "$http", function($
     			console.log(HttpService.getToken());
     			$http.get(HttpService.getSocket() + 'evaluationtemplates/' + id).
 			    success(function(data, status, headers, config) {
-			  		console.log("YAY");
+			  		console.log("found template by ID!");
 			  		deferred.resolve(data);
 			    }).
 			    error(function(data, status, headers, config) {

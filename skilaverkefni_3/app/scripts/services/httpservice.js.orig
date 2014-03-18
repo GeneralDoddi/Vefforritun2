@@ -1,0 +1,36 @@
+app.service('HttpService', function Httpservice($http) {
+    // AngularJS will instantiate a singleton by calling "new" on this function
+    var username;
+    var userobject = [];
+<<<<<<< HEAD
+    var socket = "http://project3api.haukurhaf.net/api/v1/"; //http://dispatch.hir.is/h01/api/v1/
+=======
+    var socket = "http://dispatch.hir.is/h01/api/v1/"; //"http://project3api.haukurhaf.net/api/v1/"
+>>>>>>> 09c24a0b808dd1741c2c14cb12f17986052cd988
+    var courses = [];
+    var token;
+    return {
+    	getUsername: function(){
+    		return userobject.Username;
+    	},
+    	getSocket: function(){
+    		return socket;
+    	},
+    	setUserobj: function(userobj){	
+    		userobject = userobj;
+    	},
+    	getUserobj: function(){
+    		return userobject.User;
+    	},
+    	getToken: function(){
+    		return userobject.Token;
+    	},
+    	setCourses: function(allcourses){
+    		courses = allcourses;
+
+    	},
+    	getCourses: function(){
+    		return courses;
+    	}
+    }
+  });
