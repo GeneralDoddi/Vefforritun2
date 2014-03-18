@@ -9,7 +9,7 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 
 		EvalService.getAllEvaluations().then(function(data) {
-			console.log("Success, data: ", data);
+			console.log("Success evaluations, data: ", data);
 			$scope.evaluations = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
@@ -30,7 +30,7 @@ app.controller('AdminController', function($q, $scope,$modal,$log, EvalService, 
 
 		myCourses().then(function(data) {
 			console.log("Success, data: ", data);
-			$scope.evaluations = data;
+			$scope.courses = data;
 		}, function(errorMessage) {
 			console.log("Error: " + errorMessage);
 		}, function(updateMessage) {
